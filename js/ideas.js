@@ -428,8 +428,7 @@ function guardarNuevaIdea(evento) {
                 nuevaIdea.id +
                 "."
             );
-
-        },
+                    },
         700
     );
 }
@@ -490,15 +489,11 @@ function actualizarResumenIdeasEmpleado() {
             }
         ).length;
 
-    /*
-    Se soportan tanto los IDs antiguos como
-    los nuevos con la palabra Colaborador.
-    */
-
     asignarTextoIdeaMultiple(
         [
             "totalIdeasEmpleado",
-            "totalIdeasColaborador"
+            "totalIdeasColaborador",
+            "totalIdeascolaborador"
         ],
         ideas.length
     );
@@ -819,30 +814,26 @@ function configurarPanelIdeaEmpleado() {
 
     const panel =
         document.getElementById(
-            "panelDetalleIdeaEmpleado"
+            "panelDetalleIdeaColaborador"
         );
 
     document
-        .getElementById(
-            "cerrarDetalleIdeaEmpleado"
+        .querySelectorAll(
+            "#cerrarDetalleIdeaColaborador"
         )
-        ?.addEventListener(
-            "click",
-            cerrarDetalleIdeaEmpleado
+        .forEach(
+            function (boton) {
+
+                boton.addEventListener(
+                    "click",
+                    cerrarDetalleIdeaEmpleado
+                );
+            }
         );
 
     document
         .getElementById(
-            "cerrarDetalleIdeaEmpleadoInferior"
-        )
-        ?.addEventListener(
-            "click",
-            cerrarDetalleIdeaEmpleado
-        );
-
-    document
-        .getElementById(
-            "enviarRespuestaEmpleado"
+            "enviarRespuestaColaborador"
         )
         ?.addEventListener(
             "click",
@@ -861,7 +852,7 @@ function configurarPanelIdeaEmpleado() {
     );
 
     document.addEventListener(
-        "keydown",
+                "keydown",
         function (evento) {
 
             if (evento.key === "Escape") {
@@ -897,63 +888,63 @@ function abrirDetalleIdeaEmpleado(id) {
         ideaSeleccionadaEmpleado;
 
     asignarTextoIdea(
-        "detalleTicketIdeaEmpleado",
+        "detalleTicketIdeaColaborador",
         idea.id
     );
 
     asignarTextoIdea(
-        "detalleTituloIdeaEmpleado",
+        "detalleTituloIdeaColaborador",
         idea.titulo
     );
 
     asignarTextoIdea(
-        "detalleEstadoIdeaEmpleado",
+        "detalleEstadoIdeaColaborador",
         idea.estado || "En revisión"
     );
 
     asignarTextoIdea(
-        "detalleAreaIdeaEmpleado",
+        "detalleAreaIdeaColaborador",
         idea.area || "Sin área"
     );
 
     asignarTextoIdea(
-        "detalleFechaIdeaEmpleado",
+        "detalleFechaIdeaColaborador",
         idea.fecha || "Sin fecha"
     );
 
     asignarTextoIdea(
-        "detalleFrecuenciaIdeaEmpleado",
+        "detalleFrecuenciaIdeaColaborador",
         idea.frecuencia ||
         "No especificada"
     );
 
     asignarTextoIdea(
-        "detalleHorasIdeaEmpleado",
+        "detalleHorasIdeaColaborador",
         idea.horas
             ? idea.horas + " horas"
             : "No especificadas"
     );
 
     asignarTextoIdea(
-        "detalleImplementacionIdeaEmpleado",
+        "detalleImplementacionIdeaColaborador",
         idea.implementacion ||
         "No especificada"
     );
 
     asignarTextoIdea(
-        "detalleDescripcionIdeaEmpleado",
+        "detalleDescripcionIdeaColaborador",
         idea.descripcion ||
         "Sin descripción"
     );
 
     asignarTextoIdea(
-        "detalleProblemaIdeaEmpleado",
+        "detalleProblemaIdeaColaborador",
         idea.problema ||
         "Sin información"
     );
 
     asignarTextoIdea(
-        "detalleSolucionIdeaEmpleado",
+        "detalleSolucionIdeaColaborador",
         idea.solucion ||
         "Sin solución sugerida"
     );
@@ -967,7 +958,7 @@ function abrirDetalleIdeaEmpleado(id) {
     );
 
     abrirPanelIdea(
-        "panelDetalleIdeaEmpleado"
+        "panelDetalleIdeaColaborador"
     );
 }
 
@@ -975,7 +966,7 @@ function abrirDetalleIdeaEmpleado(id) {
 function cerrarDetalleIdeaEmpleado() {
 
     cerrarPanelIdea(
-        "panelDetalleIdeaEmpleado"
+        "panelDetalleIdeaColaborador"
     );
 
     ideaSeleccionadaEmpleado =
@@ -1009,7 +1000,7 @@ function mostrarPreguntasYRespuestaEmpleado(
 
     const seccionPreguntas =
         document.getElementById(
-            "seccionPreguntasEmpleado"
+            "seccionPreguntasColaborador"
         );
 
     const seccionRespuesta =
@@ -1019,7 +1010,7 @@ function mostrarPreguntasYRespuestaEmpleado(
 
     const campoRespuesta =
         document.getElementById(
-            "respuestaEmpleadoIdea"
+            "respuestaColaboradorIdea"
         );
 
     seccionPreguntas?.classList.toggle(
@@ -1034,12 +1025,12 @@ function mostrarPreguntasYRespuestaEmpleado(
     );
 
     asignarTextoIdea(
-        "preguntasGerenteEmpleado",
+        "preguntasGerenteColaborador",
         preguntas || "—"
     );
 
     asignarTextoIdea(
-        "fechaLimiteEmpleado",
+        "fechaLimiteColaborador",
         idea.fechaLimiteRespuesta
             ? "Responder antes del " +
               formatearFechaIdea(
@@ -1055,12 +1046,12 @@ function mostrarPreguntasYRespuestaEmpleado(
     }
 
     asignarTextoIdea(
-        "respuestaEnviadaEmpleado",
+        "respuestaEnviadaColaborador",
         respuesta || "—"
     );
 
     asignarTextoIdea(
-        "fechaRespuestaEmpleado",
+        "fechaRespuestaColaborador",
         idea.fechaRespuestaEmpleado
             ? "Enviada el " +
               formatearFechaHoraIdea(
@@ -1071,7 +1062,7 @@ function mostrarPreguntasYRespuestaEmpleado(
 
     const contenedorComentario =
         document.getElementById(
-            "comentarioGerenteEmpleadoContenedor"
+            "comentarioGerenteColaboradorContenedor"
         );
 
     const comentario =
@@ -1085,7 +1076,7 @@ function mostrarPreguntasYRespuestaEmpleado(
     );
 
     asignarTextoIdea(
-        "comentarioGerenteEmpleado",
+        "comentarioGerenteColaborador",
         comentario || "—"
     );
 }
@@ -1101,7 +1092,7 @@ function enviarRespuestaEmpleadoIdea() {
     const respuesta =
         document
             .getElementById(
-                "respuestaEmpleadoIdea"
+                "respuestaColaboradorIdea"
             )
             ?.value
             .trim() || "";
@@ -1163,7 +1154,7 @@ function enviarRespuestaEmpleadoIdea() {
         function () {
 
             asignarTextoIdea(
-                "detalleEstadoIdeaEmpleado",
+                "detalleEstadoIdeaColaborador",
                 "Respuesta recibida"
             );
 
@@ -1195,7 +1186,7 @@ function mostrarComentarioGerenteEmpleado(
 
     const seccion =
         document.getElementById(
-            "seccionComentarioGerenteEmpleado"
+            "seccionComentarioGerenteColaborador"
         );
 
     const comentario =
@@ -1218,7 +1209,7 @@ function mostrarComentarioGerenteEmpleado(
     );
 
     asignarTextoIdea(
-        "comentarioFinalGerenteEmpleado",
+        "comentarioFinalGerenteColaborador",
         comentario || "—"
     );
 }
@@ -1291,8 +1282,7 @@ function limpiarFiltrosIdeas() {
                 document.getElementById(id);
 
             if (elemento) {
-
-                elemento.value = "";
+                                elemento.value = "";
             }
         }
     );
@@ -1554,7 +1544,7 @@ function mostrarMensajeRespuestaEmpleado(
 
     const mensaje =
         document.getElementById(
-            "mensajeRespuestaEmpleado"
+            "mensajeRespuestaColaborador"
         );
 
     if (!mensaje) {
