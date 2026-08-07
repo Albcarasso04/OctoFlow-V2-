@@ -3143,3 +3143,326 @@ LOGO OCTOFLOW
     object-fit: contain;
     flex-shrink: 0;
 }
+/*
+==================================================
+OCTOFLOW
+HABILIDADES POR NIVEL
+==================================================
+*/
+
+.habilidades-talento {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 18px;
+}
+
+
+/*
+==================================================
+ETIQUETA GENERAL
+==================================================
+*/
+
+.habilidad-tag-talento {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    min-height: 38px;
+
+    padding:
+        7px
+        11px;
+
+    border:
+        1px solid
+        transparent;
+
+    border-radius:
+        999px;
+
+    font-size:
+        12px;
+
+    line-height:
+        1;
+
+    transition:
+        transform
+        0.16s ease,
+        box-shadow
+        0.16s ease;
+}
+
+
+.habilidad-tag-talento:hover {
+
+    transform:
+        translateY(
+            -1px
+        );
+
+    box-shadow:
+        0 3px 8px
+        rgba(
+            15,
+            23,
+            42,
+            0.08
+        );
+}
+
+
+/*
+==================================================
+NOMBRE DE HABILIDAD
+==================================================
+*/
+
+.habilidad-tag-talento strong {
+
+    font-size:
+        12px;
+
+    font-weight:
+        750;
+
+    white-space:
+        nowrap;
+}
+
+
+/*
+==================================================
+NIVEL
+==================================================
+*/
+
+.habilidad-tag-talento small {
+
+    padding-left:
+        7px;
+
+    border-left:
+        1px solid
+        currentColor;
+
+    font-size:
+        9px;
+
+    font-weight:
+        750;
+
+    opacity:
+        0.75;
+
+    white-space:
+        nowrap;
+}
+
+
+/*
+==================================================
+INDICADOR
+==================================================
+*/
+
+.indicador-nivel-habilidad {
+
+    flex:
+        0 0 auto;
+
+    width:
+        7px;
+
+    height:
+        7px;
+
+    border-radius:
+        50%;
+
+    background-color:
+        currentColor;
+}
+
+
+/*
+==================================================
+BÁSICO
+GRIS = NIVEL INICIAL
+==================================================
+*/
+
+.habilidad-tag-talento.habilidad-nivel-basico {
+
+    border-color:
+        #d0d5dd;
+
+    background-color:
+        #f2f4f7;
+
+    color:
+        #475467;
+}
+
+
+/*
+==================================================
+INTERMEDIO
+ÁMBAR = EN DESARROLLO
+==================================================
+*/
+
+.habilidad-tag-talento.habilidad-nivel-intermedio {
+
+    border-color:
+        #fedf89;
+
+    background-color:
+        #fffaeb;
+
+    color:
+        #b54708;
+}
+
+
+/*
+==================================================
+AVANZADO
+AZUL = DOMINIO SÓLIDO
+==================================================
+*/
+
+.habilidad-tag-talento.habilidad-nivel-avanzado {
+
+    border-color:
+        #84caff;
+
+    background-color:
+        #eff8ff;
+
+    color:
+        #175cd3;
+}
+
+
+/*
+==================================================
+EXPERTO
+VERDE = DOMINIO MÁXIMO
+==================================================
+*/
+
+.habilidad-tag-talento.habilidad-nivel-experto {
+
+    border-color:
+        #abefc6;
+
+    background-color:
+        #ecfdf3;
+
+    color:
+        #067647;
+}
+
+
+/*
+==================================================
+SIN HABILIDADES
+==================================================
+*/
+
+.sin-habilidades-talento {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    min-height:
+        36px;
+
+    padding:
+        7px
+        12px;
+
+    border:
+        1px solid
+        #d0d5dd;
+
+    border-radius:
+        999px;
+
+    background-color:
+        #f9fafb;
+
+    color:
+        #667085;
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+}
+
+
+/*
+==================================================
+MÁS HABILIDADES
+==================================================
+*/
+
+.habilidades-restantes-talento {
+
+    min-height:
+        36px;
+
+    padding:
+        7px
+        11px;
+
+    border:
+        1px solid
+        #b2ddff;
+
+    border-radius:
+        999px;
+
+    background-color:
+        #ffffff;
+
+    color:
+        #005eb8;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    transition:
+        background-color
+        0.16s ease,
+        border-color
+        0.16s ease;
+}
+
+
+.habilidades-restantes-talento:hover {
+
+    border-color:
+        #84caff;
+
+    background-color:
+        #eff8ff;
+}
