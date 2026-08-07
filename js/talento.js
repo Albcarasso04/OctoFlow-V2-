@@ -1731,6 +1731,216 @@ function obtenerNombreHabilidadTalento(
 }
 
 
+/*
+==================================================
+NIVEL VISUAL DE HABILIDADES
+==================================================
+*/
+
+function obtenerClaseNivelHabilidadTalento(
+    habilidad
+) {
+
+    const nivel =
+        normalizarTalento(
+            habilidad?.nivel
+        );
+
+    if (
+        nivel === "experto"
+    ) {
+
+        return "habilidad-nivel-experto";
+    }
+
+    if (
+        nivel === "avanzado"
+    ) {
+
+        return "habilidad-nivel-avanzado";
+    }
+
+    if (
+        nivel === "intermedio"
+    ) {
+
+        return "habilidad-nivel-intermedio";
+    }
+
+    return "habilidad-nivel-basico";
+}
+
+
+/*
+==================================================
+ETIQUETA DEL NIVEL
+==================================================
+*/
+
+function obtenerNombreNivelHabilidadTalento(
+    habilidad
+) {
+
+    const nivel =
+        normalizarTalento(
+            habilidad?.nivel
+        );
+
+    if (
+        nivel === "experto"
+    ) {
+
+        return "Experto";
+    }
+
+    if (
+        nivel === "avanzado"
+    ) {
+
+        return "Avanzado";
+    }
+
+    if (
+        nivel === "intermedio"
+    ) {
+
+        return "Intermedio";
+    }
+
+    if (
+        nivel === "basico" ||
+        nivel === "básico" ||
+        nivel === "principiante"
+    ) {
+
+        return "Básico";
+    }
+
+    return (
+        habilidad?.nivel ||
+        "Sin nivel"
+    );
+}
+
+
+/*
+==================================================
+NIVEL VISUAL DE HABILIDADES
+==================================================
+*/
+
+function obtenerClaseNivelHabilidadTalento(
+    habilidad
+) {
+
+    const nivel =
+        normalizarTalento(
+            habilidad?.nivel
+        );
+
+    if (
+        nivel === "experto"
+    ) {
+
+        return "habilidad-nivel-experto";
+    }
+
+    if (
+        nivel === "avanzado"
+    ) {
+
+        return "habilidad-nivel-avanzado";
+    }
+
+    if (
+        nivel === "intermedio"
+    ) {
+
+        return "habilidad-nivel-intermedio";
+    }
+
+    return "habilidad-nivel-basico";
+}
+
+
+/*
+==================================================
+ETIQUETA DEL NIVEL
+==================================================
+*/
+
+function obtenerNombreNivelHabilidadTalento(
+    habilidad
+) {
+
+    const nivel =
+        normalizarTalento(
+            habilidad?.nivel
+        );
+
+    if (
+        nivel === "experto"
+    ) {
+
+        return "Experto";
+    }
+
+    if (
+        nivel === "avanzado"
+    ) {
+
+        return "Avanzado";
+    }
+
+    if (
+        nivel === "intermedio"
+    ) {
+
+        return "Intermedio";
+    }
+
+    if (
+        nivel === "basico" ||
+        nivel === "básico" ||
+        nivel === "principiante"
+    ) {
+
+        return "Básico";
+    }
+
+    return habilidad?.nivel ||
+        "Sin nivel";
+}
+
+/*
+==================================================
+ORDENAR HABILIDADES POR NIVEL
+==================================================
+*/
+
+function ordenarHabilidadesPorNivelTalento(
+    habilidades
+) {
+
+    return [
+        ...habilidades
+    ].sort(
+        function (a, b) {
+
+            return (
+                obtenerValorNivelTalento(
+                    b.nivel
+                )
+                -
+                obtenerValorNivelTalento(
+                    a.nivel
+                )
+            );
+        }
+    );
+}
+
+
 function obtenerValorNivelTalento(
     nivel
 ) {
@@ -2563,13 +2773,30 @@ function crearTarjetaTalento(
     persona
 ) {
 
+    /*
+    Mostramos TODAS las habilidades registradas,
+    no solamente las habilidades dominadas.
+
+    Además se ordenan de mayor a menor nivel.
+    */
+
+    const todasLasHabilidades =
+        ordenarHabilidadesPorNivelTalento(
+            persona.habilidades || []
+        );
+
     const habilidades =
-        persona
-            .habilidadesDominadas
-            .slice(
-                0,
-                4
-            );
+        todasLasHabilidades.slice(
+            0,
+            4
+        );
+
+    const habilidadesRestantes =
+        Math.max(
+            0,
+            todasLasHabilidades.length -
+            habilidades.length
+        );
 
     const claseRol =
         normalizarTalento(
@@ -2625,11 +2852,19 @@ function crearTarjetaTalento(
 
             </div>
 
+
+            <!--
+            ==========================================
+            INNOVATION SCORE
+            ==========================================
+            -->
+
             <button
                 class="score-talento"
                 type="button"
                 onclick="
                     event.stopPropagation();
+
                     mostrarDetalleInnovationScore(
                         '${escaparAtributoTalento(
                             persona.correo
@@ -2654,44 +2889,138 @@ function crearTarjetaTalento(
 
             </button>
 
+
             <div class="barra-score-talento">
 
                 <span
-                    style="width: ${persona.score}%"
+                    style="
+                        width:
+                        ${persona.score}%;
+                    "
                 ></span>
 
             </div>
+
+
+            <!--
+            ==========================================
+            HABILIDADES
+            ==========================================
+            -->
 
             <div class="habilidades-talento">
 
                 ${
                     habilidades.length > 0
+
                         ? habilidades
                             .map(
                                 function (
                                     habilidad
                                 ) {
 
+                                    const nombre =
+                                        obtenerNombreHabilidadTalento(
+                                            habilidad
+                                        );
+
+                                    const nivel =
+                                        obtenerNombreNivelHabilidadTalento(
+                                            habilidad
+                                        );
+
+                                    const claseNivel =
+                                        obtenerClaseNivelHabilidadTalento(
+                                            habilidad
+                                        );
+
                                     return `
-                                        <span>
-                                            ${escaparTalento(
-                                                obtenerNombreHabilidadTalento(
-                                                    habilidad
-                                                )
-                                            )}
+                                        <span
+                                            class="
+                                                habilidad-tag-talento
+                                                ${claseNivel}
+                                            "
+                                            title="${escaparAtributoTalento(
+                                                nombre +
+                                                " · " +
+                                                nivel
+                                            )}"
+                                        >
+
+                                            <span
+                                                class="
+                                                    indicador-nivel-habilidad
+                                                "
+                                            ></span>
+
+                                            <strong>
+                                                ${escaparTalento(
+                                                    nombre
+                                                )}
+                                            </strong>
+
+                                            <small>
+                                                ${escaparTalento(
+                                                    nivel
+                                                )}
+                                            </small>
+
                                         </span>
                                     `;
                                 }
                             )
                             .join("")
+
                         : `
-                            <span>
+                            <span
+                                class="
+                                    sin-habilidades-talento
+                                "
+                            >
                                 Sin habilidades registradas
                             </span>
                         `
                 }
 
+                ${
+                    habilidadesRestantes > 0
+
+                        ? `
+                            <button
+                                class="
+                                    habilidades-restantes-talento
+                                "
+                                type="button"
+                                onclick="
+                                    event.stopPropagation();
+
+                                    abrirDetalleTalento(
+                                        '${escaparAtributoTalento(
+                                            persona.correo
+                                        )}'
+                                    );
+                                "
+                            >
+                                +${habilidadesRestantes}
+                                ${
+                                    habilidadesRestantes === 1
+                                        ? "más"
+                                        : "más"
+                                }
+                            </button>
+                        `
+
+                        : ""
+                }
+
             </div>
+
+
+            <!--
+            ==========================================
+            MÉTRICAS
+            ==========================================
+            -->
 
             <div class="metricas-talento">
 
@@ -2707,6 +3036,7 @@ function crearTarjetaTalento(
 
                 </div>
 
+
                 <div class="metrica-talento">
 
                     <span>
@@ -2719,6 +3049,7 @@ function crearTarjetaTalento(
 
                 </div>
 
+
                 <div class="metrica-talento">
 
                     <span>
@@ -2730,6 +3061,7 @@ function crearTarjetaTalento(
                     </strong>
 
                 </div>
+
 
                 <div class="metrica-talento">
 
@@ -2745,11 +3077,22 @@ function crearTarjetaTalento(
 
             </div>
 
+
+            <!--
+            ==========================================
+            VER PERFIL
+            ==========================================
+            -->
+
             <button
-                class="boton-principal boton-ver-talento"
+                class="
+                    boton-principal
+                    boton-ver-talento
+                "
                 type="button"
                 onclick="
                     event.stopPropagation();
+
                     abrirDetalleTalento(
                         '${escaparAtributoTalento(
                             persona.correo
@@ -2763,7 +3106,6 @@ function crearTarjetaTalento(
         </article>
     `;
 }
-
 
 /*
 ==================================================
