@@ -10,7 +10,20 @@ document.addEventListener(
 );
 
 
+/*
+==================================================
+INICIAR
+==================================================
+*/
+
 function iniciarModuloHabilidades() {
+
+    /*
+    Primero corregimos registros antiguos que
+    pudieron haberse guardado sin correo.
+    */
+
+    //repararHabilidadesSinCorreo();
 
     configurarFormularioHabilidad();
 
@@ -92,6 +105,12 @@ function configurarFormularioPerfil() {
 }
 
 
+/*
+==================================================
+OTRA HERRAMIENTA
+==================================================
+*/
+
 function mostrarCampoOtraHerramienta() {
 
     const selector =
@@ -150,7 +169,8 @@ function guardarPerfilHabilidades(evento) {
 
     const nuevoPerfil = {
 
-        correo: correo,
+        correo:
+            correo,
 
         disponibilidad:
             Number(
@@ -158,7 +178,7 @@ function guardarPerfilHabilidades(evento) {
                     .getElementById(
                         "disponibilidadSemanal"
                     )
-                    .value
+                    ?.value || 0
             ) || 0,
 
         areaPrincipal:
@@ -166,43 +186,45 @@ function guardarPerfilHabilidades(evento) {
                 .getElementById(
                     "areaPrincipal"
                 )
-                .value,
+                ?.value || "",
 
         areasInteres:
             document
                 .getElementById(
                     "areasInteres"
                 )
-                .value
-                .trim(),
+                ?.value
+                ?.trim() || "",
 
         disponibleChampion:
             document
                 .getElementById(
                     "disponibleChampion"
                 )
-                .checked,
+                ?.checked === true,
 
         disponibleLearner:
             document
                 .getElementById(
                     "disponibleLearner"
                 )
-                .checked,
+                ?.checked === true,
 
         fechaActualizacion:
             new Date().toISOString()
-
     };
 
     const indice =
         perfiles.findIndex(
             function (perfil) {
 
-                return normalizar(
-                    perfil.correo
-                ) === normalizar(
-                    correo
+                return (
+                    normalizar(
+                        perfil.correo
+                    ) ===
+                    normalizar(
+                        correo
+                    )
                 );
             }
         );
@@ -221,13 +243,17 @@ function guardarPerfilHabilidades(evento) {
 
     localStorage.setItem(
         "octoflowPerfilesHabilidades",
-        JSON.stringify(perfiles)
+        JSON.stringify(
+            perfiles
+        )
     );
 
     mostrarMensajePerfil(
         "Perfil actualizado correctamente.",
         "exito"
     );
+
+    cargarPerfilHabilidades();
 
     actualizarResumenHabilidades();
 }
@@ -246,10 +272,30 @@ function guardarHabilidad(evento) {
     const correo =
         obtenerCorreoActual();
 
+    /*
+    No permitimos guardar una habilidad sin
+    identificar al usuario.
+    */
+
+    if (!correo) {
+
+        mostrarMensajeHabilidad(
+            "No fue posible identificar tu sesión. Vuelve a iniciar sesión.",
+            "error"
+        );
+
+        return;
+    }
+
     const selectorHerramienta =
         document.getElementById(
             "nombreHerramienta"
         );
+
+    if (!selectorHerramienta) {
+
+        return;
+    }
 
     let herramienta =
         selectorHerramienta.value;
@@ -261,8 +307,8 @@ function guardarHabilidad(evento) {
                 .getElementById(
                     "otraHerramienta"
                 )
-                .value
-                .trim();
+                ?.value
+                ?.trim() || "";
     }
 
     if (!herramienta) {
@@ -280,29 +326,29 @@ function guardarHabilidad(evento) {
             .getElementById(
                 "nivelHerramienta"
             )
-            .value;
+            ?.value || "";
 
     const objetivo =
         document
             .getElementById(
                 "interesHerramienta"
             )
-            .value;
+            ?.value || "";
 
     const experiencia =
         document
             .getElementById(
                 "experienciaHerramienta"
             )
-            .value;
+            ?.value || "";
 
     const comentarios =
         document
             .getElementById(
                 "comentariosHerramienta"
             )
-            .value
-            .trim();
+            ?.value
+            ?.trim() || "";
 
     const habilidades =
         obtenerTodasLasHabilidades();
@@ -314,13 +360,15 @@ function guardarHabilidad(evento) {
                 return (
                     normalizar(
                         registro.correo
-                    ) === normalizar(
+                    ) ===
+                    normalizar(
                         correo
                     )
                     &&
                     normalizar(
                         registro.herramienta
-                    ) === normalizar(
+                    ) ===
+                    normalizar(
                         herramienta
                     )
                 );
@@ -331,30 +379,44 @@ function guardarHabilidad(evento) {
 
         id:
             indiceExistente >= 0
-                ? habilidades[indiceExistente].id
+                ? habilidades[
+                    indiceExistente
+                ].id
                 : generarIdHabilidad(),
 
-        correo: correo,
+        /*
+        IMPORTANTE:
+        siempre se guarda el correo de la
+        sesión activa.
+        */
 
-        herramienta: herramienta,
+        correo:
+            correo,
 
-        nivel: nivel,
+        herramienta:
+            herramienta,
 
-        objetivo: objetivo,
+        nivel:
+            nivel,
 
-        experiencia: experiencia,
+        objetivo:
+            objetivo,
 
-        comentarios: comentarios,
+        experiencia:
+            experiencia,
+
+        comentarios:
+            comentarios,
 
         fechaActualizacion:
             new Date().toISOString()
-
     };
 
     if (indiceExistente >= 0) {
 
-        habilidades[indiceExistente] =
-            registro;
+        habilidades[
+            indiceExistente
+        ] = registro;
 
     } else {
 
@@ -365,7 +427,9 @@ function guardarHabilidad(evento) {
 
     localStorage.setItem(
         "octoflowHabilidades",
-        JSON.stringify(habilidades)
+        JSON.stringify(
+            habilidades
+        )
     );
 
     evento.target.reset();
@@ -387,17 +451,116 @@ function guardarHabilidad(evento) {
 
 /*
 ==================================================
-OBTENER INFORMACIÓN
+OBTENER CORREO ACTUAL
 ==================================================
 */
 
 function obtenerCorreoActual() {
 
-    return localStorage.getItem(
-        "octoflowCorreo"
-    ) || "";
+    /*
+    El login actual de OctoFlow utiliza
+    sessionStorage.
+
+    Dejamos localStorage únicamente como
+    respaldo para datos de versiones anteriores.
+    */
+
+    return (
+        sessionStorage.getItem(
+            "octoflowCorreo"
+        )
+        ||
+        localStorage.getItem(
+            "octoflowCorreo"
+        )
+        ||
+        ""
+    )
+        .trim()
+        .toLowerCase();
 }
 
+
+/*
+==================================================
+REPARAR HABILIDADES ANTIGUAS
+==================================================
+*/
+
+function repararHabilidadesSinCorreo() {
+
+    const correo =
+        obtenerCorreoActual();
+
+    if (!correo) {
+
+        return;
+    }
+
+    const habilidades =
+        obtenerTodasLasHabilidades();
+
+    if (
+        habilidades.length === 0
+    ) {
+
+        return;
+    }
+
+    let huboCambios =
+        false;
+
+    habilidades.forEach(
+        function (habilidad) {
+
+            /*
+            Algunas habilidades antiguas fueron
+            guardadas como:
+
+            correo: ""
+
+            Las asignamos al usuario actualmente
+            conectado para hacer compatible la
+            información antigua.
+            */
+
+            if (
+                !String(
+                    habilidad.correo || ""
+                ).trim()
+            ) {
+
+                habilidad.correo =
+                    correo;
+
+                huboCambios =
+                    true;
+            }
+        }
+    );
+
+    if (huboCambios) {
+
+        localStorage.setItem(
+            "octoflowHabilidades",
+            JSON.stringify(
+                habilidades
+            )
+        );
+
+        console.log(
+            "OctoFlow: habilidades antiguas reparadas para",
+            correo
+        );
+    }
+}
+
+
+/*
+==================================================
+OBTENER TODAS LAS HABILIDADES
+==================================================
+*/
 
 function obtenerTodasLasHabilidades() {
 
@@ -414,7 +577,9 @@ function obtenerTodasLasHabilidades() {
     try {
 
         const habilidades =
-            JSON.parse(datos);
+            JSON.parse(
+                datos
+            );
 
         return Array.isArray(
             habilidades
@@ -434,24 +599,44 @@ function obtenerTodasLasHabilidades() {
 }
 
 
+/*
+==================================================
+OBTENER HABILIDADES DEL USUARIO
+==================================================
+*/
+
 function obtenerHabilidadesUsuario() {
 
     const correo =
         obtenerCorreoActual();
 
+    if (!correo) {
+
+        return [];
+    }
+
     return obtenerTodasLasHabilidades()
         .filter(
             function (habilidad) {
 
-                return normalizar(
-                    habilidad.correo
-                ) === normalizar(
-                    correo
+                return (
+                    normalizar(
+                        habilidad.correo
+                    ) ===
+                    normalizar(
+                        correo
+                    )
                 );
             }
         );
 }
 
+
+/*
+==================================================
+OBTENER PERFILES
+==================================================
+*/
 
 function obtenerPerfilesHabilidades() {
 
@@ -468,7 +653,9 @@ function obtenerPerfilesHabilidades() {
     try {
 
         const perfiles =
-            JSON.parse(datos);
+            JSON.parse(
+                datos
+            );
 
         return Array.isArray(
             perfiles
@@ -478,24 +665,43 @@ function obtenerPerfilesHabilidades() {
 
     } catch (error) {
 
+        console.error(
+            "No fue posible leer los perfiles.",
+            error
+        );
+
         return [];
     }
 }
 
+
+/*
+==================================================
+OBTENER PERFIL DEL USUARIO
+==================================================
+*/
 
 function obtenerPerfilUsuario() {
 
     const correo =
         obtenerCorreoActual();
 
+    if (!correo) {
+
+        return null;
+    }
+
     return obtenerPerfilesHabilidades()
         .find(
             function (perfil) {
 
-                return normalizar(
-                    perfil.correo
-                ) === normalizar(
-                    correo
+                return (
+                    normalizar(
+                        perfil.correo
+                    ) ===
+                    normalizar(
+                        correo
+                    )
                 );
             }
         ) || null;
@@ -585,7 +791,9 @@ function mostrarHabilidades() {
                 }
             );
 
-    if (habilidades.length === 0) {
+    if (
+        habilidades.length === 0
+    ) {
 
         contenedor.innerHTML = `
             <div class="tabla-vacia">
@@ -599,7 +807,9 @@ function mostrarHabilidades() {
     contenedor.innerHTML =
         habilidades
             .map(
-                function (habilidad) {
+                function (
+                    habilidad
+                ) {
 
                     return `
                         <article class="tarjeta-habilidad">
@@ -720,24 +930,36 @@ function eliminarHabilidad(id) {
     const habilidades =
         obtenerTodasLasHabilidades()
             .filter(
-                function (habilidad) {
+                function (
+                    habilidad
+                ) {
 
-                    return habilidad.id !== id;
+                    return (
+                        habilidad.id !== id
+                    );
                 }
             );
 
     localStorage.setItem(
         "octoflowHabilidades",
-        JSON.stringify(habilidades)
+        JSON.stringify(
+            habilidades
+        )
     );
 
     mostrarHabilidades();
 
     actualizarResumenHabilidades();
 
-    mostrarNotificacion(
-        "Habilidad eliminada."
-    );
+    if (
+        typeof mostrarNotificacion ===
+        "function"
+    ) {
+
+        mostrarNotificacion(
+            "Habilidad eliminada."
+        );
+    }
 }
 
 
@@ -757,25 +979,39 @@ function actualizarResumenHabilidades() {
 
     const expertas =
         habilidades.filter(
-            function (habilidad) {
+            function (
+                habilidad
+            ) {
+
+                const nivel =
+                    normalizar(
+                        habilidad.nivel
+                    );
 
                 return (
-                    habilidad.nivel === "Avanzado" ||
-                    habilidad.nivel === "Experto"
+                    nivel === "avanzado" ||
+                    nivel === "experto"
                 );
             }
         ).length;
 
     const aprendizaje =
         habilidades.filter(
-            function (habilidad) {
+            function (
+                habilidad
+            ) {
+
+                const objetivo =
+                    normalizar(
+                        habilidad.objetivo
+                    );
 
                 return (
-                    habilidad.objetivo ===
-                        "Quiero aprender"
+                    objetivo ===
+                        "quiero aprender"
                     ||
-                    habilidad.objetivo ===
-                        "Mejorar nivel"
+                    objetivo ===
+                        "mejorar nivel"
                 );
             }
         ).length;
@@ -806,6 +1042,12 @@ function actualizarResumenHabilidades() {
 }
 
 
+/*
+==================================================
+ROL GENERAL
+==================================================
+*/
+
 function obtenerRolGeneral(
     expertas,
     aprendizaje,
@@ -828,12 +1070,16 @@ function obtenerRolGeneral(
         return "Learner";
     }
 
-    if (expertas > 0) {
+    if (
+        expertas > 0
+    ) {
 
         return "Contributor";
     }
 
-    if (aprendizaje > 0) {
+    if (
+        aprendizaje > 0
+    ) {
 
         return "Learner";
     }
@@ -842,14 +1088,30 @@ function obtenerRolGeneral(
 }
 
 
+/*
+==================================================
+ROL POR HABILIDAD
+==================================================
+*/
+
 function obtenerRolPorHabilidad(
     habilidad
 ) {
 
+    const nivel =
+        normalizar(
+            habilidad.nivel
+        );
+
+    const objetivo =
+        normalizar(
+            habilidad.objetivo
+        );
+
     if (
-        habilidad.nivel === "Experto" ||
-        habilidad.nivel === "Avanzado" ||
-        habilidad.objetivo === "Puedo enseñar"
+        nivel === "experto" ||
+        nivel === "avanzado" ||
+        objetivo === "puedo ensenar"
     ) {
 
         return `
@@ -860,11 +1122,8 @@ function obtenerRolPorHabilidad(
     }
 
     if (
-        habilidad.objetivo ===
-            "Quiero aprender"
-        ||
-        habilidad.objetivo ===
-            "Mejorar nivel"
+        objetivo === "quiero aprender" ||
+        objetivo === "mejorar nivel"
     ) {
 
         return `
@@ -884,27 +1143,50 @@ function obtenerRolPorHabilidad(
 
 /*
 ==================================================
-UTILIDADES
+GENERAR ID
 ==================================================
 */
 
 function generarIdHabilidad() {
+
+    if (
+        window.crypto &&
+        typeof window.crypto.randomUUID ===
+        "function"
+    ) {
+
+        return (
+            "SK-" +
+            window.crypto.randomUUID()
+        );
+    }
 
     return (
         "SK-" +
         Date.now() +
         "-" +
         Math.floor(
-            Math.random() * 1000
+            Math.random() *
+            1000
         )
     );
 }
 
 
-function obtenerClaseNivel(nivel) {
+/*
+==================================================
+CLASE DEL NIVEL
+==================================================
+*/
+
+function obtenerClaseNivel(
+    nivel
+) {
 
     const valor =
-        normalizar(nivel);
+        normalizar(
+            nivel
+        );
 
     if (
         valor === "experto" ||
@@ -914,7 +1196,9 @@ function obtenerClaseNivel(nivel) {
         return "nivel-alto";
     }
 
-    if (valor === "intermedio") {
+    if (
+        valor === "intermedio"
+    ) {
 
         return "nivel-medio";
     }
@@ -922,6 +1206,12 @@ function obtenerClaseNivel(nivel) {
     return "nivel-inicial";
 }
 
+
+/*
+==================================================
+MENSAJES
+==================================================
+*/
 
 function mostrarMensajeHabilidad(
     texto,
@@ -956,7 +1246,9 @@ function mostrarMensaje(
 ) {
 
     const elemento =
-        document.getElementById(id);
+        document.getElementById(
+            id
+        );
 
     if (!elemento) {
 
@@ -964,7 +1256,8 @@ function mostrarMensaje(
     }
 
     elemento.className =
-        "mensaje-formulario " + tipo;
+        "mensaje-formulario " +
+        tipo;
 
     elemento.textContent =
         texto;
@@ -984,13 +1277,21 @@ function mostrarMensaje(
 }
 
 
+/*
+==================================================
+ASIGNAR VALOR
+==================================================
+*/
+
 function asignarValor(
     id,
     valor
 ) {
 
     const elemento =
-        document.getElementById(id);
+        document.getElementById(
+            id
+        );
 
     if (elemento) {
 
@@ -1000,13 +1301,21 @@ function asignarValor(
 }
 
 
+/*
+==================================================
+ASIGNAR CHECKBOX
+==================================================
+*/
+
 function asignarCheckbox(
     id,
     valor
 ) {
 
     const elemento =
-        document.getElementById(id);
+        document.getElementById(
+            id
+        );
 
     if (elemento) {
 
@@ -1016,13 +1325,21 @@ function asignarCheckbox(
 }
 
 
+/*
+==================================================
+ACTUALIZAR TEXTO
+==================================================
+*/
+
 function actualizarTexto(
     id,
     valor
 ) {
 
     const elemento =
-        document.getElementById(id);
+        document.getElementById(
+            id
+        );
 
     if (elemento) {
 
@@ -1032,12 +1349,24 @@ function actualizarTexto(
 }
 
 
-function normalizar(texto) {
+/*
+==================================================
+NORMALIZAR TEXTO
+==================================================
+*/
 
-    return String(texto || "")
+function normalizar(
+    texto
+) {
+
+    return String(
+        texto || ""
+    )
         .trim()
         .toLowerCase()
-        .normalize("NFD")
+        .normalize(
+            "NFD"
+        )
         .replace(
             /[\u0300-\u036f]/g,
             ""
@@ -1045,10 +1374,20 @@ function normalizar(texto) {
 }
 
 
-function escapar(texto) {
+/*
+==================================================
+ESCAPAR HTML
+==================================================
+*/
+
+function escapar(
+    texto
+) {
 
     const elemento =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     elemento.textContent =
         texto ?? "";
@@ -1057,9 +1396,25 @@ function escapar(texto) {
 }
 
 
-function escaparAtributo(texto) {
+/*
+==================================================
+ESCAPAR ATRIBUTO
+==================================================
+*/
 
-    return String(texto || "")
-        .replace(/\\/g, "\\\\")
-        .replace(/'/g, "\\'");
+function escaparAtributo(
+    texto
+) {
+
+    return String(
+        texto || ""
+    )
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+        .replace(
+            /'/g,
+            "\\'"
+        );
 }
