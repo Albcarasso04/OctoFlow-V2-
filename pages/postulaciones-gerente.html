@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        OctoFlow | Postulaciones
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
+
+</head>
+
+<body data-portal="gerente">
+
+    <div class="aplicacion">
+
+        <!-- ======================================
+             MENÚ LATERAL
+        ======================================= -->
+
+        <aside class="menu-lateral">
+
+            <div class="marca">
+
+                <img
+                    class="logo-danone-menu"
+                    src="../img/DANONE_LOGO_HORIZONTAL.png"
+                    alt="Logo de Danone"
+                >
+
+                <h1>OctoFlow</h1>
+
+                <p>
+                    Portal del Gerente
+                </p>
+
+            </div>
+
+            <nav class="navegacion">
+
+                <a
+                    class="enlace-menu"
+                    href="gerentes.html"
+                >
+                    <span class="icono-menu">⌂</span>
+                    Dashboard
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="revision-ideas.html"
+                >
+                    <span class="icono-menu">💡</span>
+                    Revisar ideas
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="gestion-oportunidades.html"
+                >
+                    <span class="icono-menu">🚀</span>
+                    Oportunidades
+                </a>
+
+                <a
+                    class="enlace-menu activo"
+                    href="postulaciones-gerente.html"
+                >
+                    <span class="icono-menu">👥</span>
+                    Postulaciones
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="proyectos-gerente.html"
+                >
+                    <span class="icono-menu">▣</span>
+                    Proyectos
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="talento.html"
+                >
+                    <span class="icono-menu">◉</span>
+                    Talento
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="metricas.html"
+                >
+                    <span class="icono-menu">▥</span>
+                    Métricas
+                </a>
+
+            </nav>
+
+            <div class="usuario-menu">
+
+                <strong data-nombre-usuario>
+                    Gerente
+                </strong>
+
+                <div
+                    class="correo-menu"
+                    data-correo-usuario
+                >
+                    gerente@danone.com
+                </div>
+
+                <button
+                    class="boton-salir"
+                    type="button"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- ======================================
+             CONTENIDO
+        ======================================= -->
+
+        <section class="contenido">
+
+            <header class="encabezado">
+
+                <div class="titulo-encabezado">
+
+                    <h2>
+                        Postulaciones
+                    </h2>
+
+                    <p>
+                        Evalúa candidatos y forma equipos de proyecto
+                    </p>
+
+                </div>
+
+                <div class="perfil-superior">
+
+                    <div
+                        class="avatar"
+                        data-avatar-usuario
+                    >
+                        G
+                    </div>
+
+                    <div class="datos-usuario">
+
+                        <strong data-nombre-usuario>
+                            Gerente
+                        </strong>
+
+                        <span data-rol-usuario>
+                            Gerente
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main class="principal">
+
+                <div class="contenedor-pagina">
+
+                    <!-- CABECERA -->
+
+                    <section class="cabecera-pagina">
+
+                        <div>
+
+                            <h2>
+                                Candidatos a proyectos
+                            </h2>
+
+                            <p>
+                                Compara experiencia, intereses,
+                                disponibilidad y compatibilidad antes
+                                de formar el equipo.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+                    <!-- RESUMEN -->
+
+                    <section class="resumen-postulaciones-gerente">
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Total de postulaciones
+                            </span>
+
+                            <strong id="totalPostulacionesGerente">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Pendientes
+                            </span>
+
+                            <strong id="postulacionesPendientesGerente">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Preseleccionadas
+                            </span>
+
+                            <strong id="postulacionesPreseleccionadasGerente">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Aceptadas
+                            </span>
+
+                            <strong id="postulacionesAceptadasGerente">
+                                0
+                            </strong>
+
+                        </article>
+
+                    </section>
+
+                    <!-- FILTROS -->
+
+                    <section class="panel filtros-postulaciones-gerente">
+
+                        <div class="campo">
+
+                            <label for="buscarPostulacionGerente">
+                                Buscar
+                            </label>
+
+                            <input
+                                id="buscarPostulacionGerente"
+                                type="search"
+                                placeholder="Empleado, proyecto o correo"
+                            >
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroProyectoPostulacionGerente">
+                                Proyecto
+                            </label>
+
+                            <select id="filtroProyectoPostulacionGerente">
+
+                                <option value="">
+                                    Todos los proyectos
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroEstadoPostulacionGerente">
+                                Estado
+                            </label>
+
+                            <select id="filtroEstadoPostulacionGerente">
+
+                                <option value="">
+                                    Todos los estados
+                                </option>
+
+                                <option value="Pendiente">
+                                    Pendiente
+                                </option>
+
+                                <option value="En revisión">
+                                    En revisión
+                                </option>
+
+                                <option value="Preseleccionado">
+                                    Preseleccionado
+                                </option>
+
+                                <option value="Aceptado">
+                                    Aceptado
+                                </option>
+
+                                <option value="No seleccionado">
+                                    No seleccionado
+                                </option>
+
+                                <option value="Cancelado">
+                                    Cancelado
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroRolPostulacionGerente">
+                                Rol solicitado
+                            </label>
+
+                            <select id="filtroRolPostulacionGerente">
+
+                                <option value="">
+                                    Todos los roles
+                                </option>
+
+                                <option value="Champion">
+                                    Champion
+                                </option>
+
+                                <option value="Learner">
+                                    Learner
+                                </option>
+
+                                <option value="Contributor">
+                                    Contributor
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <button
+                            class="boton-secundario"
+                            id="limpiarFiltrosPostulacionesGerente"
+                            type="button"
+                        >
+                            Limpiar
+                        </button>
+
+                    </section>
+
+                    <!-- TABLA -->
+
+                    <section class="panel">
+
+                        <div class="panel-cabecera">
+
+                            <h3>
+                                Postulaciones recibidas
+                            </h3>
+
+                            <span
+                                id="contadorPostulacionesGerente"
+                                class="contador-resultados"
+                            >
+                                0 postulaciones
+                            </span>
+
+                        </div>
+
+                        <div class="tabla-contenedor">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+                                        <th>Empleado</th>
+                                        <th>Proyecto</th>
+                                        <th>Rol</th>
+                                        <th>Compatibilidad</th>
+                                        <th>Fecha</th>
+                                        <th>Estado</th>
+                                        <th>Acción</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="tablaPostulacionesGerente">
+
+                                    <tr>
+
+                                        <td
+                                            colspan="7"
+                                            class="tabla-vacia"
+                                        >
+                                            No hay postulaciones registradas.
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </main>
+
+        </section>
+
+    </div>
+
+    <!-- ======================================
+         PANEL LATERAL DE POSTULACIÓN
+    ======================================= -->
+
+    <div
+        id="panelPostulacionGerente"
+        class="panel-lateral"
+        aria-hidden="true"
+    >
+
+        <div class="panel-lateral-contenido">
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Evaluación de candidato
+                    </span>
+
+                    <h2 id="detalleCandidatoPostulacion">
+                        Empleado
+                    </h2>
+
+                </div>
+
+                <button
+                    class="boton-cerrar-modal"
+                    id="cerrarPanelPostulacionGerente"
+                    type="button"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <!-- RESUMEN -->
+
+            <section class="resumen-candidato-postulacion">
+
+                <div class="compatibilidad-candidato">
+
+                    <strong id="detalleCompatibilidadCandidato">
+                        0%
+                    </strong>
+
+                    <span>
+                        Compatibilidad
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Proyecto
+                    </span>
+
+                    <strong id="detalleProyectoCandidato">
+                        —
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Estado actual
+                    </span>
+
+                    <strong id="detalleEstadoCandidato">
+                        —
+                    </strong>
+
+                </div>
+
+            </section>
+
+            <!-- INFORMACIÓN -->
+
+            <div class="modal-grid">
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Correo
+                    </span>
+
+                    <strong id="detalleCorreoCandidato">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Fecha de postulación
+                    </span>
+
+                    <strong id="detalleFechaCandidato">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Rol solicitado
+                    </span>
+
+                    <strong id="detalleRolSolicitadoCandidato">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Disponibilidad
+                    </span>
+
+                    <strong id="detalleDisponibilidadCandidato">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Área principal
+                    </span>
+
+                    <strong id="detalleAreaPrincipalCandidato">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Áreas de interés
+                    </span>
+
+                    <strong id="detalleAreasInteresCandidato">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <!-- EQUIPO ACTUAL -->
+
+            <section class="seccion-equipo-oportunidad-gerente">
+
+                <h3>
+                    Estado actual del equipo
+                </h3>
+
+                <div class="estado-equipo-gerente">
+
+                    <article>
+
+                        <span>
+                            Champion
+                        </span>
+
+                        <strong id="estadoChampionOportunidad">
+                            Vacante
+                        </strong>
+
+                    </article>
+
+                    <article>
+
+                        <span>
+                            Learner
+                        </span>
+
+                        <strong id="estadoLearnerOportunidad">
+                            Vacante
+                        </strong>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+            <!-- HABILIDADES -->
+
+            <section class="seccion-habilidades-candidato">
+
+                <div class="panel-cabecera">
+
+                    <h3>
+                        Habilidades del candidato
+                    </h3>
+
+                    <span
+                        id="contadorHabilidadesCandidato"
+                        class="contador-resultados"
+                    >
+                        0 herramientas
+                    </span>
+
+                </div>
+
+                <div
+                    id="listaHabilidadesCandidato"
+                    class="lista-habilidades-candidato"
+                >
+
+                    <div class="tabla-vacia">
+                        No hay habilidades registradas.
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- DECISIÓN -->
+
+            <section class="seccion-decision-postulacion">
+
+                <h3>
+                    Decisión del gerente
+                </h3>
+
+                <div class="formulario">
+
+                    <div class="campo">
+
+                        <label for="rolAsignadoPostulacion">
+                            Rol propuesto
+                        </label>
+
+                        <select id="rolAsignadoPostulacion">
+
+                            <option value="Champion">
+                                Champion
+                            </option>
+
+                            <option value="Learner">
+                                Learner
+                            </option>
+
+                            <option value="Contributor">
+                                Contributor
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="campo">
+
+                        <label for="estadoPostulacionGerente">
+                            Nuevo estado
+                        </label>
+
+                        <select id="estadoPostulacionGerente">
+
+                            <option value="En revisión">
+                                En revisión
+                            </option>
+
+                            <option value="Preseleccionado">
+                                Preseleccionado
+                            </option>
+
+                            <option value="Aceptado">
+                                Aceptado
+                            </option>
+
+                            <option value="No seleccionado">
+                                No seleccionado
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="campo campo-completo">
+
+                        <label for="comentarioPostulacionGerente">
+                            Comentario para el empleado
+                        </label>
+
+                        <textarea
+                            id="comentarioPostulacionGerente"
+                            placeholder="Explica el avance de la postulación o el motivo de la decisión."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+                <div
+                    id="mensajePostulacionGerente"
+                    class="mensaje-formulario"
+                ></div>
+
+                <button
+                    class="boton-principal boton-guardar-evaluacion"
+                    id="guardarEvaluacionPostulacion"
+                    type="button"
+                >
+                    Guardar evaluación
+                </button>
+
+            </section>
+
+            <div class="modal-acciones">
+
+                <button
+                    class="boton-secundario"
+                    id="cerrarPanelPostulacionGerenteInferior"
+                    type="button"
+                >
+                    Cerrar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        id="notificacion"
+        class="notificacion"
+    ></div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/postulaciones-gerente.js"></script>
+
+</body>
+
+</html>

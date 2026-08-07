@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        OctoFlow | Revisión de Ideas
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
+
+</head>
+
+<body data-portal="gerente">
+
+    <div class="aplicacion">
+
+        <!-- ======================================
+             MENÚ LATERAL
+        ======================================= -->
+
+        <aside class="menu-lateral">
+
+            <div class="marca">
+
+                <img
+                    class="logo-danone-menu"
+                    src="../img/DANONE_LOGO_HORIZONTAL.png"
+                    alt="Logo de Danone"
+                >
+
+                <h1>OctoFlow</h1>
+
+                <p>
+                    Portal del Gerente
+                </p>
+
+            </div>
+
+            <nav class="navegacion">
+
+                <a
+                    class="enlace-menu"
+                    href="gerentes.html"
+                >
+                    <span class="icono-menu">⌂</span>
+                    Dashboard
+                </a>
+
+                <a
+                    class="enlace-menu activo"
+                    href="revision-ideas.html"
+                >
+                    <span class="icono-menu">💡</span>
+                    Revisar ideas
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="gestion-oportunidades.html"
+                >
+                    <span class="icono-menu">🚀</span>
+                    Oportunidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="postulaciones-gerente.html"
+                >
+                    <span class="icono-menu">👥</span>
+                    Postulaciones
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="proyectos-gerente.html"
+                >
+                    <span class="icono-menu">▣</span>
+                    Proyectos
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="talento.html"
+                >
+                    <span class="icono-menu">◉</span>
+                    Talento
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="metricas.html"
+                >
+                    <span class="icono-menu">▥</span>
+                    Métricas
+                </a>
+
+            </nav>
+
+            <div class="usuario-menu">
+
+                <strong data-nombre-usuario>
+                    Gerente
+                </strong>
+
+                <div
+                    class="correo-menu"
+                    data-correo-usuario
+                >
+                    gerente@danone.com
+                </div>
+
+                <button
+                    class="boton-salir"
+                    type="button"
+                    onclick="cerrarSesion()"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- ======================================
+             CONTENIDO
+        ======================================= -->
+
+        <section class="contenido">
+
+            <header class="encabezado">
+
+                <div class="titulo-encabezado">
+
+                    <h2>
+                        Revisar ideas
+                    </h2>
+
+                    <p>
+                        Evalúa propuestas y conviértelas en oportunidades
+                    </p>
+
+                </div>
+
+                <div class="perfil-superior">
+
+                    <div
+                        class="avatar"
+                        data-avatar-usuario
+                    >
+                        G
+                    </div>
+
+                    <div class="datos-usuario">
+
+                        <strong data-nombre-usuario>
+                            Gerente
+                        </strong>
+
+                        <span data-rol-usuario>
+                            Gerente
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main class="principal">
+
+                <div class="contenedor-pagina">
+
+                    <!-- CABECERA -->
+
+                    <section class="cabecera-pagina">
+
+                        <div>
+
+                            <h2>
+                                Propuestas registradas
+                            </h2>
+
+                            <p>
+                                Revisa el proceso, el problema y la solución
+                                sugerida antes de tomar una decisión.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+                    <!-- INDICADORES -->
+
+                    <section class="resumen-revision-ideas">
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Total de ideas
+                            </span>
+
+                            <strong id="totalIdeasRevision">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                En revisión
+                            </span>
+
+                            <strong id="ideasEnRevision">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Información requerida
+                            </span>
+
+                            <strong id="ideasInformacionRequerida">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Aprobadas
+                            </span>
+
+                            <strong id="ideasAprobadasGerente">
+                                0
+                            </strong>
+
+                        </article>
+
+                    </section>
+
+                    <!-- FILTROS -->
+
+                    <section class="panel filtros-revision-ideas">
+
+                        <div class="campo">
+
+                            <label for="buscarIdeaGerente">
+                                Buscar
+                            </label>
+
+                            <input
+                                type="search"
+                                id="buscarIdeaGerente"
+                                placeholder="Ticket, título, área o empleado"
+                            >
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroEstadoIdeaGerente">
+                                Estado
+                            </label>
+
+                            <select id="filtroEstadoIdeaGerente">
+
+                                <option value="">
+                                    Todos los estados
+                                </option>
+
+                                <option value="En revisión">
+                                    En revisión
+                                </option>
+
+                                <option value="Información requerida">
+                                    Información requerida
+                                </option>
+
+                                <option value="Respuesta recibida">
+                                    Respuesta recibida
+                                </option>
+
+                                <option value="Aprobada">
+                                    Aprobada
+                                </option>
+
+                                <option value="Convertida en oportunidad">
+                                    Convertida en oportunidad
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroAreaIdeaGerente">
+                                Área
+                            </label>
+
+                            <select id="filtroAreaIdeaGerente">
+
+                                <option value="">
+                                    Todas las áreas
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <button
+                            class="boton-secundario"
+                            id="limpiarFiltrosIdeasGerente"
+                            type="button"
+                        >
+                            Limpiar
+                        </button>
+
+                    </section>
+
+                    <!-- TABLA -->
+
+                    <section class="panel">
+
+                        <div class="panel-cabecera">
+
+                            <h3>
+                                Ideas recibidas
+                            </h3>
+
+                            <span
+                                id="contadorIdeasGerente"
+                                class="contador-resultados"
+                            >
+                                0 ideas
+                            </span>
+
+                        </div>
+
+                        <div class="tabla-contenedor">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+                                        <th>Ticket</th>
+                                        <th>Propuesta</th>
+                                        <th>Empleado</th>
+                                        <th>Área</th>
+                                        <th>Fecha</th>
+                                        <th>Estado</th>
+                                        <th>Acción</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="tablaRevisionIdeas">
+
+                                    <tr>
+
+                                        <td
+                                            colspan="7"
+                                            class="tabla-vacia"
+                                        >
+                                            No hay ideas registradas.
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </main>
+
+        </section>
+
+    </div>
+
+    <!-- ======================================
+         PANEL PRINCIPAL DE REVISIÓN
+    ======================================= -->
+
+    <div
+        id="panelRevisionIdea"
+        class="panel-lateral"
+        aria-hidden="true"
+    >
+
+        <div class="panel-lateral-contenido">
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Revisión de propuesta
+                    </span>
+
+                    <h2 id="detalleTicketIdea">
+                        QW-0000
+                    </h2>
+
+                </div>
+
+                <button
+                    class="boton-cerrar-modal"
+                    id="cerrarPanelRevisionIdea"
+                    type="button"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <!-- RESUMEN -->
+
+            <section class="detalle-revision-idea-superior">
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Título
+                    </span>
+
+                    <strong id="detalleTituloIdea">
+                        —
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Estado
+                    </span>
+
+                    <strong id="detalleEstadoIdea">
+                        —
+                    </strong>
+
+                </div>
+
+            </section>
+
+            <!-- INFORMACIÓN GENERAL -->
+
+            <div class="modal-grid">
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Empleado
+                    </span>
+
+                    <strong id="detalleEmpleadoIdea">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Área
+                    </span>
+
+                    <strong id="detalleAreaIdea">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Fecha
+                    </span>
+
+                    <strong id="detalleFechaIdea">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Frecuencia
+                    </span>
+
+                    <strong id="detalleFrecuenciaIdea">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Horas por ejecución
+                    </span>
+
+                    <strong id="detalleHorasIdea">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Implementación estimada
+                    </span>
+
+                    <strong id="detalleImplementacionIdea">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>
+                        Proceso actual
+                    </span>
+
+                    <p id="detalleDescripcionIdea">
+                        —
+                    </p>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>
+                        Problema identificado
+                    </span>
+
+                    <p id="detalleProblemaIdea">
+                        —
+                    </p>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>
+                        Solución sugerida
+                    </span>
+
+                    <p id="detalleSolucionIdea">
+                        —
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- PREGUNTAS ENVIADAS -->
+
+            <section
+                id="seccionPreguntasGuardadas"
+                class="seccion-preguntas-guardadas oculto"
+            >
+
+                <h3>
+                    Información solicitada
+                </h3>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Preguntas enviadas
+                    </span>
+
+                    <p id="detallePreguntasEnviadas">
+                        —
+                    </p>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Fecha límite
+                    </span>
+
+                    <strong id="detalleFechaLimiteRespuesta">
+                        —
+                    </strong>
+
+                </div>
+
+                <div
+                    id="contenedorRespuestaEmpleado"
+                    class="detalle-ticket oculto"
+                >
+
+                    <span>
+                        Respuesta del empleado
+                    </span>
+
+                    <p id="detalleRespuestaEmpleado">
+                        —
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- DECISIÓN DEL GERENTE -->
+
+            <section class="seccion-decision-idea">
+
+                <h3>
+                    Decisión del gerente
+                </h3>
+
+                <div class="campo">
+
+                    <label for="comentarioGerenteIdea">
+                        Comentarios generales
+                    </label>
+
+                    <textarea
+                        id="comentarioGerenteIdea"
+                        placeholder="Agrega observaciones o comentarios internos."
+                    ></textarea>
+
+                </div>
+
+                <div class="acciones-decision-idea">
+
+                    <button
+                        class="boton-solicitar-informacion"
+                        id="botonSolicitarInformacion"
+                        type="button"
+                    >
+                        Solicitar información
+                    </button>
+
+                    <button
+                        class="boton-rechazar-idea"
+                        id="botonRechazarIdea"
+                        type="button"
+                    >
+                        Rechazar y eliminar
+                    </button>
+
+                    <button
+                        class="boton-aprobar-idea"
+                        id="botonAprobarIdea"
+                        type="button"
+                    >
+                        Aprobar
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- CONVERTIR EN OPORTUNIDAD -->
+
+            <section
+                id="seccionConvertirOportunidad"
+                class="seccion-convertir-oportunidad oculto"
+            >
+
+                <h3>
+                    Convertir en oportunidad
+                </h3>
+
+                <p>
+                    Define los datos básicos para publicar la propuesta
+                    como proyecto disponible.
+                </p>
+
+                <div class="formulario">
+
+                    <div class="campo">
+
+                        <label for="herramientasNuevaOportunidad">
+                            Herramientas
+                        </label>
+
+                        <input
+                            type="text"
+                            id="herramientasNuevaOportunidad"
+                            placeholder="Ej. Excel, Power Automate, SAP"
+                        >
+
+                    </div>
+
+                    <div class="campo">
+
+                        <label for="duracionNuevaOportunidad">
+                            Duración
+                        </label>
+
+                        <select id="duracionNuevaOportunidad">
+
+                            <option value="1 mes">
+                                1 mes
+                            </option>
+
+                            <option value="2 meses">
+                                2 meses
+                            </option>
+
+                            <option value="3 meses">
+                                3 meses
+                            </option>
+
+                            <option value="4 a 6 meses">
+                                4 a 6 meses
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="campo">
+
+                        <label for="disponibilidadNuevaOportunidad">
+                            Horas por semana
+                        </label>
+
+                        <select id="disponibilidadNuevaOportunidad">
+
+                            <option value="1">
+                                1 hora
+                            </option>
+
+                            <option value="2">
+                                2 horas
+                            </option>
+
+                            <option value="4">
+                                4 horas
+                            </option>
+
+                            <option value="6">
+                                6 horas
+                            </option>
+
+                            <option value="8">
+                                8 horas
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="campo">
+
+                        <label for="dificultadNuevaOportunidad">
+                            Dificultad
+                        </label>
+
+                        <select id="dificultadNuevaOportunidad">
+
+                            <option value="Básica">
+                                Básica
+                            </option>
+
+                            <option value="Intermedia">
+                                Intermedia
+                            </option>
+
+                            <option value="Avanzada">
+                                Avanzada
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="campo campo-completo">
+
+                        <label for="responsabilidadChampion">
+                            Responsabilidades del Champion
+                        </label>
+
+                        <textarea
+                            id="responsabilidadChampion"
+                            placeholder="Diseñar la solución y orientar técnicamente al equipo."
+                        ></textarea>
+
+                    </div>
+
+                    <div class="campo campo-completo">
+
+                        <label for="responsabilidadLearner">
+                            Responsabilidades del Learner
+                        </label>
+
+                        <textarea
+                            id="responsabilidadLearner"
+                            placeholder="Desarrollar tareas supervisadas, ejecutar pruebas y documentar."
+                        ></textarea>
+
+                    </div>
+
+                    <div class="campo campo-completo">
+
+                        <label for="responsabilidadContributor">
+                            Responsabilidades del Contributor
+                        </label>
+
+                        <textarea
+                            id="responsabilidadContributor"
+                            placeholder="Apoyar con validaciones, datos y pruebas."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="boton-principal boton-publicar-oportunidad"
+                    id="botonPublicarOportunidad"
+                    type="button"
+                >
+                    Publicar oportunidad
+                </button>
+
+            </section>
+
+            <div class="modal-acciones">
+
+                <button
+                    class="boton-secundario"
+                    id="cerrarPanelRevisionIdeaInferior"
+                    type="button"
+                >
+                    Cerrar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ======================================
+         PANEL PARA SOLICITAR INFORMACIÓN
+    ======================================= -->
+
+    <div
+        id="panelSolicitarInformacion"
+        class="panel-lateral"
+        aria-hidden="true"
+    >
+
+        <div class="panel-lateral-contenido">
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Solicitud de información
+                    </span>
+
+                    <h2>
+                        Preguntas para el empleado
+                    </h2>
+
+                </div>
+
+                <button
+                    class="boton-cerrar-modal"
+                    id="cerrarPanelSolicitarInformacion"
+                    type="button"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <section class="resumen-solicitud-informacion">
+
+                <span>
+                    Propuesta
+                </span>
+
+                <strong id="ideaSolicitudInformacion">
+                    —
+                </strong>
+
+                <small id="empleadoSolicitudInformacion">
+                    —
+                </small>
+
+            </section>
+
+            <section class="seccion-preguntas-gerente">
+
+                <h3>
+                    Información requerida
+                </h3>
+
+                <p>
+                    Escribe claramente las preguntas que el empleado
+                    deberá responder para continuar con la evaluación.
+                </p>
+
+                <div class="campo">
+
+                    <label for="preguntasGerenteIdea">
+                        Preguntas para el empleado
+                    </label>
+
+                    <textarea
+                        id="preguntasGerenteIdea"
+                        rows="10"
+                        placeholder="Ejemplo:
+
+1. ¿Cuántas personas participan actualmente en este proceso?
+
+2. ¿Cuánto tiempo tarda cada ejecución?
+
+3. ¿Dónde se guarda la información?
+
+4. ¿Qué herramientas se utilizan actualmente?"
+                    ></textarea>
+
+                </div>
+
+                <div class="campo">
+
+                    <label for="fechaLimiteRespuestaIdea">
+                        Fecha límite para responder
+                    </label>
+
+                    <input
+                        id="fechaLimiteRespuestaIdea"
+                        type="date"
+                    >
+
+                </div>
+
+                <div
+                    id="mensajeSolicitudInformacion"
+                    class="mensaje-formulario"
+                ></div>
+
+            </section>
+
+            <div class="modal-acciones">
+
+                <button
+                    class="boton-secundario"
+                    id="cancelarSolicitudInformacion"
+                    type="button"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    class="boton-principal"
+                    id="enviarSolicitudInformacion"
+                    type="button"
+                >
+                    Enviar preguntas
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- NOTIFICACIÓN -->
+
+    <div
+        id="notificacion"
+        class="notificacion"
+    ></div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/revision-ideas.js"></script>
+
+</body>
+
+</html>

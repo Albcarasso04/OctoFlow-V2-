@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        OctoFlow | Talento
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
+
+    <style>
+
+        /*
+        ==============================================
+        CABECERA
+        ==============================================
+        */
+
+        .cabecera-talento {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .cabecera-talento h2 {
+            margin: 0;
+            color: #003b71;
+        }
+
+        .cabecera-talento p {
+            margin: 8px 0 0;
+            color: #667085;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+
+        /*
+        ==============================================
+        INDICADORES
+        ==============================================
+        */
+
+        .resumen-talento {
+            display: grid;
+            grid-template-columns:
+                repeat(5, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .tarjeta-resumen-talento {
+            padding: 19px;
+            border: 1px solid #d8e3ef;
+            border-radius: 15px;
+            background-color: #ffffff;
+            box-shadow:
+                0 10px 26px
+                rgba(15, 50, 85, 0.07);
+        }
+
+        .tarjeta-resumen-talento span {
+            display: block;
+            color: #667085;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .tarjeta-resumen-talento strong {
+            display: block;
+            margin-top: 10px;
+            color: #003b71;
+            font-size: 27px;
+        }
+
+        .tarjeta-resumen-talento small {
+            display: block;
+            margin-top: 6px;
+            color: #98a2b3;
+            font-size: 9px;
+        }
+
+
+        /*
+        ==============================================
+        FILTROS
+        ==============================================
+        */
+
+        .filtros-talento {
+            display: grid;
+            grid-template-columns:
+                minmax(220px, 1.6fr)
+                minmax(150px, 1fr)
+                minmax(150px, 1fr)
+                minmax(150px, 1fr)
+                minmax(150px, 1fr)
+                auto;
+            align-items: end;
+            gap: 13px;
+            margin-top: 22px;
+        }
+
+
+        /*
+        ==============================================
+        RANKING
+        ==============================================
+        */
+
+        .ranking-talento {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .tarjeta-ranking-talento {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px;
+            border: 1px solid #d8e3ef;
+            border-radius: 14px;
+            background-color: #ffffff;
+            cursor: pointer;
+            transition:
+                transform 0.18s ease,
+                border-color 0.18s ease;
+        }
+
+        .tarjeta-ranking-talento:hover {
+            transform: translateY(-2px);
+            border-color: #84caff;
+        }
+
+        .posicion-ranking {
+            display: grid;
+            place-items: center;
+            flex: 0 0 42px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: #e8f3ff;
+            color: #005eb8;
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .tarjeta-ranking-talento strong {
+            display: block;
+            color: #003b71;
+            font-size: 13px;
+        }
+
+        .tarjeta-ranking-talento span {
+            display: block;
+            margin-top: 4px;
+            color: #667085;
+            font-size: 10px;
+        }
+
+
+        /*
+        ==============================================
+        GRID DE COLABORADORES
+        ==============================================
+        */
+
+        .grid-talento {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .tarjeta-talento {
+            padding: 20px;
+            border: 1px solid #d8e3ef;
+            border-radius: 16px;
+            background-color: #ffffff;
+            box-shadow:
+                0 12px 30px
+                rgba(15, 50, 85, 0.08);
+            cursor: pointer;
+            transition:
+                transform 0.18s ease,
+                border-color 0.18s ease,
+                box-shadow 0.18s ease;
+        }
+
+        .tarjeta-talento:hover {
+            transform: translateY(-2px);
+            border-color: #b2ddff;
+            box-shadow:
+                0 18px 38px
+                rgba(15, 50, 85, 0.13);
+        }
+
+        .cabecera-tarjeta-talento {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .avatar-talento {
+            display: grid;
+            place-items: center;
+            flex: 0 0 52px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background-color: #e8f3ff;
+            color: #005eb8;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .datos-principales-talento {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .datos-principales-talento h3 {
+            margin: 0;
+            color: #003b71;
+            font-size: 16px;
+        }
+
+        .datos-principales-talento p {
+            margin: 5px 0 0;
+            color: #667085;
+            font-size: 10px;
+        }
+
+        .rol-principal-talento {
+            padding: 5px 8px;
+            border-radius: 999px;
+            background-color: #eff8ff;
+            color: #175cd3;
+            font-size: 9px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .rol-principal-talento.champion {
+            background-color: #dcfae6;
+            color: #067647;
+        }
+
+        .rol-principal-talento.learner {
+            background-color: #fef0c7;
+            color: #b54708;
+        }
+
+        .rol-principal-talento.contributor {
+            background-color: #f2f4f7;
+            color: #475467;
+        }
+
+
+        /*
+        ==============================================
+        INNOVATION SCORE CLICKEABLE
+        ==============================================
+        */
+
+        .score-talento {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            width: 100%;
+            margin-top: 16px;
+            padding: 12px 14px;
+            border: 1px solid transparent;
+            border-radius: 11px;
+            background-color: #f8fbff;
+            text-align: left;
+            cursor: pointer;
+            transition:
+                background-color 0.18s ease,
+                border-color 0.18s ease;
+        }
+
+        .score-talento:hover {
+            border-color: #84caff;
+            background-color: #e8f3ff;
+        }
+
+        .score-talento span {
+            color: #667085;
+            font-size: 10px;
+        }
+
+        .score-talento strong {
+            color: #005eb8;
+            font-size: 18px;
+        }
+
+        .score-talento small {
+            display: block;
+            margin-top: 3px;
+            color: #005eb8;
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .barra-score-talento {
+            height: 8px;
+            margin-top: 9px;
+            overflow: hidden;
+            border-radius: 999px;
+            background-color: #e9eef5;
+        }
+
+        .barra-score-talento span {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background:
+                linear-gradient(
+                    90deg,
+                    #005eb8,
+                    #00a3e0
+                );
+        }
+
+
+        /*
+        ==============================================
+        HABILIDADES Y MÉTRICAS
+        ==============================================
+        */
+
+        .habilidades-talento {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 15px;
+        }
+
+        .habilidades-talento span {
+            padding: 5px 8px;
+            border: 1px solid #b2ddff;
+            border-radius: 999px;
+            background-color: #eff8ff;
+            color: #005eb8;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .metricas-talento {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 9px;
+            margin-top: 16px;
+        }
+
+        .metrica-talento {
+            padding: 11px;
+            border: 1px solid #e4e7ec;
+            border-radius: 10px;
+            background-color: #f9fafb;
+        }
+
+        .metrica-talento span {
+            display: block;
+            color: #667085;
+            font-size: 9px;
+        }
+
+        .metrica-talento strong {
+            display: block;
+            margin-top: 5px;
+            color: #003b71;
+            font-size: 13px;
+        }
+
+        .boton-ver-talento {
+            width: 100%;
+            margin-top: 16px;
+        }
+
+
+        /*
+        ==============================================
+        PANEL LATERAL DEL PERFIL
+        ==============================================
+        */
+
+        .panel-talento {
+            position: fixed;
+            inset: 0;
+            z-index: 1700;
+            display: none;
+            justify-content: flex-end;
+            background-color:
+                rgba(15, 23, 42, 0.45);
+        }
+
+        .panel-talento.visible {
+            display: flex;
+        }
+
+        .panel-talento-contenido {
+            width: min(760px, 100%);
+            height: 100%;
+            overflow-y: auto;
+            padding: 28px;
+            background-color: #ffffff;
+            box-shadow:
+                -20px 0 45px
+                rgba(15, 23, 42, 0.2);
+        }
+
+        .cabecera-panel-talento {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .cerrar-panel-talento {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #d8e3ef;
+            border-radius: 50%;
+            background-color: #ffffff;
+            color: #344054;
+            font-size: 23px;
+            cursor: pointer;
+        }
+
+        .perfil-talento-superior {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 22px;
+            padding: 18px;
+            border: 1px solid #d8e3ef;
+            border-radius: 14px;
+            background-color: #f8fbff;
+        }
+
+        .avatar-talento-grande {
+            display: grid;
+            place-items: center;
+            flex: 0 0 72px;
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background-color: #e8f3ff;
+            color: #005eb8;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .perfil-talento-superior h2 {
+            margin: 0;
+            color: #003b71;
+        }
+
+        .perfil-talento-superior p {
+            margin: 6px 0 0;
+            color: #667085;
+            font-size: 11px;
+        }
+
+        .grid-detalle-talento {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 13px;
+            margin-top: 20px;
+        }
+
+        .detalle-talento-box {
+            padding: 14px;
+            border: 1px solid #e4e7ec;
+            border-radius: 11px;
+            background-color: #ffffff;
+        }
+
+        .detalle-talento-box span {
+            display: block;
+            color: #667085;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .detalle-talento-box strong,
+        .detalle-talento-box p {
+            display: block;
+            margin: 7px 0 0;
+            color: #344054;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .detalle-score-clickeable {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #84caff;
+            border-radius: 11px;
+            background-color: #f5fbff;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .detalle-score-clickeable span {
+            display: block;
+            color: #667085;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .detalle-score-clickeable strong {
+            display: block;
+            margin-top: 7px;
+            color: #005eb8;
+            font-size: 15px;
+        }
+
+        .detalle-score-clickeable small {
+            display: block;
+            margin-top: 5px;
+            color: #005eb8;
+            font-size: 9px;
+        }
+
+        .seccion-talento-panel {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #e4e7ec;
+        }
+
+        .seccion-talento-panel h3 {
+            margin: 0;
+            color: #003b71;
+            font-size: 15px;
+        }
+
+        .lista-habilidades-detalle {
+            display: grid;
+            gap: 9px;
+            margin-top: 14px;
+        }
+
+        .habilidad-detalle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 11px 13px;
+            border: 1px solid #e4e7ec;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+
+        .habilidad-detalle strong {
+            color: #003b71;
+            font-size: 11px;
+        }
+
+        .habilidad-detalle span {
+            color: #667085;
+            font-size: 10px;
+        }
+
+        .lista-proyectos-talento {
+            display: grid;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .proyecto-talento-item {
+            padding: 13px;
+            border: 1px solid #d8e3ef;
+            border-radius: 11px;
+            background-color: #ffffff;
+        }
+
+        .proyecto-talento-item strong {
+            color: #003b71;
+            font-size: 12px;
+        }
+
+        .proyecto-talento-item span {
+            display: block;
+            margin-top: 5px;
+            color: #667085;
+            font-size: 10px;
+        }
+
+        .lista-reconocimientos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .reconocimiento-talento {
+            padding: 8px 10px;
+            border-radius: 999px;
+            background-color: #fffaeb;
+            color: #b54708;
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+
+        /*
+        ==============================================
+        PANEL DEL DESGLOSE DEL SCORE
+        ==============================================
+        */
+
+        .panel-score {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: none;
+            place-items: center;
+            padding: 20px;
+            background-color:
+                rgba(15, 23, 42, 0.58);
+        }
+
+        .panel-score.visible {
+            display: grid;
+        }
+
+        .panel-score-contenido {
+            width: min(760px, 100%);
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+            padding: 26px;
+            border-radius: 18px;
+            background-color: #ffffff;
+            box-shadow:
+                0 28px 70px
+                rgba(15, 23, 42, 0.28);
+        }
+
+        .cabecera-score {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .cabecera-score h2 {
+            margin: 7px 0 0;
+            color: #003b71;
+        }
+
+        .cabecera-score p {
+            margin: 7px 0 0;
+            color: #667085;
+            font-size: 11px;
+        }
+
+        .score-total-destacado {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 22px;
+            padding: 18px;
+            border: 1px solid #84caff;
+            border-radius: 14px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #f5fbff,
+                    #e8f3ff
+                );
+        }
+
+        .score-total-destacado span {
+            display: block;
+            color: #475467;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .score-total-destacado strong {
+            color: #005eb8;
+            font-size: 32px;
+        }
+
+        .barra-score-total {
+            height: 11px;
+            margin-top: 13px;
+            overflow: hidden;
+            border-radius: 999px;
+            background-color: #d8e3ef;
+        }
+
+        .barra-score-total span {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background:
+                linear-gradient(
+                    90deg,
+                    #005eb8,
+                    #00a3e0
+                );
+        }
+
+        .tabla-desglose-score {
+            display: grid;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .fila-desglose-score {
+            display: grid;
+            grid-template-columns:
+                minmax(180px, 1.5fr)
+                minmax(150px, 1fr)
+                90px
+                90px;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 15px;
+            border: 1px solid #e4e7ec;
+            border-radius: 11px;
+            background-color: #ffffff;
+        }
+
+        .fila-desglose-score.encabezado {
+            border: none;
+            background-color: #f2f4f7;
+            color: #475467;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .concepto-score strong {
+            display: block;
+            color: #003b71;
+            font-size: 11px;
+        }
+
+        .concepto-score span {
+            display: block;
+            margin-top: 4px;
+            color: #667085;
+            font-size: 9px;
+        }
+
+        .formula-score {
+            color: #475467;
+            font-size: 10px;
+        }
+
+        .puntos-score {
+            color: #005eb8;
+            font-size: 12px;
+            font-weight: 800;
+            text-align: right;
+        }
+
+        .maximo-score {
+            color: #667085;
+            font-size: 10px;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .explicacion-score {
+            margin-top: 20px;
+            padding: 14px;
+            border: 1px solid #fedf89;
+            border-radius: 11px;
+            background-color: #fffaeb;
+            color: #7a2e0e;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        .acciones-score {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid #e4e7ec;
+        }
+
+
+        /*
+        ==============================================
+        RESPONSIVE
+        ==============================================
+        */
+
+        @media (max-width: 1200px) {
+
+            .resumen-talento {
+                grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+            }
+
+            .grid-talento {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .filtros-talento {
+                grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 800px) {
+
+            .ranking-talento,
+            .grid-talento,
+            .resumen-talento,
+            .filtros-talento,
+            .grid-detalle-talento {
+                grid-template-columns: 1fr;
+            }
+
+            .cabecera-talento {
+                flex-direction: column;
+            }
+
+            .fila-desglose-score {
+                grid-template-columns: 1fr;
+            }
+
+            .fila-desglose-score.encabezado {
+                display: none;
+            }
+
+            .puntos-score,
+            .maximo-score {
+                text-align: left;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body data-portal="gerente">
+
+    <div class="aplicacion">
+
+        <aside class="menu-lateral">
+
+            <div class="marca">
+
+                <img
+                    class="logo-danone-menu"
+                    src="../img/DANONE_LOGO_HORIZONTAL.png"
+                    alt="Logo de Danone"
+                >
+
+                <h1>
+                    OctoFlow
+                </h1>
+
+                <p>
+                    Portal del Gerente
+                </p>
+
+            </div>
+
+            <nav class="navegacion">
+
+                <a
+                    class="enlace-menu"
+                    href="gerentes.html"
+                >
+                    <span class="icono-menu">⌂</span>
+                    Dashboard
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="revision-ideas.html"
+                >
+                    <span class="icono-menu">💡</span>
+                    Revisar ideas
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="gestion-oportunidades.html"
+                >
+                    <span class="icono-menu">🚀</span>
+                    Oportunidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="postulaciones-gerente.html"
+                >
+                    <span class="icono-menu">👥</span>
+                    Postulaciones
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="proyectos-gerente.html"
+                >
+                    <span class="icono-menu">▣</span>
+                    Proyectos
+                </a>
+
+                <a
+                    class="enlace-menu activo"
+                    href="talento.html"
+                >
+                    <span class="icono-menu">◉</span>
+                    Talento
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="metricas.html"
+                >
+                    <span class="icono-menu">▥</span>
+                    Métricas
+                </a>
+
+            </nav>
+
+            <div class="usuario-menu">
+
+                <strong data-nombre-usuario>
+                    Gerente
+                </strong>
+
+                <div
+                    class="correo-menu"
+                    data-correo-usuario
+                >
+                    gerente@danone.com
+                </div>
+
+                <button
+                    class="boton-salir"
+                    type="button"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </aside>
+
+        <section class="contenido">
+
+            <header class="encabezado">
+
+                <div class="titulo-encabezado">
+
+                    <h2>
+                        Talento
+                    </h2>
+
+                    <p>
+                        Directorio de habilidades y participación
+                    </p>
+
+                </div>
+
+                <div class="perfil-superior">
+
+                    <button
+                        class="boton-notificaciones"
+                        type="button"
+                        aria-label="Notificaciones"
+                    >
+                        🔔
+                    </button>
+
+                    <div
+                        class="avatar"
+                        data-avatar-usuario
+                    >
+                        G
+                    </div>
+
+                    <div class="datos-usuario">
+
+                        <strong data-nombre-usuario>
+                            Gerente
+                        </strong>
+
+                        <span data-rol-usuario>
+                            Gerente
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main class="principal">
+
+                <div class="contenedor-pagina">
+
+                    <section class="cabecera-talento">
+
+                        <div>
+
+                            <h2>
+                                Directorio de talento
+                            </h2>
+
+                            <p>
+                                Identifica colaboradores, habilidades,
+                                experiencia y participación en proyectos.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+                    <section class="resumen-talento">
+
+                        <article class="tarjeta-resumen-talento">
+
+                            <span>
+                                Colaboradores
+                            </span>
+
+                            <strong id="totalTalentoColaboradores">
+                                0
+                            </strong>
+
+                            <small>
+                                Personas con actividad registrada
+                            </small>
+
+                        </article>
+
+                        <article class="tarjeta-resumen-talento">
+
+                            <span>
+                                Champions
+                            </span>
+
+                            <strong id="totalTalentoChampions">
+                                0
+                            </strong>
+
+                            <small>
+                                Expertos activos
+                            </small>
+
+                        </article>
+
+                        <article class="tarjeta-resumen-talento">
+
+                            <span>
+                                Learners
+                            </span>
+
+                            <strong id="totalTalentoLearners">
+                                0
+                            </strong>
+
+                            <small>
+                                Personas en desarrollo
+                            </small>
+
+                        </article>
+
+                        <article class="tarjeta-resumen-talento">
+
+                            <span>
+                                Contributors
+                            </span>
+
+                            <strong id="totalTalentoContributors">
+                                0
+                            </strong>
+
+                            <small>
+                                Participación colaborativa
+                            </small>
+
+                        </article>
+
+                        <article class="tarjeta-resumen-talento">
+
+                            <span>
+                                Innovation Score promedio
+                            </span>
+
+                            <strong id="promedioInnovationScore">
+                                0
+                            </strong>
+
+                            <small>
+                                Índice promedio del talento
+                            </small>
+
+                        </article>
+
+                    </section>
+
+                    <div class="titulo-seccion">
+
+                        <h3>
+                            Top innovadores
+                        </h3>
+
+                    </div>
+
+                    <section
+                        id="rankingTalento"
+                        class="ranking-talento"
+                    >
+
+                        <div class="tabla-vacia">
+                            Todavía no hay información suficiente.
+                        </div>
+
+                    </section>
+
+                    <section class="panel filtros-talento">
+
+                        <div class="campo">
+
+                            <label for="buscarTalento">
+                                Buscar
+                            </label>
+
+                            <input
+                                id="buscarTalento"
+                                type="search"
+                                placeholder="Nombre, correo, área o habilidad"
+                            >
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroRolTalento">
+                                Rol
+                            </label>
+
+                            <select id="filtroRolTalento">
+
+                                <option value="">
+                                    Todos
+                                </option>
+
+                                <option value="Champion">
+                                    Champion
+                                </option>
+
+                                <option value="Learner">
+                                    Learner
+                                </option>
+
+                                <option value="Contributor">
+                                    Contributor
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroAreaTalento">
+                                Área
+                            </label>
+
+                            <select id="filtroAreaTalento">
+
+                                <option value="">
+                                    Todas las áreas
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroHerramientaTalento">
+                                Herramienta
+                            </label>
+
+                            <select id="filtroHerramientaTalento">
+
+                                <option value="">
+                                    Todas
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="ordenTalento">
+                                Ordenar
+                            </label>
+
+                            <select id="ordenTalento">
+
+                                <option value="score">
+                                    Innovation Score
+                                </option>
+
+                                <option value="proyectos">
+                                    Más proyectos
+                                </option>
+
+                                <option value="ideas">
+                                    Más ideas
+                                </option>
+
+                                <option value="nombre">
+                                    Nombre
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <button
+                            id="limpiarFiltrosTalento"
+                            class="boton-secundario"
+                            type="button"
+                        >
+                            Limpiar
+                        </button>
+
+                    </section>
+
+                    <section>
+
+                        <div class="panel-cabecera">
+
+                            <div>
+
+                                <h3>
+                                    Colaboradores
+                                </h3>
+
+                                <p class="texto-ayuda">
+                                    Consulta experiencia, intereses y
+                                    participación en iniciativas.
+                                </p>
+
+                            </div>
+
+                            <span
+                                id="contadorTalento"
+                                class="contador-resultados"
+                            >
+                                0 colaboradores
+                            </span>
+
+                        </div>
+
+                        <div
+                            id="listaTalento"
+                            class="grid-talento"
+                        >
+
+                            <div class="tabla-vacia">
+                                No existe información de talento.
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </main>
+
+        </section>
+
+    </div>
+
+
+    <!-- PANEL DEL PERFIL -->
+
+    <div
+        id="panelDetalleTalento"
+        class="panel-talento"
+        aria-hidden="true"
+    >
+
+        <div class="panel-talento-contenido">
+
+            <div class="cabecera-panel-talento">
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Perfil de talento
+                    </span>
+
+                    <h2>
+                        Información del colaborador
+                    </h2>
+
+                </div>
+
+                <button
+                    id="cerrarPanelDetalleTalento"
+                    class="cerrar-panel-talento"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <section class="perfil-talento-superior">
+
+                <div
+                    id="avatarDetalleTalento"
+                    class="avatar-talento-grande"
+                >
+                    U
+                </div>
+
+                <div>
+
+                    <h2 id="nombreDetalleTalento">
+                        Colaborador
+                    </h2>
+
+                    <p id="correoDetalleTalento">
+                        usuario@danone.com
+                    </p>
+
+                    <p id="areaDetalleTalento">
+                        Sin área
+                    </p>
+
+                </div>
+
+            </section>
+
+            <section class="grid-detalle-talento">
+
+                <article class="detalle-talento-box">
+
+                    <span>
+                        Rol principal
+                    </span>
+
+                    <strong id="rolDetalleTalento">
+                        Contributor
+                    </strong>
+
+                </article>
+
+                <button
+                    id="botonScoreDetalleTalento"
+                    class="detalle-score-clickeable"
+                    type="button"
+                >
+
+                    <span>
+                        Innovation Score
+                    </span>
+
+                    <strong id="scoreDetalleTalento">
+                        0 / 100
+                    </strong>
+
+                    <small>
+                        Ver desglose del cálculo
+                    </small>
+
+                </button>
+
+                <article class="detalle-talento-box">
+
+                    <span>
+                        Disponibilidad
+                    </span>
+
+                    <strong id="disponibilidadDetalleTalento">
+                        Sin información
+                    </strong>
+
+                </article>
+
+                <article class="detalle-talento-box">
+
+                    <span>
+                        Proyectos activos
+                    </span>
+
+                    <strong id="proyectosActivosDetalleTalento">
+                        0
+                    </strong>
+
+                </article>
+
+                <article class="detalle-talento-box">
+
+                    <span>
+                        Proyectos completados
+                    </span>
+
+                    <strong id="proyectosCompletadosDetalleTalento">
+                        0
+                    </strong>
+
+                </article>
+
+                <article class="detalle-talento-box">
+
+                    <span>
+                        Hitos completados
+                    </span>
+
+                    <strong id="hitosCompletadosDetalleTalento">
+                        0
+                    </strong>
+
+                </article>
+
+                <article class="detalle-talento-box">
+
+                    <span>
+                        Ideas registradas
+                    </span>
+
+                    <strong id="ideasDetalleTalento">
+                        0
+                    </strong>
+
+                </article>
+
+                <article class="detalle-talento-box">
+
+                    <span>
+                        Ideas aprobadas
+                    </span>
+
+                    <strong id="ideasAprobadasDetalleTalento">
+                        0
+                    </strong>
+
+                </article>
+
+                <article class="detalle-talento-box">
+
+                    <span>
+                        Horas ahorradas
+                    </span>
+
+                    <strong id="horasDetalleTalento">
+                        0 h/año
+                    </strong>
+
+                </article>
+
+            </section>
+
+            <section class="seccion-talento-panel">
+
+                <h3>
+                    Habilidades dominadas
+                </h3>
+
+                <div
+                    id="habilidadesDetalleTalento"
+                    class="lista-habilidades-detalle"
+                ></div>
+
+            </section>
+
+            <section class="seccion-talento-panel">
+
+                <h3>
+                    Herramientas que desea aprender
+                </h3>
+
+                <div
+                    id="aprendizajeDetalleTalento"
+                    class="lista-habilidades-detalle"
+                ></div>
+
+            </section>
+
+            <section class="seccion-talento-panel">
+
+                <h3>
+                    Proyectos
+                </h3>
+
+                <div
+                    id="proyectosDetalleTalento"
+                    class="lista-proyectos-talento"
+                ></div>
+
+            </section>
+
+            <section class="seccion-talento-panel">
+
+                <h3>
+                    Reconocimientos
+                </h3>
+
+                <div
+                    id="reconocimientosDetalleTalento"
+                    class="lista-reconocimientos"
+                ></div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+
+    <!-- PANEL DEL INNOVATION SCORE -->
+
+    <div
+        id="panelDetalleInnovationScore"
+        class="panel-score"
+        aria-hidden="true"
+    >
+
+        <div class="panel-score-contenido">
+
+            <div class="cabecera-score">
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Metodología de evaluación
+                    </span>
+
+                    <h2 id="tituloDetalleInnovationScore">
+                        Innovation Score
+                    </h2>
+
+                    <p>
+                        El puntaje se obtiene a partir de la actividad
+                        registrada dentro de OctoFlow.
+                    </p>
+
+                </div>
+
+                <button
+                    id="cerrarPanelInnovationScore"
+                    class="cerrar-panel-talento"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <section class="score-total-destacado">
+
+                <div>
+
+                    <span>
+                        Innovation Score total
+                    </span>
+
+                    <strong id="totalDetalleInnovationScore">
+                        0 / 100
+                    </strong>
+
+                </div>
+
+                <span id="nivelDetalleInnovationScore">
+                    En desarrollo
+                </span>
+
+            </section>
+
+            <div class="barra-score-total">
+
+                <span
+                    id="barraDetalleInnovationScore"
+                    style="width: 0%"
+                ></span>
+
+            </div>
+
+            <section class="tabla-desglose-score">
+
+                <div class="fila-desglose-score encabezado">
+
+                    <div>
+                        Concepto
+                    </div>
+
+                    <div>
+                        Cálculo
+                    </div>
+
+                    <div>
+                        Puntos
+                    </div>
+
+                    <div>
+                        Máximo
+                    </div>
+
+                </div>
+
+                <div id="listaDesgloseInnovationScore"></div>
+
+            </section>
+
+            <div class="explicacion-score">
+
+                Los límites máximos evitan que una sola categoría
+                determine todo el resultado. El score busca reconocer
+                un balance entre generación de ideas, ejecución,
+                liderazgo, cumplimiento, impacto y desarrollo de
+                habilidades.
+
+            </div>
+
+            <div class="acciones-score">
+
+                <button
+                    id="cerrarPanelInnovationScoreInferior"
+                    class="boton-secundario"
+                    type="button"
+                >
+                    Cerrar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        id="notificacion"
+        class="notificacion"
+    ></div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/talento.js"></script>
+
+</body>
+
+</html>

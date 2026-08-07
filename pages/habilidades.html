@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        OctoFlow | Mis Habilidades
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
+
+</head>
+
+<body data-portal="colaborador">
+
+    <div class="aplicacion">
+
+        <!-- MENÚ LATERAL -->
+
+        <aside class="menu-lateral">
+
+            <div class="marca">
+
+                <img
+                    class="logo-danone-menu"
+                    src="../img/DANONE_LOGO_HORIZONTAL.png"
+                    alt="Logo de Danone"
+                >
+
+                <h1>OctoFlow</h1>
+
+                <p>Portal del Colaborador</p>
+
+            </div>
+
+            <nav class="navegacion">
+
+                <a
+                    class="enlace-menu"
+                    href="colaboradores.html"
+                >
+                    <span class="icono-menu">⌂</span>
+                    Inicio
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="ideas.html"
+                >
+                    <span class="icono-menu">💡</span>
+                    Mis ideas
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="oportunidades.html"
+                >
+                    <span class="icono-menu">⌕</span>
+                    Oportunidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="proyectos.html"
+                >
+                    <span class="icono-menu">▣</span>
+                    Mis proyectos
+                </a>
+
+                <a
+                    class="enlace-menu activo"
+                    href="habilidades.html"
+                >
+                    <span class="icono-menu">◉</span>
+                    Habilidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="perfil.html"
+                >
+                    <span class="icono-menu">○</span>
+                    Mi perfil
+                </a>
+
+            </nav>
+
+            <div class="usuario-menu">
+
+                <strong data-nombre-usuario>
+                    Usuario
+                </strong>
+
+                <div
+                    class="correo-menu"
+                    data-correo-usuario
+                >
+                    usuario@danone.com
+                </div>
+
+                <button
+                    class="boton-salir"
+                    type="button"
+                    onclick="cerrarSesion()"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- CONTENIDO -->
+
+        <section class="contenido">
+
+            <header class="encabezado">
+
+                <div class="titulo-encabezado">
+
+                    <h2>Mis habilidades</h2>
+
+                    <p>
+                        Conocimientos, intereses y disponibilidad
+                    </p>
+
+                </div>
+
+                <div class="perfil-superior">
+
+                    <div
+                        class="avatar"
+                        data-avatar-usuario
+                    >
+                        U
+                    </div>
+
+                    <div class="datos-usuario">
+
+                        <strong data-nombre-usuario>
+                            Usuario
+                        </strong>
+
+                        <span data-rol-usuario>
+                            Colaborador
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main class="principal">
+
+                <div class="contenedor-pagina">
+
+                    <!-- CABECERA -->
+
+                    <section class="cabecera-pagina">
+
+                        <div>
+
+                            <h2>
+                                Perfil de habilidades
+                            </h2>
+
+                            <p>
+                                Esta información permitirá que OctoFlow
+                                recomiende oportunidades compatibles
+                                contigo.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+                    <!-- RESUMEN -->
+
+                    <section class="resumen-habilidades">
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Herramientas registradas
+                            </span>
+
+                            <strong id="totalHabilidades">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Nivel avanzado o experto
+                            </span>
+
+                            <strong id="totalExpertas">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Quiero aprender
+                            </span>
+
+                            <strong id="totalAprendizaje">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Rol recomendado
+                            </span>
+
+                            <strong
+                                id="rolRecomendado"
+                                class="texto-resumen"
+                            >
+                                Por definir
+                            </strong>
+
+                        </article>
+
+                    </section>
+
+                    <!-- CONFIGURACIÓN GENERAL -->
+
+                    <section class="panel-formulario">
+
+                        <h3>
+                            Disponibilidad y participación
+                        </h3>
+
+                        <form
+                            id="formularioPerfilHabilidades"
+                            class="formulario"
+                        >
+
+                            <div class="campo">
+
+                                <label for="disponibilidadSemanal">
+                                    Disponibilidad semanal
+                                </label>
+
+                                <select id="disponibilidadSemanal">
+
+                                    <option value="1">
+                                        1 hora por semana
+                                    </option>
+
+                                    <option value="2">
+                                        2 horas por semana
+                                    </option>
+
+                                    <option value="4">
+                                        4 horas por semana
+                                    </option>
+
+                                    <option value="6">
+                                        6 horas por semana
+                                    </option>
+
+                                    <option value="8">
+                                        8 horas por semana
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="areaPrincipal">
+                                    Área principal
+                                </label>
+
+                                <select id="areaPrincipal">
+
+                                    <option value="">
+                                        Selecciona un área
+                                    </option>
+
+                                    <option value="Finanzas">
+                                        Finanzas
+                                    </option>
+
+                                    <option value="Operaciones">
+                                        Operaciones
+                                    </option>
+
+                                    <option value="Recursos Humanos">
+                                        Recursos Humanos
+                                    </option>
+
+                                    <option value="Compras">
+                                        Compras
+                                    </option>
+
+                                    <option value="Ventas">
+                                        Ventas
+                                    </option>
+
+                                    <option value="Tecnología">
+                                        Tecnología
+                                    </option>
+
+                                    <option value="Legal">
+                                        Legal
+                                    </option>
+
+                                    <option value="Otro">
+                                        Otro
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="campo campo-completo">
+
+                                <label>
+                                    Roles en los que deseas participar
+                                </label>
+
+                                <div class="opciones-participacion">
+
+                                    <label class="opcion-participacion">
+
+                                        <input
+                                            type="checkbox"
+                                            id="disponibleChampion"
+                                        >
+
+                                        <span>
+
+                                            <strong>
+                                                Disponible como Champion
+                                            </strong>
+
+                                            <small>
+                                                Puedo orientar a otros en
+                                                herramientas que domino.
+                                            </small>
+
+                                        </span>
+
+                                    </label>
+
+                                    <label class="opcion-participacion">
+
+                                        <input
+                                            type="checkbox"
+                                            id="disponibleLearner"
+                                            checked
+                                        >
+
+                                        <span>
+
+                                            <strong>
+                                                Interesado como Learner
+                                            </strong>
+
+                                            <small>
+                                                Quiero participar para desarrollar
+                                                nuevas habilidades.
+                                            </small>
+
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                            <div class="campo campo-completo">
+
+                                <label for="areasInteres">
+                                    Áreas o procesos de interés
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="areasInteres"
+                                    placeholder="Ej. Finanzas, reportes, controles, análisis de datos"
+                                >
+
+                            </div>
+
+                            <div
+                                id="mensajePerfilHabilidades"
+                                class="mensaje-formulario"
+                            ></div>
+
+                            <div class="acciones-formulario">
+
+                                <button
+                                    class="boton-principal"
+                                    type="submit"
+                                >
+                                    Guardar perfil
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </section>
+
+                    <!-- AGREGAR HABILIDAD -->
+
+                    <section class="panel-formulario">
+
+                        <div class="panel-cabecera">
+
+                            <div>
+
+                                <h3>
+                                    Agregar herramienta
+                                </h3>
+
+                                <p class="texto-ayuda">
+                                    Registra tu nivel actual y si deseas
+                                    aprender o mejorar esa herramienta.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <form
+                            id="formularioHabilidad"
+                            class="formulario"
+                        >
+
+                            <div class="campo">
+
+                                <label for="nombreHerramienta">
+                                    Herramienta
+                                </label>
+
+                                <select
+                                    id="nombreHerramienta"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Selecciona una herramienta
+                                    </option>
+
+                                    <option value="Excel">
+                                        Excel
+                                    </option>
+
+                                    <option value="Power BI">
+                                        Power BI
+                                    </option>
+
+                                    <option value="Power Automate">
+                                        Power Automate
+                                    </option>
+
+                                    <option value="Power Apps">
+                                        Power Apps
+                                    </option>
+
+                                    <option value="SharePoint">
+                                        SharePoint
+                                    </option>
+
+                                    <option value="SAP">
+                                        SAP
+                                    </option>
+
+                                    <option value="Python">
+                                        Python
+                                    </option>
+
+                                    <option value="SQL">
+                                        SQL
+                                    </option>
+
+                                    <option value="HTML">
+                                        HTML
+                                    </option>
+
+                                    <option value="JavaScript">
+                                        JavaScript
+                                    </option>
+
+                                    <option value="VBA">
+                                        VBA
+                                    </option>
+
+                                    <option value="UiPath">
+                                        UiPath
+                                    </option>
+
+                                    <option value="Alteryx">
+                                        Alteryx
+                                    </option>
+
+                                    <option value="Otra">
+                                        Otra
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div
+                                id="campoOtraHerramienta"
+                                class="campo oculto"
+                            >
+
+                                <label for="otraHerramienta">
+                                    Nombre de la herramienta
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="otraHerramienta"
+                                    placeholder="Escribe el nombre"
+                                >
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="nivelHerramienta">
+                                    Nivel actual
+                                </label>
+
+                                <select
+                                    id="nivelHerramienta"
+                                    required
+                                >
+
+                                    <option value="Sin experiencia">
+                                        Sin experiencia
+                                    </option>
+
+                                    <option value="Básico">
+                                        Básico
+                                    </option>
+
+                                    <option value="Intermedio">
+                                        Intermedio
+                                    </option>
+
+                                    <option value="Avanzado">
+                                        Avanzado
+                                    </option>
+
+                                    <option value="Experto">
+                                        Experto
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="interesHerramienta">
+                                    Objetivo
+                                </label>
+
+                                <select
+                                    id="interesHerramienta"
+                                    required
+                                >
+
+                                    <option value="Aplicar conocimientos">
+                                        Aplicar conocimientos
+                                    </option>
+
+                                    <option value="Mejorar nivel">
+                                        Mejorar nivel
+                                    </option>
+
+                                    <option value="Quiero aprender">
+                                        Quiero aprender
+                                    </option>
+
+                                    <option value="Puedo enseñar">
+                                        Puedo enseñar
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="experienciaHerramienta">
+                                    Experiencia aproximada
+                                </label>
+
+                                <select id="experienciaHerramienta">
+
+                                    <option value="Sin experiencia">
+                                        Sin experiencia
+                                    </option>
+
+                                    <option value="Menos de 1 año">
+                                        Menos de 1 año
+                                    </option>
+
+                                    <option value="1 a 2 años">
+                                        1 a 2 años
+                                    </option>
+
+                                    <option value="3 a 5 años">
+                                        3 a 5 años
+                                    </option>
+
+                                    <option value="Más de 5 años">
+                                        Más de 5 años
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="campo campo-completo">
+
+                                <label for="comentariosHerramienta">
+                                    Comentarios
+                                </label>
+
+                                <textarea
+                                    id="comentariosHerramienta"
+                                    placeholder="Ej. He creado dashboards, flujos, macros o automatizaciones con esta herramienta."
+                                ></textarea>
+
+                            </div>
+
+                            <div
+                                id="mensajeHabilidad"
+                                class="mensaje-formulario"
+                            ></div>
+
+                            <div class="acciones-formulario">
+
+                                <button
+                                    class="boton-secundario"
+                                    type="reset"
+                                >
+                                    Limpiar
+                                </button>
+
+                                <button
+                                    class="boton-principal"
+                                    type="submit"
+                                >
+                                    Agregar habilidad
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </section>
+
+                    <!-- LISTADO -->
+
+                    <section class="panel">
+
+                        <div class="panel-cabecera">
+
+                            <div>
+
+                                <h3>
+                                    Mis herramientas
+                                </h3>
+
+                                <p class="texto-ayuda">
+                                    OctoFlow utilizará este perfil para
+                                    recomendarte proyectos y roles.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="listaHabilidades"
+                            class="lista-habilidades"
+                        >
+
+                            <div class="tabla-vacia">
+                                Todavía no has registrado habilidades.
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </main>
+
+        </section>
+
+    </div>
+
+    <div
+        id="notificacion"
+        class="notificacion"
+    ></div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/habilidades.js"></script>
+
+</body>
+
+</html>

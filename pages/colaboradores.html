@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        OctoFlow | Portal del Colaborador
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
+
+</head>
+
+<body data-portal="colaborador">
+
+    <div class="aplicacion">
+
+        <!-- ======================================
+             MENÚ LATERAL
+        ======================================= -->
+
+        <aside class="menu-lateral">
+
+            <div class="marca">
+
+                <img
+                    class="logo-danone-menu"
+                    src="../img/DANONE_LOGO_HORIZONTAL.png"
+                    alt="Logo de Danone"
+                >
+
+                <h1>OctoFlow</h1>
+
+                <p>
+                    Portal del Colaborador
+                </p>
+
+            </div>
+
+            <nav class="navegacion">
+
+                <a
+                    class="enlace-menu activo"
+                    href="colaboradores.html"
+                >
+                    <span class="icono-menu">
+                        ⌂
+                    </span>
+
+                    Inicio
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="ideas.html"
+                >
+                    <span class="icono-menu">
+                        💡
+                    </span>
+
+                    Mis ideas
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="oportunidades.html"
+                >
+                    <span class="icono-menu">
+                        🚀
+                    </span>
+
+                    Oportunidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="proyectos.html"
+                >
+                    <span class="icono-menu">
+                        ▣
+                    </span>
+
+                    Mis proyectos
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="habilidades.html"
+                >
+                    <span class="icono-menu">
+                        ◉
+                    </span>
+
+                    Habilidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="perfil.html"
+                >
+                    <span class="icono-menu">
+                        ○
+                    </span>
+
+                    Mi perfil
+                </a>
+
+            </nav>
+
+            <div class="usuario-menu">
+
+                <strong data-nombre-usuario>
+                    Usuario
+                </strong>
+
+                <div
+                    class="correo-menu"
+                    data-correo-usuario
+                >
+                    usuario@danone.com
+                </div>
+
+                <button
+                    class="boton-salir"
+                    type="button"
+                    onclick="cerrarSesion()"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- ======================================
+             CONTENIDO
+        ======================================= -->
+
+        <section class="contenido">
+
+            <!-- ENCABEZADO -->
+
+            <header class="encabezado">
+
+                <div class="titulo-encabezado">
+
+                    <h2>
+                        Portal del Colaborador
+                    </h2>
+
+                    <p>
+                        Ideas, desarrollo de talento y proyectos Quick Win
+                    </p>
+
+                </div>
+
+                <div class="perfil-superior">
+
+                    <button
+                        class="boton-notificaciones"
+                        type="button"
+                        onclick="mostrarNotificacion(
+                            'No tienes notificaciones nuevas.'
+                        )"
+                        aria-label="Notificaciones"
+                    >
+                        🔔
+                    </button>
+
+                    <div
+                        class="avatar"
+                        data-avatar-usuario
+                    >
+                        U
+                    </div>
+
+                    <div class="datos-usuario">
+
+                        <strong data-nombre-usuario>
+                            Usuario
+                        </strong>
+
+                        <span data-rol-usuario>
+                            Colaborador
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <!-- CONTENIDO PRINCIPAL -->
+
+            <main class="principal">
+
+                <!-- BIENVENIDA -->
+
+                <section class="bienvenida">
+
+                    <h2 data-saludo>
+                        ¡Hola!
+                    </h2>
+
+                    <p>
+                        Comparte oportunidades de mejora, desarrolla
+                        tus habilidades y participa en proyectos de
+                        automatización como Champion, Learner o
+                        Contributor.
+                    </p>
+
+                </section>
+
+                <!-- ======================================
+                     INDICADORES
+                ======================================= -->
+
+                <section class="indicadores">
+
+                    <!-- IDEAS -->
+
+                    <article class="indicador">
+
+                        <div class="indicador-superior">
+
+                            <span class="indicador-etiqueta">
+                                Mis ideas
+                            </span>
+
+                            <span class="indicador-icono">
+                                💡
+                            </span>
+
+                        </div>
+
+                        <div
+                            id="numeroIdeasColaborador"
+                            class="indicador-numero"
+                        >
+                            0
+                        </div>
+
+                        <div
+                            id="detalleIdeasColaborador"
+                            class="indicador-detalle verde"
+                        >
+                            0 ideas aprobadas
+                        </div>
+
+                    </article>
+
+                    <!-- OPORTUNIDADES -->
+
+                    <article class="indicador">
+
+                        <div class="indicador-superior">
+
+                            <span class="indicador-etiqueta">
+                                Oportunidades recomendadas
+                            </span>
+
+                            <span class="indicador-icono">
+                                🚀
+                            </span>
+
+                        </div>
+
+                        <div
+                            id="numeroOportunidadesColaborador"
+                            class="indicador-numero"
+                        >
+                            0
+                        </div>
+
+                        <div
+                            id="detalleOportunidadesColaborador"
+                            class="indicador-detalle naranja"
+                        >
+                            Completa tus habilidades
+                        </div>
+
+                    </article>
+
+                    <!-- PROYECTOS -->
+
+                    <article class="indicador">
+
+                        <div class="indicador-superior">
+
+                            <span class="indicador-etiqueta">
+                                Mis proyectos
+                            </span>
+
+                            <span class="indicador-icono">
+                                ▣
+                            </span>
+
+                        </div>
+
+                        <div
+                            id="numeroProyectosColaborador"
+                            class="indicador-numero"
+                        >
+                            0
+                        </div>
+
+                        <div
+                            id="detalleProyectosColaborador"
+                            class="indicador-detalle verde"
+                        >
+                            Sin proyectos asignados
+                        </div>
+
+                    </article>
+
+                </section>
+
+                <!-- ======================================
+                     ACCESOS RÁPIDOS
+                ======================================= -->
+
+                <div class="titulo-seccion">
+
+                    <h3>
+                        Accesos rápidos
+                    </h3>
+
+                </div>
+
+                <section class="accesos">
+
+                    <!-- REGISTRAR IDEA -->
+
+                    <a
+                        class="acceso"
+                        href="ideas.html"
+                    >
+
+                        <div class="acceso-icono">
+                            💡
+                        </div>
+
+                        <h4>
+                            Registrar una idea
+                        </h4>
+
+                        <p>
+                            Comparte un proceso manual que podría
+                            automatizarse o mejorarse.
+                        </p>
+
+                        <strong>
+                            Registrar idea →
+                        </strong>
+
+                    </a>
+
+                    <!-- OPORTUNIDADES -->
+
+                    <a
+                        class="acceso"
+                        href="oportunidades.html"
+                    >
+
+                        <div class="acceso-icono">
+                            🚀
+                        </div>
+
+                        <h4>
+                            Oportunidades
+                        </h4>
+
+                        <p>
+                            Explora proyectos compatibles con tus
+                            habilidades e intereses de aprendizaje.
+                        </p>
+
+                        <strong>
+                            Ver recomendaciones →
+                        </strong>
+
+                    </a>
+
+                    <!-- PROYECTOS -->
+
+                    <a
+                        class="acceso"
+                        href="proyectos.html"
+                    >
+
+                        <div class="acceso-icono">
+                            ▣
+                        </div>
+
+                        <h4>
+                            Mis proyectos
+                        </h4>
+
+                        <p>
+                            Consulta los proyectos en los que participas,
+                            tu rol y el avance registrado.
+                        </p>
+
+                        <strong>
+                            Consultar proyectos →
+                        </strong>
+
+                    </a>
+
+                    <!-- HABILIDADES -->
+
+                    <a
+                        class="acceso"
+                        href="habilidades.html"
+                    >
+
+                        <div class="acceso-icono">
+                            ◉
+                        </div>
+
+                        <h4>
+                            Mis habilidades
+                        </h4>
+
+                        <p>
+                            Registra lo que dominas y las herramientas
+                            que deseas aprender.
+                        </p>
+
+                        <strong>
+                            Actualizar perfil →
+                        </strong>
+
+                    </a>
+
+                </section>
+
+                <!-- ======================================
+                     PANELES INFERIORES
+                ======================================= -->
+
+                <div class="columnas-dashboard">
+
+                    <!-- IDEAS RECIENTES -->
+
+                    <section class="panel">
+
+                        <div class="panel-cabecera">
+
+                            <h3>
+                                Mis ideas recientes
+                            </h3>
+
+                            <a
+                                class="enlace-ver-todo"
+                                href="ideas.html"
+                            >
+                                Ver todas
+                            </a>
+
+                        </div>
+
+                        <div class="tabla-contenedor">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Ticket
+                                        </th>
+
+                                        <th>
+                                            Idea
+                                        </th>
+
+                                        <th>
+                                            Estado
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="tablaIdeasRecientes">
+
+                                    <tr>
+
+                                        <td
+                                            colspan="3"
+                                            class="tabla-vacia"
+                                        >
+                                            Todavía no has registrado ideas.
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </section>
+
+                    <!-- RECOMENDACIONES -->
+
+                    <section class="panel">
+
+                        <div class="panel-cabecera">
+
+                            <h3>
+                                Recomendaciones para ti
+                            </h3>
+
+                            <a
+                                class="enlace-ver-todo"
+                                href="oportunidades.html"
+                            >
+                                Ver todas
+                            </a>
+
+                        </div>
+
+                        <div
+                            id="listaRecomendacionesColaborador"
+                            class="lista-proyectos"
+                        >
+
+                            <div class="tabla-vacia">
+                                Completa tu perfil de habilidades
+                                para recibir recomendaciones.
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+                <!-- ======================================
+                     MIS PROYECTOS ACTIVOS
+                ======================================= -->
+
+                <div class="titulo-seccion">
+
+                    <h3>
+                        Mis proyectos activos
+                    </h3>
+
+                    <a
+                        class="enlace-ver-todo"
+                        href="proyectos.html"
+                    >
+                        Ver todos
+                    </a>
+
+                </div>
+
+                <section class="panel">
+
+                    <div
+                        id="listaProyectosColaborador"
+                        class="lista-proyectos"
+                    >
+
+                        <div class="tabla-vacia">
+                            Todavía no tienes proyectos asignados.
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+        </section>
+
+    </div>
+
+    <!-- NOTIFICACIÓN EMERGENTE -->
+
+    <div
+        id="notificacion"
+        class="notificacion"
+    ></div>
+
+    <!-- ARCHIVOS JAVASCRIPT -->
+
+    <script src="../js/dashboard.js"></script>
+
+    <script src="../js/colaboradores.js"></script>
+
+</body>
+
+</html>

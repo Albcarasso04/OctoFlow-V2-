@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        OctoFlow | Mis proyectos
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
+
+    <style>
+
+        /*
+        ==============================================
+        PESTAÑAS
+        ==============================================
+        */
+
+        .pestanas-proyectos-colaborador {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .pestana-proyecto-colaborador {
+            padding: 11px 18px;
+            border: 1px solid #d8e3ef;
+            border-radius: 10px;
+            background-color: #ffffff;
+            color: #344054;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .pestana-proyecto-colaborador.activa {
+            border-color: #005eb8;
+            background-color: #e8f3ff;
+            color: #005eb8;
+        }
+
+        .contador-pestana {
+            display: inline-grid;
+            place-items: center;
+            min-width: 23px;
+            height: 23px;
+            margin-left: 7px;
+            padding: 0 7px;
+            border-radius: 999px;
+            background-color: #f2f4f7;
+            color: #475467;
+            font-size: 10px;
+        }
+
+        .pestana-proyecto-colaborador.activa
+        .contador-pestana {
+            background-color: #ffffff;
+            color: #005eb8;
+        }
+
+        .vista-proyectos-colaborador.oculto {
+            display: none;
+        }
+
+
+        /*
+        ==============================================
+        FILTROS
+        ==============================================
+        */
+
+        .filtros-proyectos {
+            display: grid;
+            grid-template-columns:
+                minmax(200px, 1.5fr)
+                minmax(150px, 1fr)
+                minmax(150px, 1fr)
+                auto;
+            align-items: end;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+
+        /*
+        ==============================================
+        TARJETAS
+        ==============================================
+        */
+
+        .grid-mis-proyectos {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .tarjeta-mi-proyecto {
+            position: relative;
+            padding: 22px;
+            border: 1px solid #d8e3ef;
+            border-radius: 16px;
+            background-color: #ffffff;
+            box-shadow:
+                0 12px 30px
+                rgba(15, 50, 85, 0.08);
+            cursor: pointer;
+            transition:
+                transform 0.18s ease,
+                border-color 0.18s ease,
+                box-shadow 0.18s ease;
+        }
+
+        .tarjeta-mi-proyecto:hover {
+            transform: translateY(-2px);
+            border-color: #b2ddff;
+            box-shadow:
+                0 18px 38px
+                rgba(15, 50, 85, 0.13);
+        }
+
+        .tarjeta-mi-proyecto.completado {
+            border-color: #abefc6;
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff,
+                    #f6fef9
+                );
+        }
+
+        .tarjeta-proyecto-cabecera {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .tarjeta-proyecto-cabecera h3 {
+            margin: 7px 0 0;
+            color: #003b71;
+            font-size: 19px;
+        }
+
+        .codigo-oportunidad {
+            color: #667085;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .estado-proyecto-colaborador {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background-color: #eff8ff;
+            color: #175cd3;
+            font-size: 10px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .estado-proyecto-colaborador.completado {
+            background-color: #dcfae6;
+            color: #067647;
+        }
+
+        .estado-proyecto-colaborador.en-pausa {
+            background-color: #fef0c7;
+            color: #b54708;
+        }
+
+        .rol-proyecto-colaborador {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-top: 17px;
+            padding: 12px 14px;
+            border-radius: 11px;
+            background-color: #f8fbff;
+        }
+
+        .rol-proyecto-colaborador span {
+            color: #667085;
+            font-size: 11px;
+        }
+
+        .rol-proyecto-colaborador strong {
+            color: #005eb8;
+            font-size: 12px;
+        }
+
+        .meta-proyecto {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .meta-proyecto span {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background-color: #f2f4f7;
+            color: #475467;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .descripcion-proyecto {
+            margin: 15px 0 0;
+            color: #475467;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .avance-proyecto-tarjeta {
+            margin-top: 18px;
+        }
+
+        .avance-proyecto-tarjeta > div:first-child {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            color: #475467;
+            font-size: 11px;
+        }
+
+        .avance-proyecto-tarjeta strong {
+            color: #003b71;
+        }
+
+        .barra-progreso {
+            height: 9px;
+            margin-top: 9px;
+            overflow: hidden;
+            border-radius: 999px;
+            background-color: #e9eef5;
+        }
+
+        .barra-progreso span {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background:
+                linear-gradient(
+                    90deg,
+                    #005eb8,
+                    #00a3e0
+                );
+        }
+
+        .resultado-proyecto-completado {
+            margin-top: 16px;
+            padding: 13px;
+            border: 1px solid #abefc6;
+            border-radius: 11px;
+            background-color: #ecfdf3;
+        }
+
+        .resultado-proyecto-completado span {
+            display: block;
+            color: #067647;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .resultado-proyecto-completado p {
+            margin: 7px 0 0;
+            color: #067647;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .boton-ver-proyecto {
+            width: 100%;
+            margin-top: 17px;
+        }
+
+
+        /*
+        ==============================================
+        PANEL LATERAL
+        ==============================================
+        */
+
+        .panel-lateral {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: none;
+            justify-content: flex-end;
+            background-color:
+                rgba(15, 23, 42, 0.45);
+        }
+
+        .panel-lateral.visible {
+            display: flex;
+        }
+
+        .panel-lateral-contenido {
+            width: min(760px, 100%);
+            height: 100%;
+            overflow-y: auto;
+            padding: 28px;
+            background-color: #ffffff;
+            box-shadow:
+                -20px 0 45px
+                rgba(15, 23, 42, 0.18);
+        }
+
+        .modal-cabecera {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .modal-cabecera h2 {
+            margin: 8px 0 0;
+            color: #003b71;
+        }
+
+        .modal-etiqueta {
+            color: #005eb8;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .boton-cerrar-modal {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #d8e3ef;
+            border-radius: 50%;
+            background-color: #ffffff;
+            color: #344054;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .aviso-solo-lectura {
+            display: none;
+            margin-top: 20px;
+            padding: 13px 15px;
+            border: 1px solid #abefc6;
+            border-radius: 11px;
+            background-color: #ecfdf3;
+            color: #067647;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .aviso-solo-lectura.visible {
+            display: block;
+        }
+
+        .detalle-proyecto-resumen {
+            display: grid;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 26px;
+        }
+
+        .detalle-proyecto-resumen > div {
+            padding: 14px;
+            border: 1px solid #d8e3ef;
+            border-radius: 12px;
+            background-color: #f8fbff;
+        }
+
+        .detalle-proyecto-resumen strong {
+            display: block;
+            margin-top: 7px;
+            color: #003b71;
+            font-size: 13px;
+        }
+
+        .barra-progreso-detalle {
+            height: 11px;
+            margin-top: 15px;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 25px;
+        }
+
+        .detalle-ticket {
+            padding: 15px;
+            border: 1px solid #e4eaf1;
+            border-radius: 12px;
+            background-color: #f9fbfd;
+        }
+
+        .detalle-ticket > span {
+            color: #667085;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .detalle-ticket strong,
+        .detalle-ticket p {
+            display: block;
+            margin: 8px 0 0;
+            color: #344054;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .campo-completo {
+            grid-column: 1 / -1;
+        }
+
+        .seccion-detalle-proyecto {
+            margin-top: 27px;
+            padding-top: 22px;
+            border-top: 1px solid #e4eaf1;
+        }
+
+        .seccion-detalle-proyecto h3 {
+            margin: 0;
+            color: #003b71;
+        }
+
+
+        /*
+        ==============================================
+        EQUIPO
+        ==============================================
+        */
+
+        .lista-equipo-proyecto {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .miembro-equipo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px;
+            border: 1px solid #d8e3ef;
+            border-radius: 12px;
+            background-color: #ffffff;
+        }
+
+        .avatar-equipo {
+            display: grid;
+            place-items: center;
+            flex: 0 0 42px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: #e8f3ff;
+            color: #005eb8;
+            font-weight: 800;
+        }
+
+        .miembro-equipo strong {
+            display: block;
+            color: #003b71;
+            font-size: 13px;
+        }
+
+        .miembro-equipo span {
+            display: block;
+            margin-top: 4px;
+            color: #667085;
+            font-size: 11px;
+        }
+
+
+        /*
+        ==============================================
+        HITOS
+        ==============================================
+        */
+
+        .lista-hitos-colaborador {
+            display: grid;
+            gap: 13px;
+            margin-top: 17px;
+        }
+
+        .hito-colaborador {
+            padding: 17px;
+            border: 1px solid #d8e3ef;
+            border-radius: 13px;
+            background-color: #ffffff;
+        }
+
+        .hito-colaborador.en-proceso {
+            border-color: #84caff;
+            background-color: #f5fbff;
+        }
+
+        .hito-colaborador.pendiente-de-verificacion {
+            border-color: #fdb022;
+            background-color: #fffaeb;
+        }
+
+        .hito-colaborador.completado {
+            border-color: #75e0a7;
+            background-color: #f6fef9;
+        }
+
+        .hito-colaborador.vencido {
+            border-color: #fda29b;
+            background-color: #fff8f7;
+        }
+
+        .cabecera-hito-colaborador {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .cabecera-hito-colaborador h4 {
+            margin: 0;
+            color: #003b71;
+            font-size: 14px;
+        }
+
+        .estado-hito-colaborador {
+            padding: 5px 9px;
+            border-radius: 999px;
+            background-color: #f2f4f7;
+            color: #475467;
+            font-size: 10px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .estado-hito-colaborador.en-proceso {
+            background-color: #dff1ff;
+            color: #175cd3;
+        }
+
+        .estado-hito-colaborador.pendiente-de-verificacion {
+            background-color: #fef0c7;
+            color: #b54708;
+        }
+
+        .estado-hito-colaborador.completado {
+            background-color: #dcfae6;
+            color: #067647;
+        }
+
+        .estado-hito-colaborador.vencido {
+            background-color: #fee4e2;
+            color: #b42318;
+        }
+
+        .datos-hito-colaborador {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .datos-hito-colaborador span {
+            padding: 5px 9px;
+            border-radius: 999px;
+            background-color: #e8f3ff;
+            color: #005eb8;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .descripcion-hito-colaborador {
+            margin: 12px 0 0;
+            color: #475467;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .acciones-hito-colaborador {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .acciones-hito-colaborador button {
+            padding: 8px 11px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-hito {
+            border: 1px solid #b2ddff;
+            background-color: #eff8ff;
+            color: #005eb8;
+        }
+
+        .btn-completar {
+            border: 1px solid #abefc6;
+            background-color: #ecfdf3;
+            color: #067647;
+        }
+
+        .comentarios-hito {
+            display: grid;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .comentario-item {
+            padding: 10px;
+            border-radius: 9px;
+            background-color: #f8fafc;
+            color: #475467;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .solicitud-box,
+        .verificacion-box {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .solicitud-box {
+            background-color: #fffaeb;
+            color: #b54708;
+        }
+
+        .verificacion-box {
+            background-color: #ecfdf3;
+            color: #067647;
+        }
+
+
+        /*
+        ==============================================
+        HISTORIAL
+        ==============================================
+        */
+
+        .lista-historial-colaborador {
+            display: grid;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .registro-historial-colaborador {
+            padding: 15px;
+            border: 1px solid #d8e3ef;
+            border-radius: 12px;
+            background-color: #ffffff;
+        }
+
+        .registro-historial-colaborador header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .registro-historial-colaborador header strong {
+            color: #003b71;
+            font-size: 12px;
+        }
+
+        .registro-historial-colaborador p {
+            margin: 10px 0 0;
+            color: #475467;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .registro-historial-colaborador small {
+            color: #667085;
+            font-size: 10px;
+        }
+
+        .resultado-final-proyecto {
+            display: none;
+            margin-top: 17px;
+            padding: 16px;
+            border: 1px solid #abefc6;
+            border-radius: 12px;
+            background-color: #ecfdf3;
+        }
+
+        .resultado-final-proyecto.visible {
+            display: block;
+        }
+
+        .resultado-final-proyecto h4 {
+            margin: 0;
+            color: #067647;
+            font-size: 13px;
+        }
+
+        .resultado-final-proyecto p {
+            margin: 9px 0 0;
+            color: #067647;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .modal-acciones {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid #e4eaf1;
+        }
+
+
+        /*
+        ==============================================
+        RESPONSIVE
+        ==============================================
+        */
+
+        @media (max-width: 1050px) {
+
+            .filtros-proyectos {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .grid-mis-proyectos {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .detalle-proyecto-resumen,
+            .modal-grid,
+            .filtros-proyectos {
+                grid-template-columns: 1fr;
+            }
+
+            .campo-completo {
+                grid-column: auto;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body data-portal="colaborador">
+
+    <div class="aplicacion">
+
+        <aside class="menu-lateral">
+
+            <div class="marca">
+
+                <img
+                    class="logo-danone-menu"
+                    src="../img/DANONE_LOGO_HORIZONTAL.png"
+                    alt="Danone"
+                >
+
+                <h1>OctoFlow</h1>
+
+                <p>
+                    Portal del Colaborador
+                </p>
+
+            </div>
+
+            <nav class="navegacion">
+
+                <a
+                    class="enlace-menu"
+                    href="colaboradores.html"
+                >
+                    <span class="icono-menu">⌂</span>
+                    Inicio
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="ideas.html"
+                >
+                    <span class="icono-menu">💡</span>
+                    Mis ideas
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="oportunidades.html"
+                >
+                    <span class="icono-menu">🚀</span>
+                    Oportunidades
+                </a>
+
+                <a
+                    class="enlace-menu activo"
+                    href="proyectos.html"
+                >
+                    <span class="icono-menu">▣</span>
+                    Mis proyectos
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="habilidades.html"
+                >
+                    <span class="icono-menu">◉</span>
+                    Habilidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="perfil.html"
+                >
+                    <span class="icono-menu">○</span>
+                    Mi perfil
+                </a>
+
+            </nav>
+
+            <div class="usuario-menu">
+
+                <strong data-nombre-usuario>
+                    Usuario
+                </strong>
+
+                <div
+                    class="correo-menu"
+                    data-correo-usuario
+                >
+                    usuario@danone.com
+                </div>
+
+                <button
+                    class="boton-salir"
+                    type="button"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </aside>
+
+        <section class="contenido">
+
+            <header class="encabezado">
+
+                <div class="titulo-encabezado">
+
+                    <h2>
+                        Mis proyectos
+                    </h2>
+
+                    <p>
+                        Consulta tus proyectos, hitos y resultados
+                    </p>
+
+                </div>
+
+                <div class="perfil-superior">
+
+                    <div
+                        class="avatar"
+                        data-avatar-usuario
+                    >
+                        U
+                    </div>
+
+                    <div class="datos-usuario">
+
+                        <strong data-nombre-usuario>
+                            Usuario
+                        </strong>
+
+                        <span data-rol-usuario>
+                            Colaborador
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main class="principal">
+
+                <div class="contenedor-pagina">
+
+                    <section class="cabecera-pagina">
+
+                        <div>
+
+                            <h2>
+                                Proyectos asignados
+                            </h2>
+
+                            <p>
+                                Revisa proyectos activos y consulta el
+                                historial de proyectos completados.
+                            </p>
+
+                        </div>
+
+                        <a
+                            class="boton-principal"
+                            href="oportunidades.html"
+                        >
+                            Explorar oportunidades
+                        </a>
+
+                    </section>
+
+                    <section class="resumen-proyectos">
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Proyectos activos
+                            </span>
+
+                            <strong id="totalProyectosActivos">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Como Champion
+                            </span>
+
+                            <strong id="totalProyectosChampion">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Hitos por verificar
+                            </span>
+
+                            <strong id="totalHitosVerificacion">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Proyectos completados
+                            </span>
+
+                            <strong id="totalProyectosCompletados">
+                                0
+                            </strong>
+
+                        </article>
+
+                    </section>
+
+                    <section class="pestanas-proyectos-colaborador">
+
+                        <button
+                            class="pestana-proyecto-colaborador activa"
+                            type="button"
+                            data-vista-proyecto-colaborador="activos"
+                        >
+                            Proyectos activos
+
+                            <span
+                                id="contadorPestanaActivos"
+                                class="contador-pestana"
+                            >
+                                0
+                            </span>
+
+                        </button>
+
+                        <button
+                            class="pestana-proyecto-colaborador"
+                            type="button"
+                            data-vista-proyecto-colaborador="completados"
+                        >
+                            Proyectos completados
+
+                            <span
+                                id="contadorPestanaCompletados"
+                                class="contador-pestana"
+                            >
+                                0
+                            </span>
+
+                        </button>
+
+                    </section>
+
+                    <section class="panel filtros-proyectos">
+
+                        <div class="campo">
+
+                            <label for="buscarProyecto">
+                                Buscar
+                            </label>
+
+                            <input
+                                id="buscarProyecto"
+                                type="search"
+                                placeholder="Nombre, área o código"
+                            >
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroEstadoProyecto">
+                                Estado
+                            </label>
+
+                            <select id="filtroEstadoProyecto">
+
+                                <option value="">
+                                    Todos
+                                </option>
+
+                                <option value="Activo">
+                                    Activo
+                                </option>
+
+                                <option value="En pausa">
+                                    En pausa
+                                </option>
+
+                                <option value="Completado">
+                                    Completado
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroRolProyecto">
+                                Mi rol
+                            </label>
+
+                            <select id="filtroRolProyecto">
+
+                                <option value="">
+                                    Todos
+                                </option>
+
+                                <option value="Champion">
+                                    Champion
+                                </option>
+
+                                <option value="Learner">
+                                    Learner
+                                </option>
+
+                                <option value="Contributor">
+                                    Contributor
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <button
+                            id="limpiarFiltrosProyectos"
+                            class="boton-secundario"
+                            type="button"
+                        >
+                            Limpiar
+                        </button>
+
+                    </section>
+
+                    <section
+                        id="vistaProyectosActivos"
+                        class="vista-proyectos-colaborador"
+                    >
+
+                        <div class="panel-cabecera">
+
+                            <div>
+
+                                <h3>
+                                    Proyectos activos
+                                </h3>
+
+                                <p class="texto-ayuda">
+                                    Proyectos en los que todavía puedes
+                                    actualizar tus hitos asignados.
+                                </p>
+
+                            </div>
+
+                            <span
+                                id="contadorProyectosActivos"
+                                class="contador-resultados"
+                            >
+                                0 proyectos
+                            </span>
+
+                        </div>
+
+                        <div
+                            id="listaProyectosActivos"
+                            class="grid-mis-proyectos"
+                        ></div>
+
+                    </section>
+
+                    <section
+                        id="vistaProyectosCompletados"
+                        class="
+                            vista-proyectos-colaborador
+                            oculto
+                        "
+                    >
+
+                        <div class="panel-cabecera">
+
+                            <div>
+
+                                <h3>
+                                    Proyectos completados
+                                </h3>
+
+                                <p class="texto-ayuda">
+                                    Consulta resultados, hitos e historial.
+                                </p>
+
+                            </div>
+
+                            <span
+                                id="contadorProyectosCompletados"
+                                class="contador-resultados"
+                            >
+                                0 proyectos
+                            </span>
+
+                        </div>
+
+                        <div
+                            id="listaProyectosCompletados"
+                            class="grid-mis-proyectos"
+                        ></div>
+
+                    </section>
+
+                </div>
+
+            </main>
+
+        </section>
+
+    </div>
+
+
+    <!-- PANEL DE DETALLE -->
+
+    <div
+        id="panelDetalleProyecto"
+        class="panel-lateral"
+        aria-hidden="true"
+    >
+
+        <div class="panel-lateral-contenido">
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Detalle del proyecto
+                    </span>
+
+                    <h2 id="detalleNombreProyecto">
+                        Proyecto
+                    </h2>
+
+                </div>
+
+                <button
+                    id="cerrarDetalleProyecto"
+                    class="boton-cerrar-modal"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div
+                id="avisoProyectoSoloLectura"
+                class="aviso-solo-lectura"
+            >
+                Este proyecto ya fue completado. Puedes consultar toda
+                la información, pero los hitos ya no pueden modificarse.
+            </div>
+
+            <section class="detalle-proyecto-resumen">
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Mi rol
+                    </span>
+
+                    <strong id="detalleRolProyecto">
+                        —
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Estado
+                    </span>
+
+                    <strong id="detalleEstadoProyecto">
+                        —
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Avance
+                    </span>
+
+                    <strong id="detalleAvanceProyecto">
+                        0%
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Código
+                    </span>
+
+                    <strong id="detalleCodigoProyecto">
+                        —
+                    </strong>
+
+                </div>
+
+            </section>
+
+            <div class="barra-progreso barra-progreso-detalle">
+
+                <span
+                    id="barraAvanceDetalleProyecto"
+                    style="width: 0%"
+                ></span>
+
+            </div>
+
+            <div class="modal-grid">
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Área
+                    </span>
+
+                    <strong id="detalleAreaProyecto">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Fecha objetivo
+                    </span>
+
+                    <strong id="detalleFechaObjetivoProyecto">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Horas ahorradas anuales
+                    </span>
+
+                    <strong id="detalleHorasAhorradasProyecto">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>
+                        Objetivo
+                    </span>
+
+                    <p id="detalleObjetivoProyecto">
+                        —
+                    </p>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>
+                        Entregable
+                    </span>
+
+                    <p id="detalleEntregableProyecto">
+                        —
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div
+                id="resultadoFinalProyectoColaborador"
+                class="resultado-final-proyecto"
+            >
+
+                <h4>
+                    Resultado final
+                </h4>
+
+                <p id="textoResultadoFinalProyecto">
+                    —
+                </p>
+
+            </div>
+
+            <section class="seccion-detalle-proyecto">
+
+                <h3>
+                    Equipo
+                </h3>
+
+                <div
+                    id="detalleEquipoProyecto"
+                    class="lista-equipo-proyecto"
+                ></div>
+
+            </section>
+
+            <section class="seccion-detalle-proyecto">
+
+                <div class="panel-cabecera">
+
+                    <div>
+
+                        <h3>
+                            Mis hitos
+                        </h3>
+
+                        <p
+                            id="textoAyudaHitosProyecto"
+                            class="texto-ayuda"
+                        >
+                            Puedes solicitar que un hito sea completado.
+                            El gerente debe verificarlo.
+                        </p>
+
+                    </div>
+
+                    <span
+                        id="contadorHitosColaborador"
+                        class="contador-resultados"
+                    >
+                        0 hitos
+                    </span>
+
+                </div>
+
+                <div
+                    id="listaHitosColaborador"
+                    class="lista-hitos-colaborador"
+                ></div>
+
+            </section>
+
+            <section class="seccion-detalle-proyecto">
+
+                <div class="panel-cabecera">
+
+                    <div>
+
+                        <h3>
+                            Historial del proyecto
+                        </h3>
+
+                        <p class="texto-ayuda">
+                            Solo el gerente puede editar este historial.
+                        </p>
+
+                    </div>
+
+                    <span
+                        id="contadorHistorialColaborador"
+                        class="contador-resultados"
+                    >
+                        0 registros
+                    </span>
+
+                </div>
+
+                <div
+                    id="historialProyectoColaborador"
+                    class="lista-historial-colaborador"
+                ></div>
+
+            </section>
+
+            <div class="modal-acciones">
+
+                <button
+                    id="cerrarDetalleProyectoInferior"
+                    class="boton-secundario"
+                    type="button"
+                >
+                    Cerrar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        id="notificacion"
+        class="notificacion"
+    ></div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/proyectos.js"></script>
+
+</body>
+
+</html>

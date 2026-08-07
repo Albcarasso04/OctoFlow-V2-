@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="OctoFlow, plataforma interna de automatización y Quick Wins."
+    >
+
+    <title>OctoFlow | Danone</title>
+
+    <style>
+
+        :root {
+            --danone-azul-oscuro: #003b71;
+            --danone-azul-principal: #005eb8;
+            --danone-azul-claro: #00a3e0;
+            --blanco: #ffffff;
+            --fondo: #f4f8fd;
+            --texto: #16385f;
+            --texto-secundario: #667085;
+            --borde: #d8e3ef;
+            --error: #b42318;
+            --error-fondo: #fff1f0;
+            --exito: #027a48;
+            --exito-fondo: #ecfdf3;
+            --cargando: #175cd3;
+            --cargando-fondo: #eff8ff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--texto);
+            background-color: var(--fondo);
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        .pagina-login {
+            display: grid;
+            grid-template-columns:
+                minmax(430px, 1.05fr)
+                minmax(480px, 0.95fr);
+            min-height: 100vh;
+        }
+
+        .panel-marca {
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding: 70px 7vw;
+            color: var(--blanco);
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--danone-azul-oscuro) 0%,
+                    var(--danone-azul-principal) 48%,
+                    var(--danone-azul-claro) 100%
+                );
+        }
+
+        .panel-marca::before {
+            position: absolute;
+            top: -170px;
+            left: -150px;
+            width: 470px;
+            height: 470px;
+            border-radius: 50%;
+            background-color:
+                rgba(255, 255, 255, 0.10);
+            content: "";
+        }
+
+        .panel-marca::after {
+            position: absolute;
+            right: -150px;
+            bottom: -230px;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            background-color:
+                rgba(255, 255, 255, 0.14);
+            content: "";
+        }
+
+        .contenido-marca {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .contenedor-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 18px;
+            border-radius: 16px;
+            background-color: var(--blanco);
+            box-shadow:
+                0 18px 45px
+                rgba(0, 26, 64, 0.22);
+        }
+
+        .logo-danone {
+            display: block;
+            width: min(260px, 58vw);
+            max-height: 76px;
+            object-fit: contain;
+        }
+
+        .nombre-producto {
+            margin: 42px 0 0;
+            color: var(--blanco);
+            font-size: clamp(48px, 5vw, 76px);
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .subtitulo-producto {
+            margin: 18px 0 0;
+            color: var(--blanco);
+            font-size: clamp(22px, 2.1vw, 32px);
+            font-weight: 500;
+        }
+
+        .descripcion-producto {
+            max-width: 610px;
+            margin: 25px 0 0;
+            color:
+                rgba(255, 255, 255, 0.92);
+            font-size: 18px;
+            line-height: 1.65;
+        }
+
+        .beneficios-login {
+            display: grid;
+            gap: 18px;
+            margin-top: 38px;
+        }
+
+        .beneficio-login {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .icono-beneficio {
+            display: grid;
+            place-items: center;
+            flex: 0 0 34px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color:
+                rgba(255, 255, 255, 0.18);
+            color: var(--blanco);
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .beneficio-login p {
+            margin: 4px 0 0;
+            color: var(--blanco);
+            font-size: 16px;
+            line-height: 1.45;
+        }
+
+        .panel-acceso {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 55px 7vw;
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #f5faff 100%
+                );
+        }
+
+        .contenedor-acceso {
+            width: 100%;
+            max-width: 535px;
+        }
+
+        .etiqueta-interna {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 13px;
+            border-radius: 999px;
+            background-color: #e8f3ff;
+            color: var(--danone-azul-principal);
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .titulo-login {
+            margin: 22px 0 0;
+            color: var(--danone-azul-oscuro);
+            font-size: clamp(38px, 4vw, 54px);
+            line-height: 1.05;
+            letter-spacing: -1px;
+        }
+
+        .descripcion-login {
+            margin: 18px 0 0;
+            color: var(--texto-secundario);
+            font-size: 16px;
+            line-height: 1.65;
+        }
+
+        .estado-carga {
+            display: none;
+            margin-top: 25px;
+            padding: 14px 16px;
+            border: 1px solid transparent;
+            border-radius: 11px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .estado-carga.cargando,
+        .estado-carga.error,
+        .estado-carga.exito {
+            display: block;
+        }
+
+        .estado-carga.cargando {
+            border-color: #b2ddff;
+            background-color: var(--cargando-fondo);
+            color: var(--cargando);
+        }
+
+        .estado-carga.error {
+            border-color: #fecdca;
+            background-color: var(--error-fondo);
+            color: var(--error);
+        }
+
+        .estado-carga.exito {
+            border-color: #abefc6;
+            background-color: var(--exito-fondo);
+            color: var(--exito);
+        }
+
+        .formulario-login {
+            display: grid;
+            gap: 20px;
+            margin-top: 27px;
+        }
+
+        .campo-login {
+            display: grid;
+            gap: 9px;
+        }
+
+        .campo-login label {
+            color: #344054;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .campo-login input {
+            width: 100%;
+            height: 56px;
+            padding: 0 17px;
+            border: 1px solid #cbd8e6;
+            border-radius: 11px;
+            outline: none;
+            background-color: var(--blanco);
+            color: #172b4d;
+            font-size: 16px;
+            transition:
+                border-color 0.18s ease,
+                box-shadow 0.18s ease;
+        }
+
+        .campo-login input::placeholder {
+            color: #98a2b3;
+        }
+
+        .campo-login input:focus {
+            border-color: var(--danone-azul-claro);
+            box-shadow:
+                0 0 0 4px
+                rgba(0, 163, 224, 0.12);
+        }
+
+        .fila-opciones-login {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .recordarme {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--texto-secundario);
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .recordarme input {
+            width: 17px;
+            height: 17px;
+            accent-color:
+                var(--danone-azul-principal);
+        }
+
+        .enlace-recuperacion {
+            border: none;
+            padding: 0;
+            background: none;
+            color: var(--danone-azul-principal);
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .enlace-recuperacion:hover {
+            text-decoration: underline;
+        }
+
+        .boton-login {
+            width: 100%;
+            min-height: 56px;
+            border: none;
+            border-radius: 11px;
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--danone-azul-principal),
+                    var(--danone-azul-claro)
+                );
+            color: var(--blanco);
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow:
+                0 12px 25px
+                rgba(0, 94, 184, 0.20);
+        }
+
+        .boton-login:hover:not(:disabled) {
+            transform: translateY(-1px);
+        }
+
+        .boton-login:disabled {
+            cursor: not-allowed;
+            opacity: 0.55;
+            box-shadow: none;
+        }
+
+        .mensaje {
+            display: none;
+            padding: 13px 15px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .mensaje.error,
+        .mensaje.exito {
+            display: block;
+        }
+
+        .mensaje.error {
+            border-color: #fecdca;
+            background-color: var(--error-fondo);
+            color: var(--error);
+        }
+
+        .mensaje.exito {
+            border-color: #abefc6;
+            background-color: var(--exito-fondo);
+            color: var(--exito);
+        }
+
+        .pie-login {
+            margin-top: 31px;
+            padding-top: 21px;
+            border-top: 1px solid var(--borde);
+            color: var(--texto-secundario);
+            font-size: 12px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .pie-login strong {
+            color: var(--danone-azul-oscuro);
+        }
+
+        @media (max-width: 980px) {
+
+            .pagina-login {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-marca {
+                padding: 55px 8vw;
+            }
+
+            .panel-acceso {
+                padding: 55px 8vw 70px;
+            }
+
+            .contenedor-acceso {
+                max-width: 620px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .panel-marca,
+            .panel-acceso {
+                padding-right: 24px;
+                padding-left: 24px;
+            }
+
+            .nombre-producto {
+                font-size: 44px;
+            }
+
+            .titulo-login {
+                font-size: 39px;
+            }
+
+            .fila-opciones-login {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 14px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <main class="pagina-login">
+
+        <section class="panel-marca">
+
+            <div class="contenido-marca">
+
+                <div class="contenedor-logo">
+
+                    <img
+                        class="logo-danone"
+                        src="img/DANONE_LOGO_HORIZONTAL.png"
+                        alt="Danone"
+                    >
+
+                </div>
+
+                <h1 class="nombre-producto">
+                    OctoFlow
+                </h1>
+
+                <h2 class="subtitulo-producto">
+                    Automation & Quick Wins Portal
+                </h2>
+
+                <p class="descripcion-producto">
+                    Una plataforma interna para convertir oportunidades
+                    de mejora en proyectos de automatización, conectar
+                    el talento adecuado y generar valor para Danone.
+                </p>
+
+                <div class="beneficios-login">
+
+                    <div class="beneficio-login">
+
+                        <span class="icono-beneficio">
+                            ✓
+                        </span>
+
+                        <p>
+                            Registra y da seguimiento a iniciativas.
+                        </p>
+
+                    </div>
+
+                    <div class="beneficio-login">
+
+                        <span class="icono-beneficio">
+                            ✓
+                        </span>
+
+                        <p>
+                            Conecta Champions, Learners y colaboradores
+                            con proyectos disponibles.
+                        </p>
+
+                    </div>
+
+                    <div class="beneficio-login">
+
+                        <span class="icono-beneficio">
+                            ✓
+                        </span>
+
+                        <p>
+                            Mide el impacto generado por cada Quick Win.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="panel-acceso">
+
+            <div class="contenedor-acceso">
+
+                <span class="etiqueta-interna">
+                    Plataforma interna
+                </span>
+
+                <h2 class="titulo-login">
+                    Iniciar sesión
+                </h2>
+
+                <p class="descripcion-login">
+                    Ingresa tus credenciales. OctoFlow identificará
+                    automáticamente si tu acceso corresponde al Portal
+                    del Colaborador o al Portal del Gerente.
+                </p>
+
+                <div
+                    id="estadoCarga"
+                    class="estado-carga"
+                    role="status"
+                    aria-live="polite"
+                ></div>
+
+                <form
+                    id="formularioLogin"
+                    class="formulario-login"
+                    autocomplete="on"
+                >
+
+                    <div class="campo-login">
+
+                        <label for="correo">
+                            Correo corporativo
+                        </label>
+
+                        <input
+                            id="correo"
+                            name="correo"
+                            type="email"
+                            placeholder="nombre.apellido@danone.com"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="campo-login">
+
+                        <label for="contrasena">
+                            Contraseña
+                        </label>
+
+                        <input
+                            id="contrasena"
+                            name="contrasena"
+                            type="password"
+                            placeholder="Ingresa tu contraseña"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="fila-opciones-login">
+
+                        <label class="recordarme">
+
+                            <input
+                                id="recordarme"
+                                type="checkbox"
+                            >
+
+                            <span>
+                                Recordarme
+                            </span>
+
+                        </label>
+
+                        <button
+                            id="botonOlvideContrasena"
+                            class="enlace-recuperacion"
+                            type="button"
+                        >
+                            ¿Olvidaste tu contraseña?
+                        </button>
+
+                    </div>
+
+                    <div
+                        id="mensaje"
+                        class="mensaje"
+                        role="alert"
+                        aria-live="polite"
+                    ></div>
+
+                    <button
+                        id="botonLogin"
+                        class="boton-login"
+                        type="submit"
+                        disabled
+                    >
+                        Cargando usuarios...
+                    </button>
+
+                </form>
+
+                <footer class="pie-login">
+
+                    <strong>OctoFlow</strong> es una plataforma de uso
+                    interno de Danone.
+
+                    <br>
+
+                    El inicio de sesión actual es una simulación para
+                    el prototipo.
+
+                </footer>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script
+        src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"
+    ></script>
+
+    <script src="js/login.js"></script>
+
+    <script>
+
+        /*
+        Función independiente para evitar errores
+        si el botón de recuperación no está conectado.
+        */
+
+        document
+            .getElementById(
+                "botonOlvideContrasena"
+            )
+            ?.addEventListener(
+                "click",
+                function () {
+
+                    window.alert(
+                        "La recuperación de contraseña se conectará posteriormente con el sistema corporativo."
+                    );
+                }
+            );
+
+    </script>
+
+</body>
+
+</html>

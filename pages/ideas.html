@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        OctoFlow | Mis Ideas
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
+
+</head>
+
+<body data-portal="colaborador">
+
+    <div class="aplicacion">
+
+        <!-- ======================================
+             MENÚ LATERAL
+        ======================================= -->
+
+        <aside class="menu-lateral">
+
+            <div class="marca">
+
+                <img
+                    class="logo-danone-menu"
+                    src="../img/DANONE_LOGO_HORIZONTAL.png"
+                    alt="Logo de Danone"
+                >
+
+                <h1>OctoFlow</h1>
+
+                <p>
+                    Portal del Colaborador
+                </p>
+
+            </div>
+
+            <nav class="navegacion">
+
+                <a
+                    class="enlace-menu"
+                    href="colaboradores.html"
+                >
+                    <span class="icono-menu">⌂</span>
+                    Inicio
+                </a>
+
+                <a
+                    class="enlace-menu activo"
+                    href="ideas.html"
+                >
+                    <span class="icono-menu">💡</span>
+                    Mis ideas
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="oportunidades.html"
+                >
+                    <span class="icono-menu">🚀</span>
+                    Oportunidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="proyectos.html"
+                >
+                    <span class="icono-menu">▣</span>
+                    Mis proyectos
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="habilidades.html"
+                >
+                    <span class="icono-menu">◉</span>
+                    Habilidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="perfil.html"
+                >
+                    <span class="icono-menu">○</span>
+                    Mi perfil
+                </a>
+
+            </nav>
+
+            <div class="usuario-menu">
+
+                <strong data-nombre-usuario>
+                    Usuario
+                </strong>
+
+                <div
+                    class="correo-menu"
+                    data-correo-usuario
+                >
+                    usuario@danone.com
+                </div>
+
+                <button
+                    class="boton-salir"
+                    type="button"
+                    onclick="cerrarSesion()"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- ======================================
+             CONTENIDO
+        ======================================= -->
+
+        <section class="contenido">
+
+            <header class="encabezado">
+
+                <div class="titulo-encabezado">
+
+                    <h2>
+                        Mis ideas
+                    </h2>
+
+                    <p>
+                        Registra propuestas y consulta su seguimiento
+                    </p>
+
+                </div>
+
+                <div class="perfil-superior">
+
+                    <div
+                        class="avatar"
+                        data-avatar-usuario
+                    >
+                        U
+                    </div>
+
+                    <div class="datos-usuario">
+
+                        <strong data-nombre-usuario>
+                            Usuario
+                        </strong>
+
+                        <span data-rol-usuario>
+                            Colaborador
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main class="principal">
+
+                <div class="contenedor-pagina">
+
+                    <!-- CABECERA -->
+
+                    <section class="cabecera-pagina">
+
+                        <div>
+
+                            <h2>
+                                Propuestas de mejora
+                            </h2>
+
+                            <p>
+                                Comparte procesos manuales, repetitivos o
+                                susceptibles de automatización.
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="boton-principal"
+                            id="botonNuevaIdea"
+                            type="button"
+                        >
+                            + Registrar nueva idea
+                        </button>
+
+                    </section>
+
+                    <!-- RESUMEN -->
+
+                    <section class="resumen-ideas-colaborador">
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Total de ideas
+                            </span>
+
+                            <strong id="totalIdeascolaborador">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                En revisión
+                            </span>
+
+                            <strong id="ideasRevisionColaborador">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Requieren respuesta
+                            </span>
+
+                            <strong id="ideasRespuestaPendiente">
+                                0
+                            </strong>
+
+                        </article>
+
+                        <article class="tarjeta-resumen">
+
+                            <span>
+                                Aprobadas
+                            </span>
+
+                            <strong id="ideasAprobadasColaborador">
+                                0
+                            </strong>
+
+                        </article>
+
+                    </section>
+
+                    <!-- AVISO DE PREGUNTAS -->
+
+                    <section
+                        id="avisoPreguntasPendientes"
+                        class="aviso-preguntas-colaborador oculto"
+                    >
+
+                        <div class="aviso-preguntas-icono">
+                            ?
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Tienes solicitudes de información pendientes
+                            </strong>
+
+                            <p id="textoAvisoPreguntas">
+                                Un gerente necesita información adicional
+                                para continuar evaluando tu propuesta.
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="boton-principal"
+                            id="botonVerPreguntasPendientes"
+                            type="button"
+                        >
+                            Ver preguntas
+                        </button>
+
+                    </section>
+
+                    <!-- FORMULARIO NUEVA IDEA -->
+
+                    <section
+                        id="seccionFormularioIdea"
+                        class="panel-formulario oculto"
+                    >
+
+                        <div class="panel-cabecera">
+
+                            <div>
+
+                                <h3>
+                                    Registrar nueva idea
+                                </h3>
+
+                                <p class="texto-ayuda">
+                                    Describe el proceso actual y la mejora
+                                    que propones.
+                                </p>
+
+                            </div>
+
+                            <button
+                                class="boton-cerrar-formulario"
+                                id="cerrarFormularioIdea"
+                                type="button"
+                                aria-label="Cerrar"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                        <form
+                            id="formularioIdea"
+                            class="formulario"
+                        >
+
+                            <div class="campo">
+
+                                <label for="tituloIdea">
+                                    Título de la propuesta
+                                </label>
+
+                                <input
+                                    id="tituloIdea"
+                                    type="text"
+                                    placeholder="Ej. Automatización de conciliación mensual"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="areaIdea">
+                                    Área
+                                </label>
+
+                                <select
+                                    id="areaIdea"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Selecciona un área
+                                    </option>
+
+                                    <option value="Finanzas">
+                                        Finanzas
+                                    </option>
+
+                                    <option value="Operaciones">
+                                        Operaciones
+                                    </option>
+
+                                    <option value="Recursos Humanos">
+                                        Recursos Humanos
+                                    </option>
+
+                                    <option value="Compras">
+                                        Compras
+                                    </option>
+
+                                    <option value="Ventas">
+                                        Ventas
+                                    </option>
+
+                                    <option value="Tecnología">
+                                        Tecnología
+                                    </option>
+
+                                    <option value="Legal">
+                                        Legal
+                                    </option>
+
+                                    <option value="Calidad">
+                                        Calidad
+                                    </option>
+
+                                    <option value="Supply Chain">
+                                        Supply Chain
+                                    </option>
+
+                                    <option value="Otro">
+                                        Otro
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="frecuenciaIdea">
+                                    Frecuencia del proceso
+                                </label>
+
+                                <select
+                                    id="frecuenciaIdea"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Selecciona una frecuencia
+                                    </option>
+
+                                    <option value="Diaria">
+                                        Diaria
+                                    </option>
+
+                                    <option value="Semanal">
+                                        Semanal
+                                    </option>
+
+                                    <option value="Quincenal">
+                                        Quincenal
+                                    </option>
+
+                                    <option value="Mensual">
+                                        Mensual
+                                    </option>
+
+                                    <option value="Trimestral">
+                                        Trimestral
+                                    </option>
+
+                                    <option value="Eventual">
+                                        Eventual
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="horasIdea">
+                                    Horas por ejecución
+                                </label>
+
+                                <input
+                                    id="horasIdea"
+                                    type="number"
+                                    min="0.1"
+                                    step="0.1"
+                                    placeholder="Ej. 4"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="implementacionIdea">
+                                    Implementación estimada
+                                </label>
+
+                                <select id="implementacionIdea">
+
+                                    <option value="Menos de 1 mes">
+                                        Menos de 1 mes
+                                    </option>
+
+                                    <option value="1 a 2 meses">
+                                        1 a 2 meses
+                                    </option>
+
+                                    <option value="3 meses">
+                                        3 meses
+                                    </option>
+
+                                    <option value="Más de 3 meses">
+                                        Más de 3 meses
+                                    </option>
+
+                                    <option value="No lo sé">
+                                        No lo sé
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="campo campo-completo">
+
+                                <label for="descripcionIdea">
+                                    Proceso actual
+                                </label>
+
+                                <textarea
+                                    id="descripcionIdea"
+                                    placeholder="Describe cómo funciona actualmente el proceso."
+                                    required
+                                ></textarea>
+
+                            </div>
+
+                            <div class="campo campo-completo">
+
+                                <label for="problemaIdea">
+                                    Problema identificado
+                                </label>
+
+                                <textarea
+                                    id="problemaIdea"
+                                    placeholder="Explica qué consume tiempo, genera errores o dificulta el proceso."
+                                    required
+                                ></textarea>
+
+                            </div>
+
+                            <div class="campo campo-completo">
+
+                                <label for="solucionIdea">
+                                    Solución sugerida
+                                </label>
+
+                                <textarea
+                                    id="solucionIdea"
+                                    placeholder="Describe cómo podría automatizarse o mejorarse."
+                                    required
+                                ></textarea>
+
+                            </div>
+
+                            <div
+                                id="mensajeFormularioIdea"
+                                class="mensaje-formulario"
+                            ></div>
+
+                            <div class="acciones-formulario">
+
+                                <button
+                                    class="boton-secundario"
+                                    id="cancelarNuevaIdea"
+                                    type="button"
+                                >
+                                    Cancelar
+                                </button>
+
+                                <button
+                                    class="boton-principal"
+                                    type="submit"
+                                >
+                                    Registrar idea
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </section>
+
+                    <!-- FILTROS -->
+
+                    <section class="panel filtros-ideas-colaborador">
+
+                        <div class="campo">
+
+                            <label for="buscarIdeaColaborador">
+                                Buscar
+                            </label>
+
+                            <input
+                                id="buscarIdeaColaborador"
+                                type="search"
+                                placeholder="Ticket, título o área"
+                            >
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroEstadoIdeaColaborador">
+                                Estado
+                            </label>
+
+                            <select id="filtroEstadoIdeaColaborador">
+
+                                <option value="">
+                                    Todos los estados
+                                </option>
+
+                                <option value="En revisión">
+                                    En revisión
+                                </option>
+
+                                <option value="Información requerida">
+                                    Información requerida
+                                </option>
+
+                                <option value="Respuesta recibida">
+                                    Respuesta recibida
+                                </option>
+
+                                <option value="Aprobada">
+                                    Aprobada
+                                </option>
+
+                                <option value="Convertida en oportunidad">
+                                    Convertida en oportunidad
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <button
+                            class="boton-secundario"
+                            id="limpiarFiltrosIdeasColaborador"
+                            type="button"
+                        >
+                            Limpiar
+                        </button>
+
+                    </section>
+
+                    <!-- TABLA -->
+
+                    <section class="panel">
+
+                        <div class="panel-cabecera">
+
+                            <h3>
+                                Mis propuestas
+                            </h3>
+
+                            <span
+                                id="contadorIdeasColaborador"
+                                class="contador-resultados"
+                            >
+                                0 ideas
+                            </span>
+
+                        </div>
+
+                        <div class="tabla-contenedor">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+                                        <th>Ticket</th>
+                                        <th>Propuesta</th>
+                                        <th>Área</th>
+                                        <th>Fecha</th>
+                                        <th>Estado</th>
+                                        <th>Acción</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="tablaIdeasColaborador">
+
+                                    <tr>
+
+                                        <td
+                                            colspan="6"
+                                            class="tabla-vacia"
+                                        >
+                                            Todavía no has registrado ideas.
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </main>
+
+        </section>
+
+    </div>
+
+    <!-- ======================================
+         PANEL LATERAL DE DETALLE Y RESPUESTA
+    ======================================= -->
+
+    <div
+        id="panelDetalleIdeaColaborador"
+        class="panel-lateral"
+        aria-hidden="true"
+    >
+
+        <div class="panel-lateral-contenido">
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Detalle de la propuesta
+                    </span>
+
+                    <h2 id="detalleTicketIdeaColaborador">
+                        QW-0000
+                    </h2>
+
+                </div>
+
+                <button
+                    class="boton-cerrar-modal"
+                    id="cerrarDetalleIdeaColaborador"
+                    type="button"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <!-- RESUMEN -->
+
+            <section class="detalle-idea-colaborador-superior">
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Propuesta
+                    </span>
+
+                    <strong id="detalleTituloIdeaColaborador">
+                        —
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Estado
+                    </span>
+
+                    <strong id="detalleEstadoIdeaColaborador">
+                        —
+                    </strong>
+
+                </div>
+
+            </section>
+
+            <!-- INFORMACIÓN ORIGINAL -->
+
+            <section class="titulo-bloque-panel">
+
+                <h3>
+                    Información registrada
+                </h3>
+
+                <p>
+                    Estos son los datos originales de tu propuesta.
+                </p>
+
+            </section>
+
+            <div class="modal-grid">
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Área
+                    </span>
+
+                    <strong id="detalleAreaIdeaColaborador">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Fecha de registro
+                    </span>
+
+                    <strong id="detalleFechaIdeaColaborador">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Frecuencia
+                    </span>
+
+                    <strong id="detalleFrecuenciaIdeaColaborador">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Horas por ejecución
+                    </span>
+
+                    <strong id="detalleHorasIdeaColaborador">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>
+                        Implementación estimada
+                    </span>
+
+                    <strong id="detalleImplementacionIdeaColaborador">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>
+                        Proceso actual
+                    </span>
+
+                    <p id="detalleDescripcionIdeaColaborador">
+                        —
+                    </p>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>
+                        Problema identificado
+                    </span>
+
+                    <p id="detalleProblemaIdeaColaborador">
+                        —
+                    </p>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>
+                        Solución sugerida
+                    </span>
+
+                    <p id="detalleSolucionIdeaColaborador">
+                        —
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- PREGUNTAS DEL GERENTE -->
+
+            <section
+                id="seccionPreguntasColaborador"
+                class="seccion-preguntas-colaborador oculto"
+            >
+
+                <div class="encabezado-preguntas-colaborador">
+
+                    <div>
+
+                        <span class="modal-etiqueta">
+                            Acción requerida
+                        </span>
+
+                        <h3>
+                            Preguntas del gerente
+                        </h3>
+
+                    </div>
+
+                    <span
+                        id="fechaLimiteColaborador"
+                        class="fecha-limite-colaborador"
+                    >
+                        Sin fecha límite
+                    </span>
+
+                </div>
+
+                <div class="preguntas-recibidas-colaborador">
+
+                    <span>
+                        Información solicitada
+                    </span>
+
+                    <p id="preguntasGerenteColaborador">
+                        —
+                    </p>
+
+                </div>
+
+                <div
+                    id="comentarioGerenteColaboradorContenedor"
+                    class="preguntas-recibidas-colaborador oculto"
+                >
+
+                    <span>
+                        Comentario adicional
+                    </span>
+
+                    <p id="comentarioGerenteColaborador">
+                        —
+                    </p>
+
+                </div>
+
+                <div class="campo">
+
+                    <label for="respuestaColaboradorIdea">
+                        Tu respuesta
+                    </label>
+
+                    <textarea
+                        id="respuestaColaboradorIdea"
+                        rows="10"
+                        placeholder="Responde claramente cada una de las preguntas del gerente."
+                    ></textarea>
+
+                </div>
+
+                <div
+                    id="mensajeRespuestaColaborador"
+                    class="mensaje-formulario"
+                ></div>
+
+                <button
+                    class="boton-principal boton-enviar-respuesta"
+                    id="enviarRespuestaColaborador"
+                    type="button"
+                >
+                    Enviar respuesta al gerente
+                </button>
+
+            </section>
+
+            <!-- RESPUESTA YA ENVIADA -->
+
+            <section
+                id="seccionRespuestaEnviada"
+                class="seccion-respuesta-enviada oculto"
+            >
+
+                <span class="modal-etiqueta">
+                    Respuesta enviada
+                </span>
+
+                <h3>
+                    El gerente recibió tu información
+                </h3>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Tu respuesta
+                    </span>
+
+                    <p id="respuestaEnviadaColaborador">
+                        —
+                    </p>
+
+                </div>
+
+                <small id="fechaRespuestaColaborador">
+                    —
+                </small>
+
+            </section>
+
+            <!-- COMENTARIO DEL GERENTE -->
+
+            <section
+                id="seccionComentarioGerenteColaborador"
+                class="seccion-comentario-gerente-colaborador oculto"
+            >
+
+                <h3>
+                    Comentarios del gerente
+                </h3>
+
+                <p id="comentarioFinalGerenteColaborador">
+                    —
+                </p>
+
+            </section>
+
+            <div class="modal-acciones">
+
+                <button
+                    class="boton-secundario"
+                    id="cerrarDetalleIdeaColaborador"
+                    type="button"
+                >
+                    Cerrar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        id="notificacion"
+        class="notificacion"
+    ></div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/ideas.js"></script>
+
+</body>
+
+</html>

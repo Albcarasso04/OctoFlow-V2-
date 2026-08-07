@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        OctoFlow | Portal del Gerente
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
+
+</head>
+
+<body data-portal="gerente">
+
+    <div class="aplicacion">
+
+        <!-- MENÚ LATERAL -->
+
+        <aside class="menu-lateral">
+
+            <div class="marca">
+
+                <img
+                    class="logo-danone-menu"
+                    src="../img/DANONE_LOGO_HORIZONTAL.png"
+                    alt="Logo de Danone"
+                >
+
+                <h1>OctoFlow</h1>
+
+                <p>
+                    Portal del Gerente
+                </p>
+
+            </div>
+
+            <nav class="navegacion">
+
+                <a
+                    class="enlace-menu activo"
+                    href="gerentes.html"
+                >
+                    <span class="icono-menu">⌂</span>
+                    Dashboard
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="revision-ideas.html"
+                >
+                    <span class="icono-menu">💡</span>
+                    Revisar ideas
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="gestion-oportunidades.html"
+                >
+                    <span class="icono-menu">🚀</span>
+                    Oportunidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="postulaciones-gerente.html"
+                >
+                    <span class="icono-menu">👥</span>
+                    Postulaciones
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="proyectos-gerente.html"
+                >
+                    <span class="icono-menu">▣</span>
+                    Proyectos
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="talento.html"
+                >
+                    <span class="icono-menu">◉</span>
+                    Talento
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="metricas.html"
+                >
+                    <span class="icono-menu">▥</span>
+                    Métricas
+                </a>
+
+            </nav>
+
+            <div class="usuario-menu">
+
+                <strong data-nombre-usuario>
+                    Gerente
+                </strong>
+
+                <div
+                    class="correo-menu"
+                    data-correo-usuario
+                >
+                    gerente@danone.com
+                </div>
+
+                <button
+                    class="boton-salir"
+                    type="button"
+                    onclick="cerrarSesion()"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- CONTENIDO -->
+
+        <section class="contenido">
+
+            <header class="encabezado">
+
+                <div class="titulo-encabezado">
+
+                    <h2>
+                        Portal del Gerente
+                    </h2>
+
+                    <p>
+                        Administración de iniciativas Quick Win
+                    </p>
+
+                </div>
+
+                <div class="perfil-superior">
+
+                    <button
+                        class="boton-notificaciones"
+                        type="button"
+                        onclick="mostrarNotificacionGerente()"
+                    >
+                        🔔
+                    </button>
+
+                    <div
+                        class="avatar"
+                        data-avatar-usuario
+                    >
+                        G
+                    </div>
+
+                    <div class="datos-usuario">
+
+                        <strong data-nombre-usuario>
+                            Gerente
+                        </strong>
+
+                        <span data-rol-usuario>
+                            Gerente
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main class="principal">
+
+                <!-- BIENVENIDA -->
+
+                <section class="bienvenida bienvenida-gerente">
+
+                    <div>
+
+                        <span class="etiqueta-dashboard">
+                            Gestión de automatización
+                        </span>
+
+                        <h2 data-saludo>
+                            ¡Hola!
+                        </h2>
+
+                        <p>
+                            Revisa propuestas, forma equipos con
+                            Champions y Learners, da seguimiento a los
+                            proyectos y mide el impacto generado.
+                        </p>
+
+                    </div>
+
+                    <a
+                        class="boton-blanco"
+                        href="revision-ideas.html"
+                    >
+                        Revisar propuestas
+                    </a>
+
+                </section>
+
+                <!-- INDICADORES PRINCIPALES -->
+
+                <section class="indicadores indicadores-gerente">
+
+                    <article class="indicador">
+
+                        <div class="indicador-superior">
+
+                            <span class="indicador-etiqueta">
+                                Ideas por revisar
+                            </span>
+
+                            <span class="indicador-icono">
+                                💡
+                            </span>
+
+                        </div>
+
+                        <div
+                            id="numeroIdeasPendientes"
+                            class="indicador-numero"
+                        >
+                            0
+                        </div>
+
+                        <div
+                            id="detalleIdeasPendientes"
+                            class="indicador-detalle naranja"
+                        >
+                            Sin propuestas pendientes
+                        </div>
+
+                    </article>
+
+                    <article class="indicador">
+
+                        <div class="indicador-superior">
+
+                            <span class="indicador-etiqueta">
+                                Oportunidades publicadas
+                            </span>
+
+                            <span class="indicador-icono">
+                                🚀
+                            </span>
+
+                        </div>
+
+                        <div
+                            id="numeroOportunidadesGerente"
+                            class="indicador-numero"
+                        >
+                            0
+                        </div>
+
+                        <div
+                            id="detalleOportunidadesGerente"
+                            class="indicador-detalle verde"
+                        >
+                            Sin oportunidades publicadas
+                        </div>
+
+                    </article>
+
+                    <article class="indicador">
+
+                        <div class="indicador-superior">
+
+                            <span class="indicador-etiqueta">
+                                Postulaciones pendientes
+                            </span>
+
+                            <span class="indicador-icono">
+                                👥
+                            </span>
+
+                        </div>
+
+                        <div
+                            id="numeroPostulacionesPendientes"
+                            class="indicador-numero"
+                        >
+                            0
+                        </div>
+
+                        <div
+                            id="detallePostulacionesPendientes"
+                            class="indicador-detalle naranja"
+                        >
+                            Sin postulaciones pendientes
+                        </div>
+
+                    </article>
+
+                    <article class="indicador">
+
+                        <div class="indicador-superior">
+
+                            <span class="indicador-etiqueta">
+                                Proyectos activos
+                            </span>
+
+                            <span class="indicador-icono">
+                                ▣
+                            </span>
+
+                        </div>
+
+                        <div
+                            id="numeroProyectosActivosGerente"
+                            class="indicador-numero"
+                        >
+                            0
+                        </div>
+
+                        <div
+                            id="detalleProyectosActivosGerente"
+                            class="indicador-detalle verde"
+                        >
+                            Sin proyectos activos
+                        </div>
+
+                    </article>
+
+                </section>
+
+                <!-- MÉTRICAS DE IMPACTO -->
+
+                <div class="titulo-seccion">
+
+                    <h3>
+                        Impacto acumulado
+                    </h3>
+
+                    <a
+                        class="enlace-ver-todo"
+                        href="metricas.html"
+                    >
+                        Ver métricas
+                    </a>
+
+                </div>
+
+                <section class="metricas-gerente">
+
+                    <article class="metrica-impacto">
+
+                        <span class="metrica-icono">
+                            ⏱
+                        </span>
+
+                        <div>
+
+                            <span>
+                                Tiempo ahorrado
+                            </span>
+
+                            <strong id="horasAhorradasGerente">
+                                0 h
+                            </strong>
+
+                            <small>
+                                Estimado anual
+                            </small>
+
+                        </div>
+
+                    </article>
+
+                    <article class="metrica-impacto">
+
+                        <span class="metrica-icono">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <span>
+                                Proyectos completados
+                            </span>
+
+                            <strong id="proyectosCompletadosGerente">
+                                0
+                            </strong>
+
+                            <small>
+                                Quick Wins implementados
+                            </small>
+
+                        </div>
+
+                    </article>
+
+                    <article class="metrica-impacto">
+
+                        <span class="metrica-icono">
+                            ◉
+                        </span>
+
+                        <div>
+
+                            <span>
+                                Learners participantes
+                            </span>
+
+                            <strong id="learnersParticipantesGerente">
+                                0
+                            </strong>
+
+                            <small>
+                                Desarrollo de talento
+                            </small>
+
+                        </div>
+
+                    </article>
+
+                    <article class="metrica-impacto">
+
+                        <span class="metrica-icono">
+                            ★
+                        </span>
+
+                        <div>
+
+                            <span>
+                                Champions activos
+                            </span>
+
+                            <strong id="championsActivosGerente">
+                                0
+                            </strong>
+
+                            <small>
+                                Expertos colaborando
+                            </small>
+
+                        </div>
+
+                    </article>
+
+                </section>
+
+                <!-- ACCESOS RÁPIDOS -->
+
+                <div class="titulo-seccion">
+
+                    <h3>
+                        Acciones principales
+                    </h3>
+
+                </div>
+
+                <section class="accesos accesos-gerente">
+
+                    <a
+                        class="acceso"
+                        href="revision-ideas.html"
+                    >
+
+                        <div class="acceso-icono">
+                            💡
+                        </div>
+
+                        <h4>
+                            Revisar ideas
+                        </h4>
+
+                        <p>
+                            Evalúa las propuestas registradas,
+                            agrega comentarios y decide cuáles
+                            pueden convertirse en oportunidades.
+                        </p>
+
+                        <strong>
+                            Revisar propuestas →
+                        </strong>
+
+                    </a>
+
+                    <a
+                        class="acceso"
+                        href="gestion-oportunidades.html"
+                    >
+
+                        <div class="acceso-icono">
+                            🚀
+                        </div>
+
+                        <h4>
+                            Publicar oportunidades
+                        </h4>
+
+                        <p>
+                            Define herramientas, duración,
+                            disponibilidad y roles requeridos.
+                        </p>
+
+                        <strong>
+                            Administrar oportunidades →
+                        </strong>
+
+                    </a>
+
+                    <a
+                        class="acceso"
+                        href="postulaciones-gerente.html"
+                    >
+
+                        <div class="acceso-icono">
+                            👥
+                        </div>
+
+                        <h4>
+                            Formar equipos
+                        </h4>
+
+                        <p>
+                            Revisa candidatos, acepta Champions
+                            y Learners y arma el equipo adecuado.
+                        </p>
+
+                        <strong>
+                            Revisar postulaciones →
+                        </strong>
+
+                    </a>
+
+                    <a
+                        class="acceso"
+                        href="proyectos-gerente.html"
+                    >
+
+                        <div class="acceso-icono">
+                            ▣
+                        </div>
+
+                        <h4>
+                            Administrar proyectos
+                        </h4>
+
+                        <p>
+                            Inicia proyectos, asigna tareas,
+                            actualiza avances y registra resultados.
+                        </p>
+
+                        <strong>
+                            Ver proyectos →
+                        </strong>
+
+                    </a>
+
+                </section>
+
+                <!-- INFORMACIÓN INFERIOR -->
+
+                <div class="columnas-dashboard">
+
+                    <!-- IDEAS PENDIENTES -->
+
+                    <section class="panel">
+
+                        <div class="panel-cabecera">
+
+                            <h3>
+                                Ideas pendientes de revisión
+                            </h3>
+
+                            <a
+                                class="enlace-ver-todo"
+                                href="revision-ideas.html"
+                            >
+                                Ver todas
+                            </a>
+
+                        </div>
+
+                        <div class="tabla-contenedor">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+                                        <th>Ticket</th>
+                                        <th>Propuesta</th>
+                                        <th>Área</th>
+                                        <th>Fecha</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="tablaIdeasPendientesGerente">
+
+                                    <tr>
+
+                                        <td
+                                            colspan="4"
+                                            class="tabla-vacia"
+                                        >
+                                            No hay ideas pendientes.
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </section>
+
+                    <!-- POSTULACIONES -->
+
+                    <section class="panel">
+
+                        <div class="panel-cabecera">
+
+                            <h3>
+                                Postulaciones recientes
+                            </h3>
+
+                            <a
+                                class="enlace-ver-todo"
+                                href="postulaciones-gerente.html"
+                            >
+                                Ver todas
+                            </a>
+
+                        </div>
+
+                        <div
+                            id="listaPostulacionesGerente"
+                            class="lista-postulaciones-gerente"
+                        >
+
+                            <div class="tabla-vacia">
+                                No hay postulaciones pendientes.
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+                <!-- PROYECTOS ACTIVOS -->
+
+                <div class="titulo-seccion">
+
+                    <h3>
+                        Proyectos activos
+                    </h3>
+
+                    <a
+                        class="enlace-ver-todo"
+                        href="proyectos-gerente.html"
+                    >
+                        Ver todos
+                    </a>
+
+                </div>
+
+                <section class="panel">
+
+                    <div
+                        id="listaProyectosGerente"
+                        class="grid-proyectos-gerente"
+                    >
+
+                        <div class="tabla-vacia">
+                            Todavía no hay proyectos activos.
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+        </section>
+
+    </div>
+
+    <div
+        id="notificacion"
+        class="notificacion"
+    ></div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/gerentes.js"></script>
+
+</body>
+
+</html>

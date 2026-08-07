@@ -1,0 +1,3145 @@
+:root {
+    --danone-azul-oscuro: #003b71;
+    --danone-azul: #005eb8;
+    --danone-azul-medio: #0072ce;
+    --danone-azul-claro: #00a3e0;
+
+    --fondo: #f4f7fb;
+    --blanco: #ffffff;
+    --texto: #172033;
+    --texto-secundario: #667085;
+    --borde: #e1e7ef;
+
+    --verde: #159455;
+    --naranja: #d97706;
+    --rojo: #c53030;
+    --morado: #6941c6;
+
+    --sombra:
+        0 6px 20px
+        rgba(16, 24, 40, 0.07);
+}
+
+/* CONFIGURACIÓN GENERAL */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+    background-color: var(--fondo);
+    color: var(--texto);
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+a {
+    color: inherit;
+}
+
+/* ESTRUCTURA PRINCIPAL */
+
+.aplicacion {
+    display: grid;
+    grid-template-columns: 255px minmax(0, 1fr);
+    min-height: 100vh;
+}
+
+/* MENÚ LATERAL */
+
+.menu-lateral {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 22px 17px;
+    background:
+        linear-gradient(
+            180deg,
+            var(--danone-azul-oscuro),
+            #00284e
+        );
+    color: var(--blanco);
+}
+
+.marca {
+    padding: 0 8px 23px;
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+}
+
+.logo-danone-menu {
+    display: block;
+    width: 175px;
+    max-width: 100%;
+    padding: 8px 12px;
+    border-radius: 11px;
+    background-color: var(--blanco);
+}
+
+.marca h1 {
+    margin: 17px 0 4px;
+    font-size: 25px;
+}
+
+.marca p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 12px;
+}
+
+.navegacion {
+    display: grid;
+    gap: 6px;
+    margin-top: 23px;
+}
+
+.enlace-menu {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 12px 13px;
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.78);
+    text-decoration: none;
+    font-size: 14px;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.enlace-menu:hover {
+    color: var(--blanco);
+    background-color:
+        rgba(255, 255, 255, 0.1);
+    transform: translateX(2px);
+}
+
+.enlace-menu.activo {
+    color: var(--blanco);
+    background-color:
+        rgba(255, 255, 255, 0.16);
+}
+
+.icono-menu {
+    display: inline-grid;
+    place-items: center;
+    width: 23px;
+    font-size: 17px;
+}
+
+.usuario-menu {
+    margin-top: auto;
+    padding: 17px 8px 0;
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+}
+
+.usuario-menu strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.correo-menu {
+    overflow: hidden;
+    margin-bottom: 13px;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.boton-salir {
+    width: 100%;
+    padding: 10px 12px;
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.25);
+    border-radius: 9px;
+    background-color: transparent;
+    color: var(--blanco);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.boton-salir:hover {
+    background-color:
+        rgba(255, 255, 255, 0.1);
+}
+
+/* CONTENIDO PRINCIPAL */
+
+.contenido {
+    min-width: 0;
+}
+
+.encabezado {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 78px;
+    padding: 16px 31px;
+    border-bottom: 1px solid var(--borde);
+    background-color:
+        rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(8px);
+}
+
+.titulo-encabezado h2 {
+    margin: 0;
+    color: var(--danone-azul-oscuro);
+    font-size: 23px;
+}
+
+.titulo-encabezado p {
+    margin: 5px 0 0;
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
+.perfil-superior {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.boton-notificaciones {
+    display: grid;
+    place-items: center;
+    width: 39px;
+    height: 39px;
+    border: 1px solid var(--borde);
+    border-radius: 50%;
+    background-color: var(--blanco);
+    cursor: pointer;
+}
+
+.avatar {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #e8f3ff;
+    color: var(--danone-azul);
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.datos-usuario strong {
+    display: block;
+    font-size: 13px;
+}
+
+.datos-usuario span {
+    display: block;
+    margin-top: 3px;
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+.principal {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 29px 31px 45px;
+}
+
+/* BIENVENIDA */
+
+.bienvenida {
+    position: relative;
+    overflow: hidden;
+    padding: 31px 34px;
+    border-radius: 19px;
+    background:
+        linear-gradient(
+            110deg,
+            var(--danone-azul-oscuro),
+            var(--danone-azul-medio)
+        );
+    color: var(--blanco);
+    box-shadow:
+        0 12px 28px
+        rgba(0, 59, 113, 0.16);
+}
+
+.bienvenida::before {
+    content: "";
+    position: absolute;
+    right: -65px;
+    top: -105px;
+    width: 235px;
+    height: 235px;
+    border-radius: 50%;
+    background-color:
+        rgba(255, 255, 255, 0.08);
+}
+
+.bienvenida::after {
+    content: "";
+    position: absolute;
+    right: 125px;
+    bottom: -130px;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background-color:
+        rgba(255, 255, 255, 0.06);
+}
+
+.bienvenida h2 {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    font-size: 29px;
+}
+
+.bienvenida p {
+    position: relative;
+    z-index: 1;
+    max-width: 690px;
+    margin: 11px 0 0;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* INDICADORES */
+
+.indicadores {
+    display: grid;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+    gap: 17px;
+    margin-top: 21px;
+}
+
+.indicador {
+    padding: 20px;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    background-color: var(--blanco);
+    box-shadow: var(--sombra);
+}
+
+.indicador-superior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.indicador-icono {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    background-color: #eaf3ff;
+    font-size: 19px;
+}
+
+.indicador-etiqueta {
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.indicador-numero {
+    margin: 10px 0 5px;
+    color: var(--danone-azul-oscuro);
+    font-size: 29px;
+    font-weight: bold;
+}
+
+.indicador-detalle {
+    font-size: 11px;
+}
+
+.verde {
+    color: var(--verde);
+}
+
+.naranja {
+    color: var(--naranja);
+}
+
+.rojo {
+    color: var(--rojo);
+}
+
+/* TÍTULOS DE SECCIÓN */
+
+.titulo-seccion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 29px 0 14px;
+}
+
+.titulo-seccion h3 {
+    margin: 0;
+    color: var(--danone-azul-oscuro);
+    font-size: 19px;
+}
+
+.enlace-ver-todo {
+    color: var(--danone-azul);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* ACCESOS RÁPIDOS */
+
+.accesos {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.acceso {
+    display: flex;
+    flex-direction: column;
+    min-height: 205px;
+    padding: 21px;
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+    background-color: var(--blanco);
+    text-decoration: none;
+    box-shadow: var(--sombra);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.acceso:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 13px 27px
+        rgba(16, 24, 40, 0.12);
+}
+
+.acceso-icono {
+    display: grid;
+    place-items: center;
+    width: 49px;
+    height: 49px;
+    border-radius: 13px;
+    background-color: #eaf3ff;
+    font-size: 23px;
+}
+
+.acceso h4 {
+    margin: 17px 0 8px;
+    color: var(--texto);
+    font-size: 16px;
+}
+
+.acceso p {
+    margin: 0;
+    color: var(--texto-secundario);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.acceso strong {
+    margin-top: auto;
+    padding-top: 17px;
+    color: var(--danone-azul);
+    font-size: 12px;
+}
+
+/* PANELES INFERIORES */
+
+.columnas-dashboard {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(300px, 0.85fr);
+    gap: 18px;
+    margin-top: 19px;
+}
+
+.panel {
+    min-width: 0;
+    padding: 21px;
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+    background-color: var(--blanco);
+    box-shadow: var(--sombra);
+}
+
+.panel-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.panel h3 {
+    margin: 0;
+    color: var(--danone-azul-oscuro);
+    font-size: 17px;
+}
+
+/* TABLAS */
+
+.tabla-contenedor {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px 9px;
+    border-bottom: 1px solid var(--borde);
+    text-align: left;
+    font-size: 12px;
+}
+
+th {
+    color: var(--texto-secundario);
+    font-weight: bold;
+}
+
+td {
+    color: #344054;
+}
+
+.estado {
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.estado-revision {
+    background-color: #fff4e5;
+    color: #b54708;
+}
+
+.estado-aprobado {
+    background-color: #ecfdf3;
+    color: #027a48;
+}
+
+.estado-desarrollo {
+    background-color: #eff8ff;
+    color: #175cd3;
+}
+
+.estado-completado {
+    background-color: #f4f3ff;
+    color: var(--morado);
+}
+
+/* PROYECTOS */
+
+.lista-proyectos {
+    display: grid;
+    gap: 12px;
+}
+
+.proyecto {
+    padding: 14px;
+    border: 1px solid var(--borde);
+    border-radius: 11px;
+}
+
+.proyecto-superior {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.proyecto strong {
+    display: block;
+    font-size: 13px;
+}
+
+.proyecto small {
+    display: block;
+    margin-top: 5px;
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+.porcentaje {
+    color: var(--danone-azul);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.barra-progreso {
+    height: 7px;
+    margin-top: 11px;
+    overflow: hidden;
+    border-radius: 999px;
+    background-color: #e8edf3;
+}
+
+.barra-progreso span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background:
+        linear-gradient(
+            90deg,
+            var(--danone-azul),
+            var(--danone-azul-claro)
+        );
+}
+
+/* FORMULARIOS REUTILIZABLES */
+
+.formulario {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.campo {
+    display: grid;
+    gap: 7px;
+}
+
+.campo-completo {
+    grid-column: 1 / -1;
+}
+
+.campo label {
+    color: #344054;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #cdd7e3;
+    border-radius: 9px;
+    outline: none;
+    background-color: var(--blanco);
+    color: var(--texto);
+}
+
+.campo textarea {
+    min-height: 105px;
+    resize: vertical;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    border-color: var(--danone-azul-claro);
+    box-shadow:
+        0 0 0 4px
+        rgba(0, 163, 224, 0.11);
+}
+
+.boton-principal {
+    display: inline-block;
+    padding: 11px 17px;
+    border: none;
+    border-radius: 9px;
+    background:
+        linear-gradient(
+            90deg,
+            var(--danone-azul),
+            var(--danone-azul-claro)
+        );
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.boton-secundario {
+    display: inline-block;
+    padding: 10px 15px;
+    border: 1px solid var(--borde);
+    border-radius: 9px;
+    background-color: var(--blanco);
+    color: var(--danone-azul);
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* MENSAJE EMERGENTE */
+
+.notificacion {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 100;
+    display: none;
+    max-width: 340px;
+    padding: 13px 16px;
+    border-radius: 10px;
+    background-color: #101828;
+    color: var(--blanco);
+    box-shadow:
+        0 12px 30px
+        rgba(16, 24, 40, 0.25);
+    font-size: 13px;
+}
+
+.notificacion.visible {
+    display: block;
+}
+
+/* DISEÑO RESPONSIVO */
+
+@media (max-width: 1100px) {
+    .indicadores,
+    .accesos {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .columnas-dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 780px) {
+    .aplicacion {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-lateral {
+        position: relative;
+        height: auto;
+    }
+
+    .navegacion {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .usuario-menu {
+        margin-top: 24px;
+    }
+
+    .encabezado {
+        position: relative;
+        padding: 16px 20px;
+    }
+
+    .perfil-superior {
+        display: none;
+    }
+
+    .principal {
+        padding: 23px 18px 35px;
+    }
+}
+
+@media (max-width: 540px) {
+    .indicadores,
+    .accesos,
+    .formulario {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-completo {
+        grid-column: auto;
+    }
+
+    .navegacion {
+        grid-template-columns: 1fr;
+    }
+
+    .bienvenida {
+        padding: 25px;
+    }
+
+    .bienvenida h2 {
+        font-size: 25px;
+    }
+}
+/* ========================================
+   MÓDULO DE IDEAS
+======================================== */
+
+.contenedor-pagina {
+    display: grid;
+    gap: 20px;
+}
+
+.cabecera-pagina {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.cabecera-pagina h2 {
+    margin: 0;
+    color: var(--danone-azul-oscuro);
+    font-size: 25px;
+}
+
+.cabecera-pagina p {
+    margin: 7px 0 0;
+    color: var(--texto-secundario);
+    font-size: 14px;
+}
+
+.resumen-ideas {
+    display: grid;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.tarjeta-resumen {
+    padding: 19px;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    background-color: var(--blanco);
+    box-shadow: var(--sombra);
+}
+
+.tarjeta-resumen span {
+    display: block;
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.tarjeta-resumen strong {
+    display: block;
+    margin-top: 8px;
+    color: var(--danone-azul-oscuro);
+    font-size: 28px;
+}
+
+.panel-formulario {
+    padding: 24px;
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+    background-color: var(--blanco);
+    box-shadow: var(--sombra);
+}
+
+.panel-formulario h3 {
+    margin: 0 0 20px;
+    color: var(--danone-azul-oscuro);
+    font-size: 18px;
+}
+
+.acciones-formulario {
+    display: flex;
+    justify-content: flex-end;
+    grid-column: 1 / -1;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.mensaje-formulario {
+    display: none;
+    grid-column: 1 / -1;
+    padding: 12px 14px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.mensaje-formulario.exito {
+    display: block;
+    border: 1px solid #abefc6;
+    background-color: #ecfdf3;
+    color: #027a48;
+}
+
+.mensaje-formulario.error {
+    display: block;
+    border: 1px solid #fecdca;
+    background-color: #fff1f0;
+    color: #b42318;
+}
+
+.boton-tabla {
+    padding: 6px 10px;
+    border: 1px solid var(--borde);
+    border-radius: 7px;
+    background-color: var(--blanco);
+    color: var(--danone-azul);
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.boton-tabla:hover {
+    background-color: #eff8ff;
+}
+
+.tabla-vacia {
+    padding: 28px;
+    color: var(--texto-secundario);
+    text-align: center;
+}
+
+@media (max-width: 700px) {
+
+    .resumen-ideas {
+        grid-template-columns: 1fr;
+    }
+
+    .cabecera-pagina {
+        flex-direction: column;
+    }
+}
+/* ========================================
+   MÓDULO DE HABILIDADES
+======================================== */
+
+.resumen-habilidades {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.texto-resumen {
+    font-size: 20px !important;
+}
+
+.texto-ayuda {
+    margin: 6px 0 0;
+    color: var(--texto-secundario);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.opciones-participacion {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.opcion-participacion {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 15px;
+    border: 1px solid var(--borde);
+    border-radius: 11px;
+    background-color: #f9fbfd;
+    cursor: pointer;
+}
+
+.opcion-participacion:hover {
+    border-color: var(--danone-azul-claro);
+}
+
+.opcion-participacion input {
+    width: 17px;
+    height: 17px;
+    margin-top: 2px;
+}
+
+.opcion-participacion strong {
+    display: block;
+    color: var(--texto);
+    font-size: 13px;
+}
+
+.opcion-participacion small {
+    display: block;
+    margin-top: 5px;
+    color: var(--texto-secundario);
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.oculto {
+    display: none !important;
+}
+
+.lista-habilidades {
+    display: grid;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.tarjeta-habilidad {
+    padding: 17px;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    background-color: var(--blanco);
+    box-shadow: var(--sombra);
+}
+
+.habilidad-cabecera {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.habilidad-cabecera h4 {
+    margin: 0 0 9px;
+    color: var(--danone-azul-oscuro);
+    font-size: 16px;
+}
+
+.nivel-habilidad {
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.nivel-alto {
+    background-color: #ecfdf3;
+    color: #027a48;
+}
+
+.nivel-medio {
+    background-color: #eff8ff;
+    color: #175cd3;
+}
+
+.nivel-inicial {
+    background-color: #fff4e5;
+    color: #b54708;
+}
+
+.boton-eliminar-habilidad {
+    padding: 5px 8px;
+    border: none;
+    border-radius: 7px;
+    background-color: #fff1f0;
+    color: #b42318;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.detalle-habilidad {
+    margin-top: 13px;
+}
+
+.detalle-habilidad span {
+    display: block;
+    color: var(--texto-secundario);
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.detalle-habilidad strong {
+    display: block;
+    margin-top: 4px;
+    color: #344054;
+    font-size: 12px;
+}
+
+.comentario-habilidad {
+    margin: 13px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--borde);
+    color: var(--texto-secundario);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.rol-sugerido-habilidad {
+    margin-top: 14px;
+}
+
+.etiqueta-rol {
+    display: inline-block;
+    padding: 6px 9px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.etiqueta-rol.champion {
+    background-color: #f4f3ff;
+    color: #5925dc;
+}
+
+.etiqueta-rol.learner {
+    background-color: #eff8ff;
+    color: #175cd3;
+}
+
+.etiqueta-rol.contributor {
+    background-color: #f2f4f7;
+    color: #475467;
+}
+
+@media (max-width: 1050px) {
+
+    .resumen-habilidades {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .lista-habilidades {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+
+    .resumen-habilidades,
+    .lista-habilidades,
+    .opciones-participacion {
+        grid-template-columns: 1fr;
+    }
+}
+/* ========================================
+   MÓDULO DE OPORTUNIDADES
+======================================== */
+
+.resumen-oportunidades {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.aviso-oportunidades {
+    display: grid;
+    grid-template-columns:
+        auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 18px;
+    margin-bottom: 18px;
+    border: 1px solid #b2ddff;
+    border-radius: 14px;
+    background-color: #eff8ff;
+}
+
+.aviso-oportunidades-icono {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background-color: #d1e9ff;
+    color: var(--danone-azul);
+    font-size: 21px;
+}
+
+.aviso-oportunidades strong {
+    color: var(--danone-azul-oscuro);
+    font-size: 14px;
+}
+
+.aviso-oportunidades p {
+    margin: 5px 0 0;
+    color: var(--texto-secundario);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.filtros-oportunidades {
+    display: grid;
+    grid-template-columns:
+        minmax(180px, 1.5fr)
+        minmax(150px, 1fr)
+        minmax(150px, 1fr)
+        minmax(160px, 1fr)
+        auto;
+    align-items: end;
+    gap: 13px;
+}
+
+.grid-oportunidades {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.tarjeta-oportunidad {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+    background-color: var(--blanco);
+    box-shadow: var(--sombra);
+}
+
+.tarjeta-oportunidad-superior {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.codigo-oportunidad {
+    color: var(--texto-secundario);
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.tarjeta-oportunidad h3 {
+    margin: 7px 0 0;
+    color: var(--danone-azul-oscuro);
+    font-size: 17px;
+    line-height: 1.35;
+}
+
+.compatibilidad-circulo {
+    display: grid;
+    place-items: center;
+    flex: 0 0 57px;
+    width: 57px;
+    height: 57px;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.compatibilidad-alta {
+    background-color: #ecfdf3;
+    color: #027a48;
+}
+
+.compatibilidad-media {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+.compatibilidad-baja {
+    background-color: #f2f4f7;
+    color: #475467;
+}
+
+.meta-oportunidad {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 14px;
+}
+
+.meta-oportunidad span {
+    padding: 5px 8px;
+    border-radius: 999px;
+    background-color: #f2f4f7;
+    color: #475467;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.descripcion-oportunidad {
+    margin: 14px 0;
+    color: var(--texto-secundario);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.etiquetas-herramientas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.etiqueta-herramienta {
+    display: inline-block;
+    padding: 6px 9px;
+    border-radius: 999px;
+    background-color: #eaf3ff;
+    color: var(--danone-azul);
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.rol-recomendado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 17px;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #f9fafb;
+}
+
+.rol-recomendado span {
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+.rol-recomendado strong {
+    padding: 6px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+}
+
+.rol-champion {
+    background-color: #f4f3ff;
+    color: #5925dc;
+}
+
+.rol-learner {
+    background-color: #eff8ff;
+    color: #175cd3;
+}
+
+.rol-contributor {
+    background-color: #f2f4f7;
+    color: #475467;
+}
+
+.equipo-oportunidad {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 13px;
+}
+
+.equipo-oportunidad span {
+    padding: 6px 8px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.equipo-oportunidad .cubierto {
+    background-color: #ecfdf3;
+    color: #027a48;
+}
+
+.equipo-oportunidad .vacante {
+    background-color: #fff4e5;
+    color: #b54708;
+}
+
+.tarjeta-oportunidad-acciones {
+    margin-top: auto;
+    padding-top: 18px;
+}
+
+.tarjeta-oportunidad-acciones button {
+    width: 100%;
+}
+
+.tarjeta-oportunidad-acciones button:disabled,
+#botonPostularse:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.detalle-oportunidad-superior {
+    display: grid;
+    grid-template-columns:
+        auto 1fr 1fr;
+    align-items: center;
+    gap: 18px;
+    margin-top: 19px;
+    padding: 17px;
+    border-radius: 13px;
+    background-color: #f7faff;
+}
+
+.compatibilidad-grande {
+    display: grid;
+    place-items: center;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: #e8f3ff;
+    color: var(--danone-azul);
+}
+
+.compatibilidad-grande span {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.compatibilidad-grande small {
+    font-size: 9px;
+}
+
+.rol-recomendado-grande {
+    margin-top: 7px;
+    color: var(--danone-azul-oscuro);
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.estado-equipo-modal {
+    margin-top: 7px;
+    color: #344054;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.lista-razones {
+    margin: 0;
+    padding-left: 18px;
+    color: #344054;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+@media (max-width: 1100px) {
+
+    .resumen-oportunidades {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .filtros-oportunidades {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 800px) {
+
+    .grid-oportunidades {
+        grid-template-columns: 1fr;
+    }
+
+    .detalle-oportunidad-superior {
+        grid-template-columns: 1fr;
+    }
+
+    .compatibilidad-grande {
+        width: 75px;
+        height: 75px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .resumen-oportunidades,
+    .filtros-oportunidades {
+        grid-template-columns: 1fr;
+    }
+
+    .aviso-oportunidades {
+        grid-template-columns: 1fr;
+    }
+}
+/* ========================================
+   PANEL LATERAL DE OPORTUNIDADES
+======================================== */
+
+.panel-lateral {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    visibility: hidden;
+    background-color: rgba(15, 23, 42, 0);
+    transition:
+        visibility 0.25s ease,
+        background-color 0.25s ease;
+}
+
+.panel-lateral.visible {
+    visibility: visible;
+    background-color: rgba(15, 23, 42, 0.48);
+}
+
+.panel-lateral-contenido {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: min(620px, 92vw);
+    height: 100%;
+    overflow-y: auto;
+    padding: 28px;
+    background-color: var(--blanco);
+    box-shadow:
+        -18px 0 55px
+        rgba(15, 23, 42, 0.2);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.panel-lateral.visible
+.panel-lateral-contenido {
+    transform: translateX(0);
+}
+
+.panel-lateral .modal-cabecera {
+    position: sticky;
+    top: -28px;
+    z-index: 5;
+    margin: -28px -28px 0;
+    padding: 24px 28px 18px;
+    background-color: var(--blanco);
+}
+
+.panel-lateral .detalle-oportunidad-superior {
+    grid-template-columns:
+        110px minmax(0, 1fr);
+    margin-top: 22px;
+}
+
+.panel-lateral
+.detalle-oportunidad-superior
+> div:last-child {
+    grid-column: 1 / -1;
+}
+
+.panel-lateral .modal-grid {
+    grid-template-columns: 1fr;
+}
+
+.panel-lateral .campo-completo {
+    grid-column: auto;
+}
+
+.panel-lateral .modal-acciones {
+    position: sticky;
+    bottom: -28px;
+    margin: 22px -28px -28px;
+    padding: 18px 28px;
+    background-color: var(--blanco);
+    box-shadow:
+        0 -8px 20px
+        rgba(15, 23, 42, 0.07);
+}
+
+@media (max-width: 650px) {
+
+    .panel-lateral-contenido {
+        width: 100%;
+        padding: 22px;
+    }
+
+    .panel-lateral .modal-cabecera {
+        top: -22px;
+        margin: -22px -22px 0;
+        padding: 20px 22px 16px;
+    }
+
+    .panel-lateral .modal-acciones {
+        bottom: -22px;
+        margin: 20px -22px -22px;
+        padding: 16px 22px;
+    }
+
+    .panel-lateral .detalle-oportunidad-superior {
+        grid-template-columns: 1fr;
+    }
+}
+/* ========================================
+   MÓDULO MIS PROYECTOS
+======================================== */
+
+.resumen-proyectos {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.filtros-proyectos {
+    display: grid;
+    grid-template-columns:
+        minmax(200px, 1.5fr)
+        minmax(160px, 1fr)
+        minmax(160px, 1fr)
+        auto;
+    align-items: end;
+    gap: 14px;
+}
+
+.grid-mis-proyectos {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.tarjeta-mi-proyecto {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+    background-color: var(--blanco);
+    box-shadow: var(--sombra);
+}
+
+.tarjeta-proyecto-cabecera {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.tarjeta-proyecto-cabecera h3 {
+    margin: 7px 0 0;
+    color: var(--danone-azul-oscuro);
+    font-size: 17px;
+    line-height: 1.35;
+}
+
+.rol-proyecto-colabordador {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+    padding: 11px;
+    border-radius: 10px;
+    background-color: #f9fafb;
+}
+
+.rol-proyecto-colabordador span {
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+.rol-proyecto-colabordador strong {
+    padding: 6px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+}
+
+.avance-proyecto-tarjeta {
+    margin-top: 17px;
+}
+
+.avance-proyecto-tarjeta > div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.avance-proyecto-tarjeta span {
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+.avance-proyecto-tarjeta strong {
+    color: var(--danone-azul);
+    font-size: 13px;
+}
+
+.resumen-tareas-proyecto {
+    margin-top: 12px;
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+.boton-ver-proyecto {
+    width: 100%;
+    margin-top: 17px;
+}
+
+.detalle-proyecto-resumen {
+    display: grid;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+    gap: 13px;
+    margin-top: 20px;
+}
+
+.detalle-proyecto-resumen > div {
+    padding: 14px;
+    border: 1px solid var(--borde);
+    border-radius: 11px;
+    background-color: #f9fbfd;
+}
+
+.detalle-proyecto-resumen strong {
+    display: block;
+    margin-top: 7px;
+    color: var(--danone-azul-oscuro);
+}
+
+.rol-detalle-proyecto {
+    font-size: 18px;
+}
+
+.barra-progreso-detalle {
+    height: 10px;
+    margin: 17px 0;
+}
+
+.seccion-detalle-proyecto {
+    margin-top: 23px;
+}
+
+.seccion-detalle-proyecto h3 {
+    margin: 0 0 13px;
+    color: var(--danone-azul-oscuro);
+    font-size: 17px;
+}
+
+.lista-equipo-proyecto {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 11px;
+}
+
+.miembro-equipo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 12px;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+}
+
+.avatar-equipo {
+    width: 37px;
+    height: 37px;
+    font-size: 13px;
+}
+
+.miembro-equipo strong {
+    display: block;
+    font-size: 12px;
+}
+
+.miembro-equipo span {
+    display: block;
+    margin-top: 4px;
+    color: var(--texto-secundario);
+    font-size: 10px;
+}
+
+.lista-tareas-proyecto {
+    display: grid;
+    gap: 10px;
+}
+
+.tarea-proyecto {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 13px;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.tarea-proyecto:hover {
+    border-color: var(--danone-azul-claro);
+}
+
+.tarea-proyecto input {
+    width: 17px;
+    height: 17px;
+    margin-top: 2px;
+}
+
+.tarea-proyecto strong {
+    display: block;
+    font-size: 12px;
+}
+
+.tarea-proyecto small {
+    display: block;
+    margin-top: 5px;
+    color: var(--texto-secundario);
+    font-size: 10px;
+}
+
+.tarea-completada {
+    background-color: #f6fef9;
+}
+
+.tarea-completada strong {
+    color: var(--texto-secundario);
+    text-decoration: line-through;
+}
+
+@media (max-width: 1000px) {
+
+    .resumen-proyectos {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .filtros-proyectos {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+
+    .grid-mis-proyectos,
+    .lista-equipo-proyecto {
+        grid-template-columns: 1fr;
+    }
+
+    .detalle-proyecto-resumen {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .resumen-proyectos,
+    .filtros-proyectos {
+        grid-template-columns: 1fr;
+    }
+}
+/* ========================================
+   PESTAÑAS DE OPORTUNIDADES
+======================================== */
+
+.pestanas-oportunidades {
+    display: flex;
+    gap: 8px;
+    padding: 5px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background-color: var(--blanco);
+    box-shadow: var(--sombra);
+}
+
+.pestana-oportunidad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 190px;
+    padding: 11px 17px;
+    border: none;
+    border-radius: 9px;
+    background-color: transparent;
+    color: var(--texto-secundario);
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.pestana-oportunidad:hover {
+    background-color: #f2f6fb;
+    color: var(--danone-azul);
+}
+
+.pestana-oportunidad.activa {
+    background-color: #e8f3ff;
+    color: var(--danone-azul);
+}
+
+.contador-pestana {
+    display: grid;
+    place-items: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background-color: var(--danone-azul);
+    color: var(--blanco);
+    font-size: 10px;
+}
+
+/* ========================================
+   MIS POSTULACIONES
+======================================== */
+
+.cabecera-postulaciones {
+    margin-bottom: 17px;
+}
+
+.cabecera-postulaciones h3 {
+    margin: 0;
+    color: var(--danone-azul-oscuro);
+    font-size: 21px;
+}
+
+.cabecera-postulaciones p {
+    margin: 7px 0 0;
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
+.resumen-postulaciones {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.filtros-postulaciones {
+    display: grid;
+    grid-template-columns:
+        minmax(220px, 1.5fr)
+        minmax(180px, 1fr)
+        auto;
+    align-items: end;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.estado-postulacion {
+    display: inline-block;
+    padding: 6px 9px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.estado-postulacion-pendiente {
+    background-color: #fff4e5;
+    color: #b54708;
+}
+
+.estado-postulacion-revision {
+    background-color: #eff8ff;
+    color: #175cd3;
+}
+
+.estado-postulacion-preseleccionada {
+    background-color: #f4f3ff;
+    color: #5925dc;
+}
+
+.estado-postulacion-aceptada {
+    background-color: #ecfdf3;
+    color: #027a48;
+}
+
+.estado-postulacion-rechazada {
+    background-color: #fff1f0;
+    color: #b42318;
+}
+
+.estado-postulacion-cancelada {
+    background-color: #f2f4f7;
+    color: #475467;
+}
+
+@media (max-width: 900px) {
+
+    .resumen-postulaciones {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .filtros-postulaciones {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+
+    .pestanas-oportunidades {
+        flex-direction: column;
+    }
+
+    .pestana-oportunidad {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .resumen-postulaciones,
+    .filtros-postulaciones {
+        grid-template-columns: 1fr;
+    }
+}
+/* ========================================
+   PORTAL DEL GERENTE
+======================================== */
+
+.bienvenida-gerente {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.etiqueta-dashboard {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background-color:
+        rgba(255, 255, 255, 0.15);
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.boton-blanco {
+    position: relative;
+    z-index: 1;
+    flex: 0 0 auto;
+    padding: 12px 18px;
+    border-radius: 10px;
+    background-color: var(--blanco);
+    color: var(--danone-azul);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.indicadores-gerente {
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+}
+
+.metricas-gerente {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.metrica-impacto {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    background-color: var(--blanco);
+    box-shadow: var(--sombra);
+}
+
+.metrica-icono {
+    display: grid;
+    place-items: center;
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background-color: #eaf3ff;
+    color: var(--danone-azul);
+    font-size: 21px;
+}
+
+.metrica-impacto span {
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+.metrica-impacto strong {
+    display: block;
+    margin-top: 5px;
+    color: var(--danone-azul-oscuro);
+    font-size: 24px;
+}
+
+.metrica-impacto small {
+    display: block;
+    margin-top: 4px;
+    color: var(--texto-secundario);
+    font-size: 10px;
+}
+
+.accesos-gerente {
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+}
+
+.lista-postulaciones-gerente {
+    display: grid;
+    gap: 10px;
+}
+
+.postulacion-gerente {
+    display: grid;
+    grid-template-columns:
+        auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 11px;
+    padding: 12px;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+}
+
+.postulacion-gerente-datos {
+    min-width: 0;
+}
+
+.postulacion-gerente-datos strong {
+    display: block;
+    font-size: 12px;
+}
+
+.postulacion-gerente-datos span {
+    display: block;
+    overflow: hidden;
+    margin-top: 4px;
+    color: var(--texto-secundario);
+    font-size: 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.postulacion-gerente-datos small {
+    display: block;
+    margin-top: 5px;
+    color: var(--danone-azul);
+    font-size: 10px;
+}
+
+.grid-proyectos-gerente {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.proyecto-gerente {
+    padding: 17px;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    background-color: var(--blanco);
+}
+
+.proyecto-gerente strong {
+    display: block;
+    margin-top: 6px;
+    color: var(--danone-azul-oscuro);
+    font-size: 14px;
+}
+
+.proyecto-gerente small {
+    display: block;
+    margin-top: 5px;
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+@media (max-width: 1100px) {
+
+    .indicadores-gerente,
+    .metricas-gerente,
+    .accesos-gerente {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+
+    .bienvenida-gerente {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .indicadores-gerente,
+    .metricas-gerente,
+    .accesos-gerente,
+    .grid-proyectos-gerente {
+        grid-template-columns: 1fr;
+    }
+}
+/* ========================================
+   REVISIÓN DE IDEAS
+======================================== */
+
+.resumen-revision-ideas {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.filtros-revision-ideas {
+    display: grid;
+    grid-template-columns:
+        minmax(220px, 1.5fr)
+        minmax(180px, 1fr)
+        minmax(180px, 1fr)
+        auto;
+    align-items: end;
+    gap: 14px;
+}
+
+.detalle-revision-idea-superior {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto;
+    gap: 14px;
+    margin-top: 20px;
+    padding: 16px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background-color: #f8fbff;
+}
+
+.detalle-revision-idea-superior strong {
+    display: block;
+    margin-top: 7px;
+    color: var(--danone-azul-oscuro);
+    font-size: 15px;
+}
+
+.seccion-decision-idea,
+.seccion-convertir-oportunidad {
+    margin-top: 24px;
+    padding: 18px;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    background-color: var(--blanco);
+}
+
+.seccion-decision-idea h3,
+.seccion-convertir-oportunidad h3 {
+    margin: 0 0 15px;
+    color: var(--danone-azul-oscuro);
+    font-size: 17px;
+}
+
+.seccion-convertir-oportunidad p {
+    margin: -7px 0 18px;
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.acciones-decision-idea {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.boton-solicitar-informacion,
+.boton-rechazar-idea,
+.boton-aprobar-idea {
+    padding: 11px 15px;
+    border-radius: 9px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.boton-solicitar-informacion {
+    border: 1px solid #f5c16c;
+    background-color: #fff8e8;
+    color: #a15c00;
+}
+
+.boton-rechazar-idea {
+    border: 1px solid #fecdca;
+    background-color: #fff1f0;
+    color: #b42318;
+}
+
+.boton-aprobar-idea {
+    border: 1px solid #75e0a7;
+    background-color: #ecfdf3;
+    color: #027a48;
+}
+
+.boton-publicar-oportunidad {
+    width: 100%;
+    margin-top: 17px;
+}
+
+.estado-informacion {
+    background-color: #fff8e8;
+    color: #a15c00;
+}
+
+@media (max-width: 950px) {
+
+    .resumen-revision-ideas {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .filtros-revision-ideas {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+
+    .resumen-revision-ideas,
+    .filtros-revision-ideas,
+    .detalle-revision-idea-superior {
+        grid-template-columns: 1fr;
+    }
+
+    .acciones-decision-idea {
+        flex-direction: column;
+    }
+
+    .acciones-decision-idea button {
+        width: 100%;
+    }
+}
+/* ========================================
+   REVISIÓN DE IDEAS - VERSIÓN ACTUALIZADA
+======================================== */
+
+.resumen-revision-ideas {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.filtros-revision-ideas {
+    display: grid;
+    grid-template-columns:
+        minmax(220px, 1.5fr)
+        minmax(180px, 1fr)
+        minmax(180px, 1fr)
+        auto;
+    align-items: end;
+    gap: 14px;
+}
+
+.detalle-revision-idea-superior {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(150px, auto);
+    gap: 14px;
+    margin-top: 20px;
+    padding: 16px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background-color: #f8fbff;
+}
+
+.detalle-revision-idea-superior strong {
+    display: block;
+    margin-top: 7px;
+    color: var(--danone-azul-oscuro);
+    font-size: 15px;
+}
+
+.seccion-decision-idea,
+.seccion-convertir-oportunidad,
+.seccion-preguntas-guardadas {
+    margin-top: 24px;
+    padding: 18px;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    background-color: var(--blanco);
+}
+
+.seccion-decision-idea h3,
+.seccion-convertir-oportunidad h3,
+.seccion-preguntas-guardadas h3 {
+    margin: 0 0 15px;
+    color: var(--danone-azul-oscuro);
+    font-size: 17px;
+}
+
+.seccion-convertir-oportunidad > p {
+    margin: -7px 0 18px;
+    color: var(--texto-secundario);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.seccion-preguntas-guardadas {
+    border-color: #b2ddff;
+    background-color: #f5faff;
+}
+
+.seccion-preguntas-guardadas
+.detalle-ticket {
+    margin-top: 12px;
+}
+
+.acciones-decision-idea {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.boton-solicitar-informacion,
+.boton-rechazar-idea,
+.boton-aprobar-idea {
+    padding: 11px 15px;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.boton-solicitar-informacion {
+    border: 1px solid #f5c16c;
+    background-color: #fff8e8;
+    color: #a15c00;
+}
+
+.boton-solicitar-informacion:hover {
+    background-color: #fff1cc;
+}
+
+.boton-rechazar-idea {
+    border: 1px solid #fecdca;
+    background-color: #fff1f0;
+    color: #b42318;
+}
+
+.boton-rechazar-idea:hover {
+    background-color: #ffe4e1;
+}
+
+.boton-aprobar-idea {
+    border: 1px solid #75e0a7;
+    background-color: #ecfdf3;
+    color: #027a48;
+}
+
+.boton-aprobar-idea:hover {
+    background-color: #d8fbe6;
+}
+
+.boton-publicar-oportunidad {
+    width: 100%;
+    margin-top: 17px;
+}
+
+.estado-informacion {
+    background-color: #fff8e8;
+    color: #a15c00;
+}
+
+.estado-respuesta {
+    background-color: #f4f3ff;
+    color: #5925dc;
+}
+
+/* ========================================
+   PANEL DE SOLICITUD DE INFORMACIÓN
+======================================== */
+
+.resumen-solicitud-informacion {
+    margin-top: 20px;
+    padding: 17px;
+    border: 1px solid #b2ddff;
+    border-radius: 12px;
+    background-color: #eff8ff;
+}
+
+.resumen-solicitud-informacion span {
+    display: block;
+    color: var(--texto-secundario);
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.resumen-solicitud-informacion strong {
+    display: block;
+    margin-top: 7px;
+    color: var(--danone-azul-oscuro);
+    font-size: 16px;
+}
+
+.resumen-solicitud-informacion small {
+    display: block;
+    margin-top: 6px;
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.seccion-preguntas-gerente {
+    margin-top: 22px;
+}
+
+.seccion-preguntas-gerente h3 {
+    margin: 0;
+    color: var(--danone-azul-oscuro);
+    font-size: 18px;
+}
+
+.seccion-preguntas-gerente > p {
+    margin: 7px 0 18px;
+    color: var(--texto-secundario);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.seccion-preguntas-gerente textarea {
+    min-height: 230px;
+    resize: vertical;
+}
+
+@media (max-width: 950px) {
+
+    .resumen-revision-ideas {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .filtros-revision-ideas {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+
+    .resumen-revision-ideas,
+    .filtros-revision-ideas,
+    .detalle-revision-idea-superior {
+        grid-template-columns: 1fr;
+    }
+
+    .acciones-decision-idea {
+        flex-direction: column;
+    }
+
+    .acciones-decision-idea button {
+        width: 100%;
+    }
+}
+/* ========================================
+   MIS IDEAS - Colaborador
+======================================== */
+
+.resumen-ideas-colaborador {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.filtros-ideas-colaborador {
+    display: grid;
+    grid-template-columns:
+        minmax(230px, 1.5fr)
+        minmax(190px, 1fr)
+        auto;
+    align-items: end;
+    gap: 14px;
+}
+
+.boton-cerrar-formulario {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    background-color: #f2f4f7;
+    color: #475467;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.aviso-preguntas-colaborador {
+    display: grid;
+    grid-template-columns:
+        auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 16px;
+    padding: 18px;
+    border: 1px solid #f5c16c;
+    border-radius: 14px;
+    background-color: #fff8e8;
+}
+
+.aviso-preguntas-icono {
+    display: grid;
+    place-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background-color: #ffe7b2;
+    color: #a15c00;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.aviso-preguntas-colaborador strong {
+    color: #7a4500;
+    font-size: 14px;
+}
+
+.aviso-preguntas-colaborador p {
+    margin: 5px 0 0;
+    color: #7a5b32;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.fila-requiere-respuesta {
+    background-color: #fffdf7;
+}
+
+.boton-responder-idea {
+    border-color: #f5c16c;
+    background-color: #fff8e8;
+    color: #a15c00;
+}
+
+/* ========================================
+   PANEL DE DETALLE DE IDEA
+======================================== */
+
+.detalle-idea-colaborador-superior {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(150px, auto);
+    gap: 14px;
+    margin-top: 20px;
+    padding: 16px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background-color: #f8fbff;
+}
+
+.detalle-idea-colaborador-superior strong {
+    display: block;
+    margin-top: 7px;
+    color: var(--danone-azul-oscuro);
+    font-size: 15px;
+}
+
+.titulo-bloque-panel {
+    margin-top: 23px;
+}
+
+.titulo-bloque-panel h3 {
+    margin: 0;
+    color: var(--danone-azul-oscuro);
+    font-size: 17px;
+}
+
+.titulo-bloque-panel p {
+    margin: 6px 0 0;
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+/* ========================================
+   PREGUNTAS DEL GERENTE
+======================================== */
+
+.seccion-preguntas-colaborador {
+    margin-top: 25px;
+    padding: 19px;
+    border: 1px solid #f5c16c;
+    border-radius: 14px;
+    background-color: #fffaf0;
+}
+
+.encabezado-preguntas-colaborador {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.encabezado-preguntas-colaborador h3 {
+    margin: 5px 0 0;
+    color: #7a4500;
+    font-size: 18px;
+}
+
+.fecha-limite-colaborador {
+    padding: 7px 10px;
+    border-radius: 999px;
+    background-color: #ffe7b2;
+    color: #8a4e00;
+    font-size: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.preguntas-recibidas-colaborador {
+    margin-top: 16px;
+    padding: 15px;
+    border: 1px solid #f5d69b;
+    border-radius: 11px;
+    background-color: var(--blanco);
+}
+
+.preguntas-recibidas-colaborador span {
+    display: block;
+    margin-bottom: 8px;
+    color: #8a4e00;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.preguntas-recibidas-colaborador p {
+    margin: 0;
+    color: #344054;
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+
+.seccion-preguntas-colaborador .campo {
+    margin-top: 17px;
+}
+
+.seccion-preguntas-colaborador textarea {
+    min-height: 220px;
+    resize: vertical;
+}
+
+.boton-enviar-respuesta {
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* ========================================
+   RESPUESTA YA ENVIADA
+======================================== */
+
+.seccion-respuesta-enviada {
+    margin-top: 25px;
+    padding: 19px;
+    border: 1px solid #75e0a7;
+    border-radius: 14px;
+    background-color: #f0fdf4;
+}
+
+.seccion-respuesta-enviada h3 {
+    margin: 6px 0 15px;
+    color: #027a48;
+    font-size: 18px;
+}
+
+.seccion-respuesta-enviada small {
+    display: block;
+    margin-top: 12px;
+    color: #667085;
+    font-size: 11px;
+}
+
+/* ========================================
+   COMENTARIO DEL GERENTE
+======================================== */
+
+.seccion-comentario-gerente-colaborador {
+    margin-top: 24px;
+    padding: 18px;
+    border: 1px solid #b2ddff;
+    border-radius: 13px;
+    background-color: #eff8ff;
+}
+
+.seccion-comentario-gerente-colaborador h3 {
+    margin: 0;
+    color: var(--danone-azul-oscuro);
+    font-size: 17px;
+}
+
+.seccion-comentario-gerente-colaborador p {
+    margin: 10px 0 0;
+    color: #344054;
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+@media (max-width: 900px) {
+
+    .resumen-ideas-colaborador {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .filtros-ideas-colaborador {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+
+    .resumen-ideas-colaborador,
+    .filtros-ideas-colaborador,
+    .detalle-idea-colaborador-superior {
+        grid-template-columns: 1fr;
+    }
+
+    .aviso-preguntas-colaborador {
+        grid-template-columns: 1fr;
+    }
+
+    .encabezado-preguntas-colaborador {
+        flex-direction: column;
+    }
+}
+/* ========================================
+   POSTULACIONES DEL GERENTE
+======================================== */
+
+.resumen-postulaciones-gerente {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.filtros-postulaciones-gerente {
+    display: grid;
+    grid-template-columns:
+        minmax(190px, 1.4fr)
+        minmax(180px, 1fr)
+        minmax(160px, 1fr)
+        minmax(150px, 1fr)
+        auto;
+    align-items: end;
+    gap: 13px;
+}
+
+.correo-tabla {
+    display: block;
+    margin-top: 4px;
+    color: var(--texto-secundario);
+    font-size: 10px;
+}
+
+/* ========================================
+   RESUMEN DEL CANDIDATO
+======================================== */
+
+.resumen-candidato-postulacion {
+    display: grid;
+    grid-template-columns:
+        auto minmax(0, 1fr)
+        minmax(150px, auto);
+    align-items: center;
+    gap: 17px;
+    margin-top: 20px;
+    padding: 17px;
+    border: 1px solid #b2ddff;
+    border-radius: 13px;
+    background-color: #f5faff;
+}
+
+.resumen-candidato-postulacion strong {
+    display: block;
+    margin-top: 7px;
+    color: var(--danone-azul-oscuro);
+    font-size: 14px;
+}
+
+.compatibilidad-candidato {
+    display: grid;
+    place-items: center;
+    width: 91px;
+    height: 91px;
+    border-radius: 50%;
+    background-color: #e8f3ff;
+    color: var(--danone-azul);
+}
+
+.compatibilidad-candidato strong {
+    margin: 0;
+    color: var(--danone-azul);
+    font-size: 23px;
+}
+
+.compatibilidad-candidato span {
+    margin-top: 2px;
+    font-size: 9px;
+}
+
+/* ========================================
+   ESTADO DEL EQUIPO
+======================================== */
+
+.seccion-equipo-oportunidad-gerente,
+.seccion-habilidades-candidato,
+.seccion-decision-postulacion {
+    margin-top: 23px;
+}
+
+.seccion-equipo-oportunidad-gerente h3,
+.seccion-habilidades-candidato h3,
+.seccion-decision-postulacion h3 {
+    margin: 0 0 14px;
+    color: var(--danone-azul-oscuro);
+    font-size: 17px;
+}
+
+.estado-equipo-gerente {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.estado-equipo-gerente article {
+    padding: 15px;
+    border: 1px solid var(--borde);
+    border-radius: 11px;
+    background-color: #f9fbfd;
+}
+
+.estado-equipo-gerente span {
+    display: block;
+    color: var(--texto-secundario);
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.estado-equipo-gerente strong {
+    display: block;
+    margin-top: 7px;
+    color: var(--danone-azul-oscuro);
+    font-size: 14px;
+}
+
+/* ========================================
+   HABILIDADES DEL CANDIDATO
+======================================== */
+
+.lista-habilidades-candidato {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.habilidad-candidato {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 13px;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    background-color: var(--blanco);
+}
+
+.habilidad-candidato strong {
+    display: block;
+    color: var(--danone-azul-oscuro);
+    font-size: 12px;
+}
+
+.habilidad-candidato span {
+    display: block;
+    margin-top: 4px;
+    color: var(--texto-secundario);
+    font-size: 10px;
+}
+
+.habilidad-candidato small {
+    padding: 5px 8px;
+    border-radius: 999px;
+    background-color: #eff8ff;
+    color: #175cd3;
+    font-size: 9px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* ========================================
+   DECISIÓN DE POSTULACIÓN
+======================================== */
+
+.seccion-decision-postulacion {
+    padding: 18px;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    background-color: #f9fbfd;
+}
+
+.boton-guardar-evaluacion {
+    width: 100%;
+    margin-top: 16px;
+}
+
+@media (max-width: 1100px) {
+
+    .resumen-postulaciones-gerente {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .filtros-postulaciones-gerente {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+
+    .resumen-postulaciones-gerente,
+    .filtros-postulaciones-gerente,
+    .resumen-candidato-postulacion,
+    .estado-equipo-gerente,
+    .lista-habilidades-candidato {
+        grid-template-columns: 1fr;
+    }
+
+    .compatibilidad-candidato {
+        width: 75px;
+        height: 75px;
+    }
+}
+/* ========================================
+   PERFIL DEL COLABORADOR
+======================================== */
+
+.perfil-resumen {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 22px;
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+    background:
+        linear-gradient(
+            135deg,
+            #f6fbff,
+            #ffffff
+        );
+    box-shadow: var(--sombra);
+}
+
+.avatar-perfil-grande {
+    flex: 0 0 82px;
+    width: 82px;
+    height: 82px;
+    font-size: 27px;
+}
+
+.perfil-resumen-datos h2 {
+    margin: 0;
+    color: var(--danone-azul-oscuro);
+    font-size: 25px;
+}
+
+.perfil-resumen-datos p {
+    margin: 7px 0 10px;
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
+.etiqueta-rol-perfil {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background-color: #e8f3ff;
+    color: var(--danone-azul);
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.formulario-perfil input[readonly] {
+    cursor: not-allowed;
+    background-color: #f2f4f7;
+    color: #667085;
+}
+
+.resumen-habilidades-perfil {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.resumen-habilidades-perfil article {
+    padding: 17px;
+    border: 1px solid var(--borde);
+    border-radius: 11px;
+    background-color: #f9fbfd;
+}
+
+.resumen-habilidades-perfil span {
+    display: block;
+    color: var(--texto-secundario);
+    font-size: 10px;
+}
+
+.resumen-habilidades-perfil strong {
+    display: block;
+    margin-top: 8px;
+    color: var(--danone-azul-oscuro);
+    font-size: 21px;
+}
+
+@media (max-width: 900px) {
+
+    .resumen-habilidades-perfil {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+
+    .perfil-resumen {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .resumen-habilidades-perfil {
+        grid-template-columns: 1fr;
+    }
+}
+/*
+==================================================
+LOGO OCTOFLOW
+==================================================
+*/
+
+.marca-octoflow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.marca-octoflow h1 {
+    margin: 0;
+}
+
+.logo-octoflow {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    flex-shrink: 0;
+}

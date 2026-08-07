@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>OctoFlow | Mi perfil</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
+
+</head>
+
+<body data-portal="colaborador">
+
+    <div class="aplicacion">
+
+        <!-- MENÚ LATERAL -->
+
+        <aside class="menu-lateral">
+
+            <div class="marca">
+
+                <img
+                    class="logo-danone-menu"
+                    src="../img/DANONE_LOGO_HORIZONTAL.png"
+                    alt="Logo de Danone"
+                >
+
+                <h1>OctoFlow</h1>
+
+                <p>
+                    Portal del Colaborador
+                </p>
+
+            </div>
+
+            <nav class="navegacion">
+
+                <a
+                    class="enlace-menu"
+                    href="colaboradores.html"
+                >
+                    <span class="icono-menu">⌂</span>
+                    Inicio
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="ideas.html"
+                >
+                    <span class="icono-menu">💡</span>
+                    Mis ideas
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="oportunidades.html"
+                >
+                    <span class="icono-menu">🚀</span>
+                    Oportunidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="proyectos.html"
+                >
+                    <span class="icono-menu">▣</span>
+                    Mis proyectos
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="habilidades.html"
+                >
+                    <span class="icono-menu">◉</span>
+                    Habilidades
+                </a>
+
+                <a
+                    class="enlace-menu activo"
+                    href="perfil.html"
+                >
+                    <span class="icono-menu">○</span>
+                    Mi perfil
+                </a>
+
+            </nav>
+
+            <div class="usuario-menu">
+
+                <strong data-nombre-usuario>
+                    Usuario
+                </strong>
+
+                <div
+                    class="correo-menu"
+                    data-correo-usuario
+                >
+                    usuario@danone.com
+                </div>
+
+                <button
+                    class="boton-salir"
+                    type="button"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- CONTENIDO -->
+
+        <section class="contenido">
+
+            <header class="encabezado">
+
+                <div class="titulo-encabezado">
+
+                    <h2>
+                        Mi perfil
+                    </h2>
+
+                    <p>
+                        Información personal
+                    </p>
+
+                </div>
+
+                <div class="perfil-superior">
+
+                    <div
+                        class="avatar"
+                        data-avatar-usuario
+                    >
+                        U
+                    </div>
+
+                    <div class="datos-usuario">
+
+                        <strong data-nombre-usuario>
+                            Usuario
+                        </strong>
+
+                        <span data-rol-usuario>
+                            Colaborador
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main class="principal">
+
+                <div class="contenedor-pagina">
+
+                    <!-- CABECERA -->
+
+                    <section class="cabecera-pagina">
+
+                        <div>
+
+                            <h2>
+                                Información personal
+                            </h2>
+
+                            <p>
+                                Consulta los datos asociados a tu cuenta
+                                de OctoFlow.
+                            </p>
+
+                        </div>
+
+                        <a
+                            class="boton-secundario"
+                            href="habilidades.html"
+                        >
+                            Editar habilidades
+                        </a>
+
+                    </section>
+
+                    <!-- RESUMEN DEL COLABORADOR -->
+
+                    <section class="perfil-resumen">
+
+                        <div
+                            class="avatar avatar-perfil-grande"
+                            data-avatar-usuario
+                        >
+                            U
+                        </div>
+
+                        <div class="perfil-resumen-datos">
+
+                            <h2 data-nombre-usuario>
+                                Usuario
+                            </h2>
+
+                            <p data-correo-usuario>
+                                usuario@danone.com
+                            </p>
+
+                            <span
+                                class="etiqueta-rol-perfil"
+                                data-rol-usuario
+                            >
+                                Colaborador
+                            </span>
+
+                        </div>
+
+                    </section>
+
+                    <!-- INFORMACIÓN PERSONAL -->
+
+                    <section class="panel formulario-perfil">
+
+                        <div class="panel-cabecera">
+
+                            <div>
+
+                                <h3>
+                                    Datos personales
+                                </h3>
+
+                                <p class="texto-ayuda">
+                                    Estos datos provienen de la base de
+                                    usuarios y no pueden modificarse aquí.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="formulario">
+
+                            <div class="campo">
+
+                                <label for="perfilNombre">
+                                    Nombre
+                                </label>
+
+                                <input
+                                    id="perfilNombre"
+                                    type="text"
+                                    readonly
+                                >
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="perfilApellido">
+                                    Apellido
+                                </label>
+
+                                <input
+                                    id="perfilApellido"
+                                    type="text"
+                                    readonly
+                                >
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="perfilCorreo">
+                                    Correo corporativo
+                                </label>
+
+                                <input
+                                    id="perfilCorreo"
+                                    type="email"
+                                    readonly
+                                >
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="perfilRol">
+                                    Rol
+                                </label>
+
+                                <input
+                                    id="perfilRol"
+                                    type="text"
+                                    readonly
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <!-- RESUMEN DE HABILIDADES -->
+
+                    <section class="panel">
+
+                        <div class="panel-cabecera">
+
+                            <div>
+
+                                <h3>
+                                    Resumen de habilidades
+                                </h3>
+
+                                <p class="texto-ayuda">
+                                    Información tomada del módulo de
+                                    habilidades.
+                                </p>
+
+                            </div>
+
+                            <a
+                                class="enlace-ver-todo"
+                                href="habilidades.html"
+                            >
+                                Administrar habilidades
+                            </a>
+
+                        </div>
+
+                        <section class="resumen-habilidades-perfil">
+
+                            <article>
+
+                                <span>
+                                    Herramientas registradas
+                                </span>
+
+                                <strong id="perfilTotalHabilidades">
+                                    0
+                                </strong>
+
+                            </article>
+
+                            <article>
+
+                                <span>
+                                    Nivel avanzado o experto
+                                </span>
+
+                                <strong id="perfilHabilidadesAvanzadas">
+                                    0
+                                </strong>
+
+                            </article>
+
+                            <article>
+
+                                <span>
+                                    Intereses de aprendizaje
+                                </span>
+
+                                <strong id="perfilInteresesAprendizaje">
+                                    0
+                                </strong>
+
+                            </article>
+
+                            <article>
+
+                                <span>
+                                    Disponibilidad semanal
+                                </span>
+
+                                <strong id="perfilDisponibilidad">
+                                    —
+                                </strong>
+
+                            </article>
+
+                        </section>
+
+                    </section>
+
+                </div>
+
+            </main>
+
+        </section>
+
+    </div>
+
+    <div
+        id="notificacion"
+        class="notificacion"
+    ></div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/perfil.js"></script>
+
+</body>
+
+</html>

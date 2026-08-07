@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        OctoFlow | Gestión de oportunidades
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
+
+    <style>
+
+        /*
+        ==============================================
+        CABECERA DEL MÓDULO
+        ==============================================
+        */
+
+        .cabecera-gestion-oportunidades {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .cabecera-gestion-oportunidades h2 {
+            margin: 0;
+            color: #003b71;
+        }
+
+        .cabecera-gestion-oportunidades p {
+            margin: 8px 0 0;
+            color: #667085;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+
+        /*
+        ==============================================
+        RESUMEN
+        ==============================================
+        */
+
+        .resumen-oportunidades-gerente {
+            display: grid;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .tarjeta-resumen-oportunidad {
+            padding: 19px;
+            border: 1px solid #d8e3ef;
+            border-radius: 15px;
+            background-color: #ffffff;
+            box-shadow:
+                0 10px 26px
+                rgba(15, 50, 85, 0.07);
+        }
+
+        .tarjeta-resumen-oportunidad span {
+            display: block;
+            color: #667085;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .tarjeta-resumen-oportunidad strong {
+            display: block;
+            margin-top: 10px;
+            color: #003b71;
+            font-size: 28px;
+        }
+
+        .tarjeta-resumen-oportunidad small {
+            display: block;
+            margin-top: 6px;
+            color: #98a2b3;
+            font-size: 10px;
+        }
+
+
+        /*
+        ==============================================
+        PESTAÑAS
+        ==============================================
+        */
+
+        .pestanas-oportunidades-gerente {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 24px;
+        }
+
+        .pestana-oportunidad-gerente {
+            padding: 10px 16px;
+            border: 1px solid #d8e3ef;
+            border-radius: 9px;
+            background-color: #ffffff;
+            color: #475467;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .pestana-oportunidad-gerente.activa {
+            border-color: #005eb8;
+            background-color: #e8f3ff;
+            color: #005eb8;
+        }
+
+        .contador-pestana-oportunidad {
+            display: inline-grid;
+            place-items: center;
+            min-width: 22px;
+            height: 22px;
+            margin-left: 7px;
+            padding: 0 6px;
+            border-radius: 999px;
+            background-color: #f2f4f7;
+            color: #475467;
+            font-size: 9px;
+        }
+
+        .pestana-oportunidad-gerente.activa
+        .contador-pestana-oportunidad {
+            background-color: #ffffff;
+            color: #005eb8;
+        }
+
+
+        /*
+        ==============================================
+        FILTROS
+        ==============================================
+        */
+
+        .filtros-oportunidades-gerente {
+            display: grid;
+            grid-template-columns:
+                minmax(220px, 1.5fr)
+                minmax(160px, 1fr)
+                minmax(160px, 1fr)
+                minmax(160px, 1fr)
+                auto;
+            align-items: end;
+            gap: 13px;
+            margin-top: 20px;
+        }
+
+
+        /*
+        ==============================================
+        TARJETAS
+        ==============================================
+        */
+
+        .grid-oportunidades-gerente {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .tarjeta-oportunidad-gerente {
+            padding: 21px;
+            border: 1px solid #d8e3ef;
+            border-radius: 15px;
+            background-color: #ffffff;
+            box-shadow:
+                0 12px 30px
+                rgba(15, 50, 85, 0.08);
+        }
+
+        .tarjeta-oportunidad-gerente.borrador {
+            border-style: dashed;
+            background-color: #fafafa;
+        }
+
+        .tarjeta-oportunidad-gerente.pausada {
+            border-color: #fdb022;
+            background-color: #fffcf5;
+        }
+
+        .tarjeta-oportunidad-gerente.cerrada {
+            border-color: #d0d5dd;
+            background-color: #f9fafb;
+        }
+
+        .cabecera-tarjeta-oportunidad {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .cabecera-tarjeta-oportunidad h3 {
+            margin: 7px 0 0;
+            color: #003b71;
+            font-size: 18px;
+        }
+
+        .codigo-oportunidad-gerente {
+            color: #667085;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .estado-oportunidad-gerente {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background-color: #dcfae6;
+            color: #067647;
+            font-size: 9px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .estado-oportunidad-gerente.borrador {
+            background-color: #f2f4f7;
+            color: #475467;
+        }
+
+        .estado-oportunidad-gerente.pausada {
+            background-color: #fef0c7;
+            color: #b54708;
+        }
+
+        .estado-oportunidad-gerente.cerrada {
+            background-color: #e4e7ec;
+            color: #344054;
+        }
+
+        .meta-oportunidad-gerente {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .meta-oportunidad-gerente span {
+            padding: 6px 9px;
+            border-radius: 999px;
+            background-color: #f2f4f7;
+            color: #475467;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .descripcion-oportunidad-gerente {
+            margin: 15px 0 0;
+            color: #475467;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .herramientas-oportunidad-gerente {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 14px;
+        }
+
+        .herramientas-oportunidad-gerente span {
+            padding: 5px 9px;
+            border: 1px solid #b2ddff;
+            border-radius: 999px;
+            background-color: #eff8ff;
+            color: #005eb8;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .vacantes-oportunidad-gerente {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+            gap: 9px;
+            margin-top: 16px;
+        }
+
+        .vacante-oportunidad {
+            padding: 11px;
+            border: 1px solid #e4e7ec;
+            border-radius: 10px;
+            background-color: #f9fafb;
+        }
+
+        .vacante-oportunidad span {
+            display: block;
+            color: #667085;
+            font-size: 9px;
+        }
+
+        .vacante-oportunidad strong {
+            display: block;
+            margin-top: 6px;
+            color: #003b71;
+            font-size: 12px;
+        }
+
+        .resumen-postulaciones-oportunidad {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 16px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background-color: #f8fbff;
+        }
+
+        .resumen-postulaciones-oportunidad span {
+            color: #667085;
+            font-size: 10px;
+        }
+
+        .resumen-postulaciones-oportunidad strong {
+            color: #005eb8;
+            font-size: 13px;
+        }
+
+        .acciones-oportunidad-gerente {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 17px;
+        }
+
+        .acciones-oportunidad-gerente button,
+        .acciones-oportunidad-gerente a {
+            padding: 8px 11px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .boton-editar-oportunidad {
+            border: 1px solid #b2ddff;
+            background-color: #eff8ff;
+            color: #005eb8;
+        }
+
+        .boton-publicar-oportunidad {
+            border: 1px solid #abefc6;
+            background-color: #ecfdf3;
+            color: #067647;
+        }
+
+        .boton-pausar-oportunidad {
+            border: 1px solid #fedf89;
+            background-color: #fffaeb;
+            color: #b54708;
+        }
+
+        .boton-cerrar-oportunidad {
+            border: 1px solid #d0d5dd;
+            background-color: #f9fafb;
+            color: #344054;
+        }
+
+        .boton-eliminar-oportunidad {
+            border: 1px solid #fecdca;
+            background-color: #fff1f0;
+            color: #b42318;
+        }
+
+        .boton-postulaciones-oportunidad {
+            border: 1px solid #c7d7fe;
+            background-color: #eef4ff;
+            color: #3538cd;
+        }
+
+
+        /*
+        ==============================================
+        PANEL LATERAL
+        ==============================================
+        */
+
+        .panel-oportunidad-gerente {
+            position: fixed;
+            inset: 0;
+            z-index: 1600;
+            display: none;
+            justify-content: flex-end;
+            background-color:
+                rgba(15, 23, 42, 0.45);
+        }
+
+        .panel-oportunidad-gerente.visible {
+            display: flex;
+        }
+
+        .panel-oportunidad-contenido {
+            width: min(760px, 100%);
+            height: 100%;
+            overflow-y: auto;
+            padding: 28px;
+            background-color: #ffffff;
+            box-shadow:
+                -20px 0 45px
+                rgba(15, 23, 42, 0.2);
+        }
+
+        .cabecera-panel-oportunidad {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .cabecera-panel-oportunidad h2 {
+            margin: 8px 0 0;
+            color: #003b71;
+        }
+
+        .etiqueta-panel-oportunidad {
+            color: #005eb8;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .cerrar-panel-oportunidad {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #d8e3ef;
+            border-radius: 50%;
+            background-color: #ffffff;
+            color: #344054;
+            font-size: 23px;
+            cursor: pointer;
+        }
+
+
+        /*
+        ==============================================
+        FORMULARIO
+        ==============================================
+        */
+
+        .formulario-oportunidad-gerente {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .campo-oportunidad {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .campo-oportunidad label {
+            color: #344054;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .campo-oportunidad input,
+        .campo-oportunidad select,
+        .campo-oportunidad textarea {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #d0d5dd;
+            border-radius: 9px;
+            background-color: #ffffff;
+            color: #344054;
+            font: inherit;
+            font-size: 12px;
+            box-sizing: border-box;
+        }
+
+        .campo-oportunidad textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .campo-oportunidad-completo {
+            grid-column: 1 / -1;
+        }
+
+        .grupo-vacantes-formulario {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            grid-column: 1 / -1;
+        }
+
+        .texto-ayuda-oportunidad {
+            margin: 5px 0 0;
+            color: #667085;
+            font-size: 9px;
+            line-height: 1.5;
+        }
+
+        .mensaje-oportunidad-gerente {
+            display: none;
+            grid-column: 1 / -1;
+            padding: 11px 13px;
+            border-radius: 9px;
+            font-size: 11px;
+        }
+
+        .mensaje-oportunidad-gerente.error {
+            display: block;
+            border: 1px solid #fecdca;
+            background-color: #fff1f0;
+            color: #b42318;
+        }
+
+        .mensaje-oportunidad-gerente.exito {
+            display: block;
+            border: 1px solid #abefc6;
+            background-color: #ecfdf3;
+            color: #067647;
+        }
+
+        .acciones-panel-oportunidad {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e4e7ec;
+        }
+
+
+        /*
+        ==============================================
+        IDEAS APROBADAS
+        ==============================================
+        */
+
+        .idea-origen-resumen {
+            display: none;
+            grid-column: 1 / -1;
+            padding: 14px;
+            border: 1px solid #b2ddff;
+            border-radius: 11px;
+            background-color: #f5fbff;
+        }
+
+        .idea-origen-resumen.visible {
+            display: block;
+        }
+
+        .idea-origen-resumen strong {
+            display: block;
+            color: #003b71;
+            font-size: 12px;
+        }
+
+        .idea-origen-resumen p {
+            margin: 7px 0 0;
+            color: #475467;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+
+        /*
+        ==============================================
+        RESPONSIVE
+        ==============================================
+        */
+
+        @media (max-width: 1100px) {
+
+            .resumen-oportunidades-gerente {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .grid-oportunidades-gerente {
+                grid-template-columns: 1fr;
+            }
+
+            .filtros-oportunidades-gerente {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .cabecera-gestion-oportunidades {
+                flex-direction: column;
+            }
+
+            .resumen-oportunidades-gerente,
+            .filtros-oportunidades-gerente,
+            .formulario-oportunidad-gerente,
+            .grupo-vacantes-formulario,
+            .vacantes-oportunidad-gerente {
+                grid-template-columns: 1fr;
+            }
+
+            .campo-oportunidad-completo,
+            .grupo-vacantes-formulario {
+                grid-column: auto;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body data-portal="gerente">
+
+    <div class="aplicacion">
+
+        <!-- MENÚ LATERAL -->
+
+        <aside class="menu-lateral">
+
+            <div class="marca">
+
+                <img
+                    class="logo-danone-menu"
+                    src="../img/DANONE_LOGO_HORIZONTAL.png"
+                    alt="Logo de Danone"
+                >
+
+                <h1>
+                    OctoFlow
+                </h1>
+
+                <p>
+                    Portal del Gerente
+                </p>
+
+            </div>
+
+            <nav class="navegacion">
+
+                <a
+                    class="enlace-menu"
+                    href="gerentes.html"
+                >
+                    <span class="icono-menu">⌂</span>
+                    Dashboard
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="revision-ideas.html"
+                >
+                    <span class="icono-menu">💡</span>
+                    Revisar ideas
+                </a>
+
+                <a
+                    class="enlace-menu activo"
+                    href="gestion-oportunidades.html"
+                >
+                    <span class="icono-menu">🚀</span>
+                    Oportunidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="postulaciones-gerente.html"
+                >
+                    <span class="icono-menu">👥</span>
+                    Postulaciones
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="proyectos-gerente.html"
+                >
+                    <span class="icono-menu">▣</span>
+                    Proyectos
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="talento.html"
+                >
+                    <span class="icono-menu">◉</span>
+                    Talento
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="metricas.html"
+                >
+                    <span class="icono-menu">▥</span>
+                    Métricas
+                </a>
+
+            </nav>
+
+            <div class="usuario-menu">
+
+                <strong data-nombre-usuario>
+                    Gerente
+                </strong>
+
+                <div
+                    class="correo-menu"
+                    data-correo-usuario
+                >
+                    gerente@danone.com
+                </div>
+
+                <button
+                    class="boton-salir"
+                    type="button"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- CONTENIDO -->
+
+        <section class="contenido">
+
+            <header class="encabezado">
+
+                <div class="titulo-encabezado">
+
+                    <h2>
+                        Gestión de oportunidades
+                    </h2>
+
+                    <p>
+                        Publica convocatorias y forma equipos Quick Win
+                    </p>
+
+                </div>
+
+                <div class="perfil-superior">
+
+                    <button
+                        class="boton-notificaciones"
+                        type="button"
+                        aria-label="Notificaciones"
+                    >
+                        🔔
+                    </button>
+
+                    <div
+                        class="avatar"
+                        data-avatar-usuario
+                    >
+                        G
+                    </div>
+
+                    <div class="datos-usuario">
+
+                        <strong data-nombre-usuario>
+                            Gerente
+                        </strong>
+
+                        <span data-rol-usuario>
+                            Gerente
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <main class="principal">
+
+                <div class="contenedor-pagina">
+
+                    <section class="cabecera-gestion-oportunidades">
+
+                        <div>
+
+                            <h2>
+                                Oportunidades
+                            </h2>
+
+                            <p>
+                                Convierte ideas aprobadas en oportunidades,
+                                define roles y administra su publicación.
+                            </p>
+
+                        </div>
+
+                        <button
+                            id="crearNuevaOportunidad"
+                            class="boton-principal"
+                            type="button"
+                        >
+                            + Nueva oportunidad
+                        </button>
+
+                    </section>
+
+
+                    <!-- INDICADORES -->
+
+                    <section class="resumen-oportunidades-gerente">
+
+                        <article class="tarjeta-resumen-oportunidad">
+
+                            <span>
+                                Publicadas
+                            </span>
+
+                            <strong id="totalOportunidadesPublicadas">
+                                0
+                            </strong>
+
+                            <small>
+                                Disponibles para colaboradores
+                            </small>
+
+                        </article>
+
+                        <article class="tarjeta-resumen-oportunidad">
+
+                            <span>
+                                Borradores
+                            </span>
+
+                            <strong id="totalOportunidadesBorrador">
+                                0
+                            </strong>
+
+                            <small>
+                                Pendientes de publicar
+                            </small>
+
+                        </article>
+
+                        <article class="tarjeta-resumen-oportunidad">
+
+                            <span>
+                                Postulaciones
+                            </span>
+
+                            <strong id="totalPostulacionesOportunidades">
+                                0
+                            </strong>
+
+                            <small>
+                                Recibidas en total
+                            </small>
+
+                        </article>
+
+                        <article class="tarjeta-resumen-oportunidad">
+
+                            <span>
+                                Cerradas
+                            </span>
+
+                            <strong id="totalOportunidadesCerradas">
+                                0
+                            </strong>
+
+                            <small>
+                                Convertidas o finalizadas
+                            </small>
+
+                        </article>
+
+                    </section>
+
+
+                    <!-- PESTAÑAS -->
+
+                    <section class="pestanas-oportunidades-gerente">
+
+                        <button
+                            class="pestana-oportunidad-gerente activa"
+                            type="button"
+                            data-vista-oportunidad="publicadas"
+                        >
+                            Publicadas
+
+                            <span
+                                id="contadorPestanaPublicadas"
+                                class="contador-pestana-oportunidad"
+                            >
+                                0
+                            </span>
+
+                        </button>
+
+                        <button
+                            class="pestana-oportunidad-gerente"
+                            type="button"
+                            data-vista-oportunidad="borradores"
+                        >
+                            Borradores
+
+                            <span
+                                id="contadorPestanaBorradores"
+                                class="contador-pestana-oportunidad"
+                            >
+                                0
+                            </span>
+
+                        </button>
+
+                        <button
+                            class="pestana-oportunidad-gerente"
+                            type="button"
+                            data-vista-oportunidad="pausadas"
+                        >
+                            Pausadas
+
+                            <span
+                                id="contadorPestanaPausadas"
+                                class="contador-pestana-oportunidad"
+                            >
+                                0
+                            </span>
+
+                        </button>
+
+                        <button
+                            class="pestana-oportunidad-gerente"
+                            type="button"
+                            data-vista-oportunidad="cerradas"
+                        >
+                            Cerradas
+
+                            <span
+                                id="contadorPestanaCerradas"
+                                class="contador-pestana-oportunidad"
+                            >
+                                0
+                            </span>
+
+                        </button>
+
+                    </section>
+
+
+                    <!-- FILTROS -->
+
+                    <section class="panel filtros-oportunidades-gerente">
+
+                        <div class="campo">
+
+                            <label for="buscarOportunidadGerente">
+                                Buscar
+                            </label>
+
+                            <input
+                                id="buscarOportunidadGerente"
+                                type="search"
+                                placeholder="Nombre, área o herramienta"
+                            >
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroAreaOportunidadGerente">
+                                Área
+                            </label>
+
+                            <select id="filtroAreaOportunidadGerente">
+
+                                <option value="">
+                                    Todas las áreas
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroPrioridadOportunidadGerente">
+                                Prioridad
+                            </label>
+
+                            <select id="filtroPrioridadOportunidadGerente">
+
+                                <option value="">
+                                    Todas
+                                </option>
+
+                                <option value="Alta">
+                                    Alta
+                                </option>
+
+                                <option value="Media">
+                                    Media
+                                </option>
+
+                                <option value="Baja">
+                                    Baja
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="ordenOportunidadesGerente">
+                                Ordenar
+                            </label>
+
+                            <select id="ordenOportunidadesGerente">
+
+                                <option value="recientes">
+                                    Más recientes
+                                </option>
+
+                                <option value="postulaciones">
+                                    Más postulaciones
+                                </option>
+
+                                <option value="nombre">
+                                    Nombre
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <button
+                            id="limpiarFiltrosOportunidadesGerente"
+                            class="boton-secundario"
+                            type="button"
+                        >
+                            Limpiar
+                        </button>
+
+                    </section>
+
+
+                    <!-- LISTADO -->
+
+                    <section>
+
+                        <div class="panel-cabecera">
+
+                            <div>
+
+                                <h3 id="tituloVistaOportunidadesGerente">
+                                    Oportunidades publicadas
+                                </h3>
+
+                                <p
+                                    id="descripcionVistaOportunidadesGerente"
+                                    class="texto-ayuda"
+                                >
+                                    Convocatorias visibles para los
+                                    colaboradores.
+                                </p>
+
+                            </div>
+
+                            <span
+                                id="contadorOportunidadesGerente"
+                                class="contador-resultados"
+                            >
+                                0 oportunidades
+                            </span>
+
+                        </div>
+
+                        <div
+                            id="listaOportunidadesGerente"
+                            class="grid-oportunidades-gerente"
+                        >
+
+                            <div class="tabla-vacia">
+                                No existen oportunidades en esta sección.
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </main>
+
+        </section>
+
+    </div>
+
+
+    <!-- PANEL CREAR / EDITAR -->
+
+    <div
+        id="panelFormularioOportunidad"
+        class="panel-oportunidad-gerente"
+        aria-hidden="true"
+    >
+
+        <div class="panel-oportunidad-contenido">
+
+            <div class="cabecera-panel-oportunidad">
+
+                <div>
+
+                    <span class="etiqueta-panel-oportunidad">
+                        Administración
+                    </span>
+
+                    <h2 id="tituloPanelFormularioOportunidad">
+                        Nueva oportunidad
+                    </h2>
+
+                </div>
+
+                <button
+                    id="cerrarPanelFormularioOportunidad"
+                    class="cerrar-panel-oportunidad"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form
+                id="formularioOportunidadGerente"
+                class="formulario-oportunidad-gerente"
+            >
+
+                <div class="campo-oportunidad campo-oportunidad-completo">
+
+                    <label for="ideaOrigenOportunidad">
+                        Idea aprobada de origen
+                    </label>
+
+                    <select id="ideaOrigenOportunidad">
+
+                        <option value="">
+                            Sin idea de origen
+                        </option>
+
+                    </select>
+
+                    <p class="texto-ayuda-oportunidad">
+                        Al seleccionar una idea aprobada se llenarán
+                        automáticamente algunos campos.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="resumenIdeaOrigenOportunidad"
+                    class="idea-origen-resumen"
+                >
+
+                    <strong id="tituloIdeaOrigenOportunidad">
+                        Idea
+                    </strong>
+
+                    <p id="descripcionIdeaOrigenOportunidad">
+                        —
+                    </p>
+
+                </div>
+
+
+                <div class="campo-oportunidad campo-oportunidad-completo">
+
+                    <label for="tituloOportunidadGerente">
+                        Título de la oportunidad
+                    </label>
+
+                    <input
+                        id="tituloOportunidadGerente"
+                        type="text"
+                        placeholder="Ej. Dashboard de seguimiento de inventarios"
+                        maxlength="120"
+                    >
+
+                </div>
+
+
+                <div class="campo-oportunidad">
+
+                    <label for="areaOportunidadGerente">
+                        Área
+                    </label>
+
+                    <input
+                        id="areaOportunidadGerente"
+                        type="text"
+                        placeholder="Ej. Operaciones"
+                    >
+
+                </div>
+
+
+                <div class="campo-oportunidad">
+
+                    <label for="prioridadOportunidadGerente">
+                        Prioridad
+                    </label>
+
+                    <select id="prioridadOportunidadGerente">
+
+                        <option value="Media">
+                            Media
+                        </option>
+
+                        <option value="Alta">
+                            Alta
+                        </option>
+
+                        <option value="Baja">
+                            Baja
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo-oportunidad campo-oportunidad-completo">
+
+                    <label for="descripcionOportunidadGerente">
+                        Descripción
+                    </label>
+
+                    <textarea
+                        id="descripcionOportunidadGerente"
+                        placeholder="Describe el problema y el alcance general."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="campo-oportunidad campo-oportunidad-completo">
+
+                    <label for="objetivoOportunidadGerente">
+                        Objetivo
+                    </label>
+
+                    <textarea
+                        id="objetivoOportunidadGerente"
+                        placeholder="Describe el resultado que se busca obtener."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="campo-oportunidad campo-oportunidad-completo">
+
+                    <label for="herramientasOportunidadGerente">
+                        Herramientas requeridas
+                    </label>
+
+                    <input
+                        id="herramientasOportunidadGerente"
+                        type="text"
+                        placeholder="Excel, Power BI, Power Automate"
+                    >
+
+                    <p class="texto-ayuda-oportunidad">
+                        Separa cada herramienta con una coma.
+                    </p>
+
+                </div>
+
+
+                <div class="grupo-vacantes-formulario">
+
+                    <div class="campo-oportunidad">
+
+                        <label for="vacantesChampionOportunidad">
+                            Champions requeridos
+                        </label>
+
+                        <input
+                            id="vacantesChampionOportunidad"
+                            type="number"
+                            min="0"
+                            max="10"
+                            value="1"
+                        >
+
+                    </div>
+
+                    <div class="campo-oportunidad">
+
+                        <label for="vacantesLearnerOportunidad">
+                            Learners requeridos
+                        </label>
+
+                        <input
+                            id="vacantesLearnerOportunidad"
+                            type="number"
+                            min="0"
+                            max="10"
+                            value="1"
+                        >
+
+                    </div>
+
+                    <div class="campo-oportunidad">
+
+                        <label for="vacantesContributorOportunidad">
+                            Contributors requeridos
+                        </label>
+
+                        <input
+                            id="vacantesContributorOportunidad"
+                            type="number"
+                            min="0"
+                            max="20"
+                            value="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="campo-oportunidad">
+
+                    <label for="duracionOportunidadGerente">
+                        Duración estimada
+                    </label>
+
+                    <input
+                        id="duracionOportunidadGerente"
+                        type="text"
+                        placeholder="Ej. 2 meses"
+                    >
+
+                </div>
+
+
+                <div class="campo-oportunidad">
+
+                    <label for="disponibilidadOportunidadGerente">
+                        Horas semanales
+                    </label>
+
+                    <input
+                        id="disponibilidadOportunidadGerente"
+                        type="number"
+                        min="1"
+                        max="40"
+                        value="4"
+                    >
+
+                </div>
+
+
+                <div class="campo-oportunidad">
+
+                    <label for="dificultadOportunidadGerente">
+                        Dificultad
+                    </label>
+
+                    <select id="dificultadOportunidadGerente">
+
+                        <option value="Básica">
+                            Básica
+                        </option>
+
+                        <option value="Intermedia" selected>
+                            Intermedia
+                        </option>
+
+                        <option value="Avanzada">
+                            Avanzada
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo-oportunidad">
+
+                    <label for="fechaLimiteOportunidadGerente">
+                        Fecha límite de postulación
+                    </label>
+
+                    <input
+                        id="fechaLimiteOportunidadGerente"
+                        type="date"
+                    >
+
+                </div>
+
+
+                <div class="campo-oportunidad campo-oportunidad-completo">
+
+                    <label for="responsabilidadesChampionOportunidad">
+                        Responsabilidades del Champion
+                    </label>
+
+                    <textarea
+                        id="responsabilidadesChampionOportunidad"
+                        placeholder="Define las responsabilidades del Champion."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="campo-oportunidad campo-oportunidad-completo">
+
+                    <label for="responsabilidadesLearnerOportunidad">
+                        Responsabilidades del Learner
+                    </label>
+
+                    <textarea
+                        id="responsabilidadesLearnerOportunidad"
+                        placeholder="Define las responsabilidades del Learner."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="campo-oportunidad campo-oportunidad-completo">
+
+                    <label for="responsabilidadesContributorOportunidad">
+                        Responsabilidades del Contributor
+                    </label>
+
+                    <textarea
+                        id="responsabilidadesContributorOportunidad"
+                        placeholder="Define las responsabilidades del Contributor."
+                    ></textarea>
+
+                </div>
+
+
+                <div
+                    id="mensajeFormularioOportunidad"
+                    class="mensaje-oportunidad-gerente"
+                ></div>
+
+            </form>
+
+
+            <div class="acciones-panel-oportunidad">
+
+                <button
+                    id="cancelarFormularioOportunidad"
+                    class="boton-secundario"
+                    type="button"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    id="guardarBorradorOportunidad"
+                    class="boton-secundario"
+                    type="button"
+                >
+                    Guardar borrador
+                </button>
+
+                <button
+                    id="publicarOportunidadGerente"
+                    class="boton-principal"
+                    type="button"
+                >
+                    Publicar oportunidad
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NOTIFICACIÓN -->
+
+    <div
+        id="notificacion"
+        class="notificacion"
+    ></div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="../js/dashboard.js"></script>
+
+    <script src="../js/gestion-oportunidades.js"></script>
+
+</body>
+
+</html>

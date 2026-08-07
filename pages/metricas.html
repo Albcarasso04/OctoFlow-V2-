@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        OctoFlow | Métricas
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
+
+    <style>
+
+        /*
+        ==============================================
+        CABECERA
+        ==============================================
+        */
+
+        .cabecera-metricas {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .cabecera-metricas h2 {
+            margin: 0;
+            color: #003b71;
+        }
+
+        .cabecera-metricas p {
+            margin: 8px 0 0;
+            color: #667085;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .acciones-cabecera-metricas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+
+        /*
+        ==============================================
+        FILTROS
+        ==============================================
+        */
+
+        .filtros-metricas {
+            display: grid;
+            grid-template-columns:
+                minmax(160px, 1fr)
+                minmax(160px, 1fr)
+                minmax(160px, 1fr)
+                auto;
+            align-items: end;
+            gap: 13px;
+            margin-top: 22px;
+        }
+
+
+        /*
+        ==============================================
+        KPIS
+        ==============================================
+        */
+
+        .grid-kpis-metricas {
+            display: grid;
+            grid-template-columns:
+                repeat(5, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .tarjeta-kpi-metrica {
+            padding: 19px;
+            border: 1px solid #d8e3ef;
+            border-radius: 15px;
+            background-color: #ffffff;
+            box-shadow:
+                0 10px 26px
+                rgba(15, 50, 85, 0.07);
+        }
+
+        .tarjeta-kpi-metrica span {
+            display: block;
+            color: #667085;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .tarjeta-kpi-metrica strong {
+            display: block;
+            margin-top: 10px;
+            color: #003b71;
+            font-size: 28px;
+        }
+
+        .tarjeta-kpi-metrica small {
+            display: block;
+            margin-top: 6px;
+            color: #98a2b3;
+            font-size: 9px;
+            line-height: 1.5;
+        }
+
+        .tarjeta-kpi-metrica.destacada {
+            border-color: #84caff;
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #f5fbff
+                );
+        }
+
+
+        /*
+        ==============================================
+        LAYOUT GENERAL
+        ==============================================
+        */
+
+        .grid-dashboard-metricas {
+            display: grid;
+            grid-template-columns:
+                minmax(0, 1.15fr)
+                minmax(0, 0.85fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .panel-metrica {
+            padding: 20px;
+            border: 1px solid #d8e3ef;
+            border-radius: 16px;
+            background-color: #ffffff;
+            box-shadow:
+                0 12px 30px
+                rgba(15, 50, 85, 0.07);
+        }
+
+        .panel-metrica h3 {
+            margin: 0;
+            color: #003b71;
+            font-size: 16px;
+        }
+
+        .panel-metrica p {
+            margin: 6px 0 0;
+            color: #667085;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .panel-metrica-completo {
+            grid-column: 1 / -1;
+        }
+
+
+        /*
+        ==============================================
+        EMBUDO
+        ==============================================
+        */
+
+        .embudo-innovacion {
+            display: grid;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .fila-embudo {
+            display: grid;
+            grid-template-columns:
+                130px
+                minmax(0, 1fr)
+                70px;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .fila-embudo > span {
+            color: #475467;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .barra-embudo {
+            height: 14px;
+            overflow: hidden;
+            border-radius: 999px;
+            background-color: #eef2f6;
+        }
+
+        .barra-embudo span {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background:
+                linear-gradient(
+                    90deg,
+                    #005eb8,
+                    #00a3e0
+                );
+        }
+
+        .fila-embudo strong {
+            color: #003b71;
+            font-size: 13px;
+            text-align: right;
+        }
+
+
+        /*
+        ==============================================
+        ESTADO DE PROYECTOS
+        ==============================================
+        */
+
+        .estado-proyectos-metricas {
+            display: grid;
+            gap: 11px;
+            margin-top: 18px;
+        }
+
+        .estado-proyecto-metrica {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 13px 14px;
+            border: 1px solid #e4e7ec;
+            border-radius: 11px;
+            background-color: #ffffff;
+        }
+
+        .estado-proyecto-metrica span {
+            color: #475467;
+            font-size: 11px;
+        }
+
+        .estado-proyecto-metrica strong {
+            color: #003b71;
+            font-size: 15px;
+        }
+
+        .indicador-estado {
+            display: inline-block;
+            width: 9px;
+            height: 9px;
+            margin-right: 8px;
+            border-radius: 50%;
+        }
+
+        .indicador-estado.en-tiempo {
+            background-color: #17b26a;
+        }
+
+        .indicador-estado.en-riesgo {
+            background-color: #f79009;
+        }
+
+        .indicador-estado.atrasado {
+            background-color: #d92d20;
+        }
+
+        .indicador-estado.completado {
+            background-color: #005eb8;
+        }
+
+
+        /*
+        ==============================================
+        IMPACTO
+        ==============================================
+        */
+
+        .impacto-ejecutivo {
+            display: grid;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .impacto-item {
+            padding: 15px;
+            border: 1px solid #b2ddff;
+            border-radius: 12px;
+            background-color: #f5fbff;
+        }
+
+        .impacto-item span {
+            display: block;
+            color: #667085;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .impacto-item strong {
+            display: block;
+            margin-top: 8px;
+            color: #005eb8;
+            font-size: 22px;
+        }
+
+        .impacto-item small {
+            display: block;
+            margin-top: 5px;
+            color: #667085;
+            font-size: 9px;
+            line-height: 1.5;
+        }
+
+
+        /*
+        ==============================================
+        BARRAS
+        ==============================================
+        */
+
+        .lista-barras-metricas {
+            display: grid;
+            gap: 13px;
+            margin-top: 18px;
+        }
+
+        .fila-barra-metrica {
+            display: grid;
+            grid-template-columns:
+                minmax(110px, 0.8fr)
+                minmax(0, 1.8fr)
+                70px;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .fila-barra-metrica > span {
+            color: #475467;
+            font-size: 10px;
+        }
+
+        .barra-horizontal-metrica {
+            height: 11px;
+            overflow: hidden;
+            border-radius: 999px;
+            background-color: #eef2f6;
+        }
+
+        .barra-horizontal-metrica span {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background:
+                linear-gradient(
+                    90deg,
+                    #005eb8,
+                    #00a3e0
+                );
+        }
+
+        .fila-barra-metrica strong {
+            color: #003b71;
+            font-size: 11px;
+            text-align: right;
+        }
+
+
+        /*
+        ==============================================
+        TOP INNOVADORES
+        ==============================================
+        */
+
+        .lista-top-innovadores {
+            display: grid;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .innovador-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 13px;
+            border: 1px solid #e4e7ec;
+            border-radius: 11px;
+            background-color: #ffffff;
+        }
+
+        .posicion-innovador {
+            display: grid;
+            place-items: center;
+            flex: 0 0 34px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: #e8f3ff;
+            color: #005eb8;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .datos-innovador {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .datos-innovador strong {
+            display: block;
+            color: #003b71;
+            font-size: 11px;
+        }
+
+        .datos-innovador span {
+            display: block;
+            margin-top: 4px;
+            color: #667085;
+            font-size: 9px;
+        }
+
+        .score-innovador {
+            color: #005eb8;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+
+        /*
+        ==============================================
+        HITOS
+        ==============================================
+        */
+
+        .lista-hitos-metricas {
+            display: grid;
+            gap: 11px;
+            margin-top: 18px;
+        }
+
+        .hito-metrica {
+            padding: 13px;
+            border: 1px solid #e4e7ec;
+            border-radius: 11px;
+            background-color: #ffffff;
+        }
+
+        .hito-metrica.vencido {
+            border-color: #fda29b;
+            background-color: #fff8f7;
+        }
+
+        .hito-metrica.proximo {
+            border-color: #fedf89;
+            background-color: #fffcf5;
+        }
+
+        .hito-metrica strong {
+            display: block;
+            color: #003b71;
+            font-size: 11px;
+        }
+
+        .hito-metrica span {
+            display: block;
+            margin-top: 5px;
+            color: #667085;
+            font-size: 9px;
+            line-height: 1.5;
+        }
+
+
+        /*
+        ==============================================
+        INSIGHTS
+        ==============================================
+        */
+
+        .lista-insights {
+            display: grid;
+            gap: 11px;
+            margin-top: 18px;
+        }
+
+        .insight-item {
+            padding: 13px 14px;
+            border-left: 4px solid #005eb8;
+            border-radius: 9px;
+            background-color: #f8fbff;
+            color: #475467;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        .insight-item.alerta {
+            border-left-color: #d92d20;
+            background-color: #fff8f7;
+        }
+
+        .insight-item.positivo {
+            border-left-color: #17b26a;
+            background-color: #f6fef9;
+        }
+
+
+        /*
+        ==============================================
+        GRÁFICAS
+        ==============================================
+        */
+
+        .grid-graficas-progreso {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .grafica-progreso {
+            padding: 20px;
+            border: 1px solid #d8e3ef;
+            border-radius: 16px;
+            background-color: #ffffff;
+            box-shadow:
+                0 12px 30px
+                rgba(15, 50, 85, 0.07);
+        }
+
+        .grafica-progreso h3 {
+            margin: 0;
+            color: #003b71;
+            font-size: 16px;
+        }
+
+        .grafica-progreso p {
+            margin: 6px 0 0;
+            color: #667085;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .grafica-svg-contenedor {
+            width: 100%;
+            min-height: 280px;
+            margin-top: 18px;
+            overflow: hidden;
+        }
+
+        .grafica-svg-contenedor svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .leyenda-grafica {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .leyenda-grafica span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #475467;
+            font-size: 9px;
+        }
+
+        .muestra-leyenda {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            background-color: #005eb8;
+        }
+
+        .muestra-leyenda.secundaria {
+            background-color: #00a3e0;
+        }
+
+        .muestra-leyenda.terciaria {
+            background-color: #17b26a;
+        }
+
+        .muestra-leyenda.cuarta {
+            background-color: #f79009;
+        }
+
+
+        /*
+        ==============================================
+        PANEL DE CONFIGURACIÓN
+        ==============================================
+        */
+
+        .panel-configuracion-metricas {
+            position: fixed;
+            inset: 0;
+            z-index: 2200;
+            display: none;
+            justify-content: flex-end;
+            background-color:
+                rgba(15, 23, 42, 0.5);
+        }
+
+        .panel-configuracion-metricas.visible {
+            display: flex;
+        }
+
+        .panel-configuracion-contenido {
+            width: min(700px, 100%);
+            height: 100%;
+            overflow-y: auto;
+            padding: 28px;
+            background-color: #ffffff;
+            box-shadow:
+                -20px 0 45px
+                rgba(15, 23, 42, 0.2);
+        }
+
+        .cabecera-configuracion-metricas {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .cabecera-configuracion-metricas h2 {
+            margin: 8px 0 0;
+            color: #003b71;
+        }
+
+        .cabecera-configuracion-metricas p {
+            margin: 7px 0 0;
+            color: #667085;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .cerrar-configuracion-metricas {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #d8e3ef;
+            border-radius: 50%;
+            background-color: #ffffff;
+            color: #344054;
+            font-size: 23px;
+            cursor: pointer;
+        }
+
+        .seccion-configuracion-metricas {
+            margin-top: 26px;
+            padding-top: 20px;
+            border-top: 1px solid #e4e7ec;
+        }
+
+        .seccion-configuracion-metricas h3 {
+            margin: 0;
+            color: #003b71;
+            font-size: 15px;
+        }
+
+        .seccion-configuracion-metricas p {
+            margin: 6px 0 0;
+            color: #667085;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .grid-configuracion-general {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 17px;
+        }
+
+        .campo-configuracion {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .campo-configuracion label {
+            color: #344054;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .campo-configuracion input,
+        .campo-configuracion select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 11px 12px;
+            border: 1px solid #d0d5dd;
+            border-radius: 9px;
+            background-color: #ffffff;
+            color: #344054;
+            font: inherit;
+            font-size: 12px;
+        }
+
+        .interruptor-precio-area {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-top: 17px;
+            padding: 14px;
+            border: 1px solid #d8e3ef;
+            border-radius: 11px;
+            background-color: #f8fbff;
+        }
+
+        .interruptor-precio-area strong {
+            display: block;
+            color: #003b71;
+            font-size: 11px;
+        }
+
+        .interruptor-precio-area span {
+            display: block;
+            margin-top: 5px;
+            color: #667085;
+            font-size: 9px;
+        }
+
+        .interruptor-precio-area input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .lista-precios-area {
+            display: grid;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .fila-precio-area {
+            display: grid;
+            grid-template-columns:
+                minmax(160px, 1fr)
+                minmax(130px, 0.7fr)
+                auto;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border: 1px solid #e4e7ec;
+            border-radius: 11px;
+            background-color: #ffffff;
+        }
+
+        .fila-precio-area input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 11px;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            color: #344054;
+            font: inherit;
+            font-size: 11px;
+        }
+
+        .eliminar-precio-area {
+            padding: 9px 11px;
+            border: 1px solid #fecdca;
+            border-radius: 8px;
+            background-color: #fff1f0;
+            color: #b42318;
+            font-size: 10px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .agregar-precio-area {
+            margin-top: 14px;
+        }
+
+        .resumen-formulas-configuracion {
+            display: grid;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .formula-configuracion {
+            padding: 13px;
+            border: 1px solid #b2ddff;
+            border-radius: 10px;
+            background-color: #f5fbff;
+            color: #344054;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        .formula-configuracion strong {
+            color: #005eb8;
+        }
+
+        .acciones-configuracion-metricas {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid #e4e7ec;
+        }
+
+
+        /*
+        ==============================================
+        RESPONSIVE
+        ==============================================
+        */
+
+        @media (max-width: 1200px) {
+
+            .grid-kpis-metricas {
+                grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+            }
+
+            .filtros-metricas {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .impacto-ejecutivo {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 900px) {
+
+            .grid-dashboard-metricas,
+            .grid-graficas-progreso {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-metrica-completo {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .grid-kpis-metricas,
+            .filtros-metricas,
+            .impacto-ejecutivo,
+            .grid-configuracion-general,
+            .fila-precio-area {
+                grid-template-columns: 1fr;
+            }
+
+            .cabecera-metricas {
+                flex-direction: column;
+            }
+
+            .fila-embudo,
+            .fila-barra-metrica {
+                grid-template-columns: 1fr;
+            }
+
+            .fila-embudo strong,
+            .fila-barra-metrica strong {
+                text-align: left;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body data-portal="gerente">
+
+    <div class="aplicacion">
+
+        <aside class="menu-lateral">
+
+            <div class="marca">
+
+                <img
+                    class="logo-danone-menu"
+                    src="../img/DANONE_LOGO_HORIZONTAL.png"
+                    alt="Logo de Danone"
+                >
+
+                <h1>
+                    OctoFlow
+                </h1>
+
+                <p>
+                    Portal del Gerente
+                </p>
+
+            </div>
+
+            <nav class="navegacion">
+
+                <a
+                    class="enlace-menu"
+                    href="gerentes.html"
+                >
+                    <span class="icono-menu">⌂</span>
+                    Dashboard
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="revision-ideas.html"
+                >
+                    <span class="icono-menu">💡</span>
+                    Revisar ideas
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="gestion-oportunidades.html"
+                >
+                    <span class="icono-menu">🚀</span>
+                    Oportunidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="postulaciones-gerente.html"
+                >
+                    <span class="icono-menu">👥</span>
+                    Postulaciones
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="proyectos-gerente.html"
+                >
+                    <span class="icono-menu">▣</span>
+                    Proyectos
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="talento.html"
+                >
+                    <span class="icono-menu">◉</span>
+                    Talento
+                </a>
+
+                <a
+                    class="enlace-menu activo"
+                    href="metricas.html"
+                >
+                    <span class="icono-menu">▥</span>
+                    Métricas
+                </a>
+
+            </nav>
+
+            <div class="usuario-menu">
+
+                <strong data-nombre-usuario>
+                    Gerente
+                </strong>
+
+                <div
+                    class="correo-menu"
+                    data-correo-usuario
+                >
+                    gerente@danone.com
+                </div>
+
+                <button
+                    class="boton-salir"
+                    type="button"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </aside>
+
+        <section class="contenido">
+
+            <header class="encabezado">
+
+                <div class="titulo-encabezado">
+
+                    <h2>
+                        Executive Dashboard
+                    </h2>
+
+                    <p>
+                        Indicadores de innovación e impacto
+                    </p>
+
+                </div>
+
+                <div class="perfil-superior">
+
+                    <button
+                        class="boton-notificaciones"
+                        type="button"
+                        aria-label="Notificaciones"
+                    >
+                        🔔
+                    </button>
+
+                    <div
+                        class="avatar"
+                        data-avatar-usuario
+                    >
+                        G
+                    </div>
+
+                    <div class="datos-usuario">
+
+                        <strong data-nombre-usuario>
+                            Gerente
+                        </strong>
+
+                        <span data-rol-usuario>
+                            Gerente
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main class="principal">
+
+                <div class="contenedor-pagina">
+
+                    <section class="cabecera-metricas">
+
+                        <div>
+
+                            <h2>
+                                Métricas ejecutivas
+                            </h2>
+
+                            <p>
+                                Analiza el pipeline, el progreso de los
+                                proyectos y el impacto operativo generado.
+                            </p>
+
+                        </div>
+
+                        <div class="acciones-cabecera-metricas">
+
+                            <button
+                                id="abrirConfiguracionMetricas"
+                                class="boton-secundario"
+                                type="button"
+                            >
+                                ⚙ Configurar FTE y ahorros
+                            </button>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- FILTROS -->
+
+                    <section class="panel filtros-metricas">
+
+                        <div class="campo">
+
+                            <label for="filtroPeriodoMetricas">
+                                Periodo
+                            </label>
+
+                            <select id="filtroPeriodoMetricas">
+
+                                <option value="todo">
+                                    Todo el histórico
+                                </option>
+
+                                <option value="mes">
+                                    Mes actual
+                                </option>
+
+                                <option value="trimestre">
+                                    Trimestre actual
+                                </option>
+
+                                <option value="anio">
+                                    Año actual
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroAreaMetricas">
+                                Área
+                            </label>
+
+                            <select id="filtroAreaMetricas">
+
+                                <option value="">
+                                    Todas las áreas
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="filtroEstadoProyectoMetricas">
+                                Estado del proyecto
+                            </label>
+
+                            <select id="filtroEstadoProyectoMetricas">
+
+                                <option value="">
+                                    Todos
+                                </option>
+
+                                <option value="Activo">
+                                    Activo
+                                </option>
+
+                                <option value="En pausa">
+                                    En pausa
+                                </option>
+
+                                <option value="Completado">
+                                    Completado
+                                </option>
+
+                                <option value="Cancelado">
+                                    Cancelado
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <button
+                            id="limpiarFiltrosMetricas"
+                            class="boton-secundario"
+                            type="button"
+                        >
+                            Limpiar
+                        </button>
+
+                    </section>
+
+
+                    <!-- KPIS -->
+
+                    <section class="grid-kpis-metricas">
+
+                        <article class="tarjeta-kpi-metrica">
+
+                            <span>
+                                Ideas registradas
+                            </span>
+
+                            <strong id="kpiIdeasMetricas">
+                                0
+                            </strong>
+
+                            <small id="detalleIdeasMetricas">
+                                0 aprobadas
+                            </small>
+
+                        </article>
+
+                        <article class="tarjeta-kpi-metrica">
+
+                            <span>
+                                Oportunidades
+                            </span>
+
+                            <strong id="kpiOportunidadesMetricas">
+                                0
+                            </strong>
+
+                            <small id="detalleOportunidadesMetricas">
+                                0 publicadas
+                            </small>
+
+                        </article>
+
+                        <article class="tarjeta-kpi-metrica">
+
+                            <span>
+                                Proyectos activos
+                            </span>
+
+                            <strong id="kpiProyectosActivosMetricas">
+                                0
+                            </strong>
+
+                            <small id="detalleProyectosActivosMetricas">
+                                0 en riesgo
+                            </small>
+
+                        </article>
+
+                        <article class="tarjeta-kpi-metrica">
+
+                            <span>
+                                Proyectos completados
+                            </span>
+
+                            <strong id="kpiProyectosCompletadosMetricas">
+                                0
+                            </strong>
+
+                            <small id="detalleProyectosCompletadosMetricas">
+                                0% de implementación
+                            </small>
+
+                        </article>
+
+                        <article class="tarjeta-kpi-metrica destacada">
+
+                            <span>
+                                Horas ahorradas anuales
+                            </span>
+
+                            <strong id="kpiHorasAhorradasMetricas">
+                                0
+                            </strong>
+
+                            <small>
+                                Impacto consolidado de proyectos completados
+                            </small>
+
+                        </article>
+
+                    </section>
+
+
+                    <!-- GRÁFICAS DE PROGRESO -->
+
+                    <section class="grid-graficas-progreso">
+
+                        <article class="grafica-progreso">
+
+                            <h3>
+                                Progreso mensual del pipeline
+                            </h3>
+
+                            <p>
+                                Ideas, oportunidades y proyectos registrados
+                                durante los últimos doce meses.
+                            </p>
+
+                            <div
+                                id="graficaPipelineMensual"
+                                class="grafica-svg-contenedor"
+                            ></div>
+
+                            <div class="leyenda-grafica">
+
+                                <span>
+                                    <i class="muestra-leyenda"></i>
+                                    Ideas
+                                </span>
+
+                                <span>
+                                    <i class="muestra-leyenda secundaria"></i>
+                                    Oportunidades
+                                </span>
+
+                                <span>
+                                    <i class="muestra-leyenda terciaria"></i>
+                                    Proyectos
+                                </span>
+
+                            </div>
+
+                        </article>
+
+                        <article class="grafica-progreso">
+
+                            <h3>
+                                Proyectos creados vs. completados
+                            </h3>
+
+                            <p>
+                                Comparativo mensual de ejecución y cierre.
+                            </p>
+
+                            <div
+                                id="graficaProyectosMensual"
+                                class="grafica-svg-contenedor"
+                            ></div>
+
+                            <div class="leyenda-grafica">
+
+                                <span>
+                                    <i class="muestra-leyenda"></i>
+                                    Creados
+                                </span>
+
+                                <span>
+                                    <i class="muestra-leyenda terciaria"></i>
+                                    Completados
+                                </span>
+
+                            </div>
+
+                        </article>
+
+                        <article class="grafica-progreso">
+
+                            <h3>
+                                Horas ahorradas acumuladas
+                            </h3>
+
+                            <p>
+                                Evolución del impacto anual reconocido.
+                            </p>
+
+                            <div
+                                id="graficaHorasAcumuladas"
+                                class="grafica-svg-contenedor"
+                            ></div>
+
+                        </article>
+
+                        <article class="grafica-progreso">
+
+                            <h3>
+                                Avance promedio de proyectos
+                            </h3>
+
+                            <p>
+                                Tendencia mensual del porcentaje promedio
+                                de avance registrado.
+                            </p>
+
+                            <div
+                                id="graficaAvancePromedio"
+                                class="grafica-svg-contenedor"
+                            ></div>
+
+                        </article>
+
+                    </section>
+
+
+                    <!-- DASHBOARD -->
+
+                    <section class="grid-dashboard-metricas">
+
+                        <article class="panel-metrica">
+
+                            <h3>
+                                Embudo de innovación
+                            </h3>
+
+                            <p>
+                                Conversión desde ideas hasta proyectos
+                                implementados.
+                            </p>
+
+                            <div
+                                id="embudoInnovacionMetricas"
+                                class="embudo-innovacion"
+                            ></div>
+
+                        </article>
+
+                        <article class="panel-metrica">
+
+                            <h3>
+                                Estado de proyectos
+                            </h3>
+
+                            <p>
+                                Distribución según avance y fechas objetivo.
+                            </p>
+
+                            <div
+                                id="estadoProyectosMetricas"
+                                class="estado-proyectos-metricas"
+                            ></div>
+
+                        </article>
+
+                        <article class="panel-metrica panel-metrica-completo">
+
+                            <h3>
+                                Impacto ejecutivo
+                            </h3>
+
+                            <p id="textoSupuestosImpacto">
+                                Calculado con los parámetros configurados.
+                            </p>
+
+                            <div class="impacto-ejecutivo">
+
+                                <div class="impacto-item">
+
+                                    <span>
+                                        Horas ahorradas
+                                    </span>
+
+                                    <strong id="impactoHorasMetricas">
+                                        0
+                                    </strong>
+
+                                    <small>
+                                        Horas por año
+                                    </small>
+
+                                </div>
+
+                                <div class="impacto-item">
+
+                                    <span>
+                                        Equivalente FTE
+                                    </span>
+
+                                    <strong id="impactoFteMetricas">
+                                        0.0
+                                    </strong>
+
+                                    <small id="detalleFteMetricas">
+                                        Basado en 1,760 horas/año
+                                    </small>
+
+                                </div>
+
+                                <div class="impacto-item">
+
+                                    <span>
+                                        Valor estimado
+                                    </span>
+
+                                    <strong id="impactoValorMetricas">
+                                        $0
+                                    </strong>
+
+                                    <small id="detalleValorMetricas">
+                                        Precio general por hora
+                                    </small>
+
+                                </div>
+
+                                <div class="impacto-item">
+
+                                    <span>
+                                        Valor promedio por hora
+                                    </span>
+
+                                    <strong id="impactoPrecioPromedioMetricas">
+                                        $0
+                                    </strong>
+
+                                    <small>
+                                        Promedio ponderado de los proyectos
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                        <article class="panel-metrica">
+
+                            <h3>
+                                Ideas por área
+                            </h3>
+
+                            <p>
+                                Participación de las áreas en el pipeline.
+                            </p>
+
+                            <div
+                                id="ideasPorAreaMetricas"
+                                class="lista-barras-metricas"
+                            ></div>
+
+                        </article>
+
+                        <article class="panel-metrica">
+
+                            <h3>
+                                Ahorro estimado por área
+                            </h3>
+
+                            <p>
+                                Impacto económico según el precio configurado.
+                            </p>
+
+                            <div
+                                id="ahorroPorAreaMetricas"
+                                class="lista-barras-metricas"
+                            ></div>
+
+                        </article>
+
+                        <article class="panel-metrica">
+
+                            <h3>
+                                Top innovadores
+                            </h3>
+
+                            <p>
+                                Ranking basado en el Innovation Score.
+                            </p>
+
+                            <div
+                                id="topInnovadoresMetricas"
+                                class="lista-top-innovadores"
+                            ></div>
+
+                        </article>
+
+                        <article class="panel-metrica">
+
+                            <h3>
+                                Próximos hitos
+                            </h3>
+
+                            <p>
+                                Hitos vencidos o próximos a vencer.
+                            </p>
+
+                            <div
+                                id="proximosHitosMetricas"
+                                class="lista-hitos-metricas"
+                            ></div>
+
+                        </article>
+
+                        <article class="panel-metrica panel-metrica-completo">
+
+                            <h3>
+                                Insights automáticos
+                            </h3>
+
+                            <p>
+                                Se recalculan cada vez que cambian los datos
+                                o los supuestos.
+                            </p>
+
+                            <div
+                                id="insightsMetricas"
+                                class="lista-insights"
+                            ></div>
+
+                        </article>
+
+                    </section>
+
+                </div>
+
+            </main>
+
+        </section>
+
+    </div>
+
+
+    <!-- PANEL DE CONFIGURACIÓN -->
+
+    <div
+        id="panelConfiguracionMetricas"
+        class="panel-configuracion-metricas"
+        aria-hidden="true"
+    >
+
+        <div class="panel-configuracion-contenido">
+
+            <div class="cabecera-configuracion-metricas">
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Parámetros del dashboard
+                    </span>
+
+                    <h2>
+                        Configurar FTE y ahorros
+                    </h2>
+
+                    <p>
+                        Modifica los supuestos utilizados para convertir
+                        horas ahorradas en equivalentes FTE y valor económico.
+                    </p>
+
+                </div>
+
+                <button
+                    id="cerrarConfiguracionMetricas"
+                    class="cerrar-configuracion-metricas"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <section class="seccion-configuracion-metricas">
+
+                <h3>
+                    Parámetros generales
+                </h3>
+
+                <p>
+                    Se aplican cuando un área no tiene un precio específico.
+                </p>
+
+                <div class="grid-configuracion-general">
+
+                    <div class="campo-configuracion">
+
+                        <label for="configHorasFte">
+                            Horas anuales por FTE
+                        </label>
+
+                        <input
+                            id="configHorasFte"
+                            type="number"
+                            min="1"
+                            step="1"
+                            value="1760"
+                        >
+
+                    </div>
+
+                    <div class="campo-configuracion">
+
+                        <label for="configPrecioHoraGeneral">
+                            Precio general por hora (MXN)
+                        </label>
+
+                        <input
+                            id="configPrecioHoraGeneral"
+                            type="number"
+                            min="0"
+                            step="1"
+                            value="380"
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="interruptor-precio-area">
+
+                    <div>
+
+                        <strong>
+                            Usar precios específicos por área
+                        </strong>
+
+                        <span>
+                            Cuando esté desactivado, todos los proyectos
+                            utilizarán el precio general.
+                        </span>
+
+                    </div>
+
+                    <input
+                        id="configUsarPreciosArea"
+                        type="checkbox"
+                        checked
+                    >
+
+                </div>
+
+            </section>
+
+
+            <section class="seccion-configuracion-metricas">
+
+                <h3>
+                    Precio por hora por área
+                </h3>
+
+                <p>
+                    El nombre debe coincidir con el área registrada en
+                    ideas, oportunidades o proyectos.
+                </p>
+
+                <div
+                    id="listaConfiguracionPreciosArea"
+                    class="lista-precios-area"
+                ></div>
+
+                <button
+                    id="agregarPrecioArea"
+                    class="boton-secundario agregar-precio-area"
+                    type="button"
+                >
+                    + Agregar área
+                </button>
+
+            </section>
+
+
+            <section class="seccion-configuracion-metricas">
+
+                <h3>
+                    Fórmulas utilizadas
+                </h3>
+
+                <div class="resumen-formulas-configuracion">
+
+                    <div class="formula-configuracion">
+
+                        <strong>
+                            Equivalente FTE:
+                        </strong>
+
+                        horas ahorradas ÷ horas anuales por FTE.
+
+                    </div>
+
+                    <div class="formula-configuracion">
+
+                        <strong>
+                            Valor estimado:
+                        </strong>
+
+                        horas ahorradas del proyecto × precio por hora
+                        correspondiente a su área.
+
+                    </div>
+
+                    <div class="formula-configuracion">
+
+                        <strong>
+                            Precio de respaldo:
+                        </strong>
+
+                        si un área no tiene precio propio, se usa el
+                        precio general por hora.
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <div class="acciones-configuracion-metricas">
+
+                <button
+                    id="restablecerConfiguracionMetricas"
+                    class="boton-secundario"
+                    type="button"
+                >
+                    Restablecer valores
+                </button>
+
+                <button
+                    id="cancelarConfiguracionMetricas"
+                    class="boton-secundario"
+                    type="button"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    id="guardarConfiguracionMetricas"
+                    class="boton-principal"
+                    type="button"
+                >
+                    Guardar configuración
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="notificacion"
+        class="notificacion"
+    ></div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/metricas.js"></script>
+
+</body>
+
+</html>

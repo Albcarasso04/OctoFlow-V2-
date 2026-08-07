@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        OctoFlow | Oportunidades
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
+
+</head>
+
+<body data-portal="colaborador">
+
+    <div class="aplicacion">
+
+        <!-- ======================================
+             MENÚ LATERAL
+        ======================================= -->
+
+        <aside class="menu-lateral">
+
+            <div class="marca">
+
+                <img
+                    class="logo-danone-menu"
+                    src="../img/DANONE_LOGO_HORIZONTAL.png"
+                    alt="Logo de Danone"
+                >
+
+                <h1>OctoFlow</h1>
+
+                <p>
+                    Portal del Colaborador
+                </p>
+
+            </div>
+
+            <nav class="navegacion">
+
+                <a
+                    class="enlace-menu"
+                    href="colaboradores.html"
+                >
+                    <span class="icono-menu">⌂</span>
+                    Inicio
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="ideas.html"
+                >
+                    <span class="icono-menu">💡</span>
+                    Mis ideas
+                </a>
+
+                <a
+                    class="enlace-menu activo"
+                    href="oportunidades.html"
+                >
+                    <span class="icono-menu">🚀</span>
+                    Oportunidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="proyectos.html"
+                >
+                    <span class="icono-menu">▣</span>
+                    Mis proyectos
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="habilidades.html"
+                >
+                    <span class="icono-menu">◉</span>
+                    Habilidades
+                </a>
+
+                <a
+                    class="enlace-menu"
+                    href="perfil.html"
+                >
+                    <span class="icono-menu">○</span>
+                    Mi perfil
+                </a>
+
+            </nav>
+
+            <div class="usuario-menu">
+
+                <strong data-nombre-usuario>
+                    Usuario
+                </strong>
+
+                <div
+                    class="correo-menu"
+                    data-correo-usuario
+                >
+                    usuario@danone.com
+                </div>
+
+                <button
+                    class="boton-salir"
+                    type="button"
+                    onclick="cerrarSesion()"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- ======================================
+             CONTENIDO
+        ======================================= -->
+
+        <section class="contenido">
+
+            <header class="encabezado">
+
+                <div class="titulo-encabezado">
+
+                    <h2>
+                        Oportunidades
+                    </h2>
+
+                    <p>
+                        Encuentra proyectos y consulta tus postulaciones
+                    </p>
+
+                </div>
+
+                <div class="perfil-superior">
+
+                    <div
+                        class="avatar"
+                        data-avatar-usuario
+                    >
+                        U
+                    </div>
+
+                    <div class="datos-usuario">
+
+                        <strong data-nombre-usuario>
+                            Usuario
+                        </strong>
+
+                        <span data-rol-usuario>
+                            Colaborador
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main class="principal">
+
+                <div class="contenedor-pagina">
+
+                    <!-- CABECERA -->
+
+                    <section class="cabecera-pagina">
+
+                        <div>
+
+                            <h2>
+                                Oportunidades de automatización
+                            </h2>
+
+                            <p>
+                                OctoFlow recomienda proyectos basándose
+                                en tu experiencia, intereses y
+                                disponibilidad.
+                            </p>
+
+                        </div>
+
+                        <a
+                            class="boton-secundario"
+                            href="habilidades.html"
+                        >
+                            Actualizar habilidades
+                        </a>
+
+                    </section>
+
+                    <!-- PESTAÑAS -->
+
+                    <div class="pestanas-oportunidades">
+
+                        <button
+                            class="pestana-oportunidad activa"
+                            id="pestanaExplorar"
+                            type="button"
+                        >
+                            Explorar oportunidades
+                        </button>
+
+                        <button
+                            class="pestana-oportunidad"
+                            id="pestanaPostulaciones"
+                            type="button"
+                        >
+                            Mis postulaciones
+
+                            <span
+                                id="contadorPestanaPostulaciones"
+                                class="contador-pestana"
+                            >
+                                0
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                    <!-- ======================================
+                         SECCIÓN EXPLORAR
+                    ======================================= -->
+
+                    <section id="seccionExplorar">
+
+                        <!-- AVISO DE PERFIL -->
+
+                        <section
+                            id="avisoPerfilIncompleto"
+                            class="aviso-oportunidades oculto"
+                        >
+
+                            <div class="aviso-oportunidades-icono">
+                                ◉
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Completa tu perfil de habilidades
+                                </strong>
+
+                                <p>
+                                    Registra las herramientas que dominas
+                                    y las que quieres aprender para mejorar
+                                    las recomendaciones.
+                                </p>
+
+                            </div>
+
+                            <a
+                                class="boton-principal"
+                                href="habilidades.html"
+                            >
+                                Completar perfil
+                            </a>
+
+                        </section>
+
+                        <!-- INDICADORES -->
+
+                        <section class="resumen-oportunidades">
+
+                            <article class="tarjeta-resumen">
+
+                                <span>
+                                    Oportunidades publicadas
+                                </span>
+
+                                <strong id="totalOportunidades">
+                                    0
+                                </strong>
+
+                            </article>
+
+                            <article class="tarjeta-resumen">
+
+                                <span>
+                                    Recomendadas como Champion
+                                </span>
+
+                                <strong id="totalChampion">
+                                    0
+                                </strong>
+
+                            </article>
+
+                            <article class="tarjeta-resumen">
+
+                                <span>
+                                    Recomendadas como Learner
+                                </span>
+
+                                <strong id="totalLearner">
+                                    0
+                                </strong>
+
+                            </article>
+
+                            <article class="tarjeta-resumen">
+
+                                <span>
+                                    Mis postulaciones
+                                </span>
+
+                                <strong id="totalPostulaciones">
+                                    0
+                                </strong>
+
+                            </article>
+
+                        </section>
+
+                        <!-- FILTROS -->
+
+                        <section class="panel filtros-oportunidades">
+
+                            <div class="campo">
+
+                                <label for="buscarOportunidad">
+                                    Buscar
+                                </label>
+
+                                <input
+                                    type="search"
+                                    id="buscarOportunidad"
+                                    placeholder="Proyecto, herramienta o área"
+                                >
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="filtroRolOportunidad">
+                                    Rol recomendado
+                                </label>
+
+                                <select id="filtroRolOportunidad">
+
+                                    <option value="">
+                                        Todos los roles
+                                    </option>
+
+                                    <option value="Champion">
+                                        Champion
+                                    </option>
+
+                                    <option value="Learner">
+                                        Learner
+                                    </option>
+
+                                    <option value="Contributor">
+                                        Contributor
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="filtroAreaOportunidad">
+                                    Área
+                                </label>
+
+                                <select id="filtroAreaOportunidad">
+
+                                    <option value="">
+                                        Todas las áreas
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="ordenOportunidades">
+                                    Ordenar por
+                                </label>
+
+                                <select id="ordenOportunidades">
+
+                                    <option value="compatibilidad">
+                                        Mayor compatibilidad
+                                    </option>
+
+                                    <option value="recientes">
+                                        Más recientes
+                                    </option>
+
+                                    <option value="nombre">
+                                        Nombre
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <button
+                                class="boton-secundario boton-limpiar-filtros"
+                                id="limpiarFiltrosOportunidades"
+                                type="button"
+                            >
+                                Limpiar
+                            </button>
+
+                        </section>
+
+                        <!-- LISTADO -->
+
+                        <section>
+
+                            <div class="panel-cabecera">
+
+                                <h3>
+                                    Proyectos recomendados
+                                </h3>
+
+                                <span
+                                    id="contadorOportunidades"
+                                    class="contador-resultados"
+                                >
+                                    0 oportunidades
+                                </span>
+
+                            </div>
+
+                            <div
+                                id="listaOportunidades"
+                                class="grid-oportunidades"
+                            >
+
+                                <div class="tabla-vacia">
+                                    No hay oportunidades disponibles.
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                    </section>
+
+                    <!-- ======================================
+                         MIS POSTULACIONES
+                    ======================================= -->
+
+                    <section
+                        id="seccionPostulaciones"
+                        class="oculto"
+                    >
+
+                        <section class="cabecera-postulaciones">
+
+                            <div>
+
+                                <h3>
+                                    Seguimiento de postulaciones
+                                </h3>
+
+                                <p>
+                                    Consulta el estado y los comentarios
+                                    relacionados con cada solicitud.
+                                </p>
+
+                            </div>
+
+                        </section>
+
+                        <!-- RESUMEN POSTULACIONES -->
+
+                        <section class="resumen-postulaciones">
+
+                            <article class="tarjeta-resumen">
+
+                                <span>
+                                    Total
+                                </span>
+
+                                <strong id="postulacionesTotal">
+                                    0
+                                </strong>
+
+                            </article>
+
+                            <article class="tarjeta-resumen">
+
+                                <span>
+                                    Pendientes
+                                </span>
+
+                                <strong id="postulacionesPendientes">
+                                    0
+                                </strong>
+
+                            </article>
+
+                            <article class="tarjeta-resumen">
+
+                                <span>
+                                    Aceptadas
+                                </span>
+
+                                <strong id="postulacionesAceptadas">
+                                    0
+                                </strong>
+
+                            </article>
+
+                            <article class="tarjeta-resumen">
+
+                                <span>
+                                    No seleccionadas
+                                </span>
+
+                                <strong id="postulacionesRechazadas">
+                                    0
+                                </strong>
+
+                            </article>
+
+                        </section>
+
+                        <!-- FILTROS POSTULACIONES -->
+
+                        <section class="panel filtros-postulaciones">
+
+                            <div class="campo">
+
+                                <label for="buscarPostulacion">
+                                    Buscar
+                                </label>
+
+                                <input
+                                    type="search"
+                                    id="buscarPostulacion"
+                                    placeholder="Proyecto o rol"
+                                >
+
+                            </div>
+
+                            <div class="campo">
+
+                                <label for="filtroEstadoPostulacion">
+                                    Estado
+                                </label>
+
+                                <select id="filtroEstadoPostulacion">
+
+                                    <option value="">
+                                        Todos los estados
+                                    </option>
+
+                                    <option value="Pendiente">
+                                        Pendiente
+                                    </option>
+
+                                    <option value="En revisión">
+                                        En revisión
+                                    </option>
+
+                                    <option value="Preseleccionado">
+                                        Preseleccionado
+                                    </option>
+
+                                    <option value="Aceptado">
+                                        Aceptado
+                                    </option>
+
+                                    <option value="No seleccionado">
+                                        No seleccionado
+                                    </option>
+
+                                    <option value="Cancelado">
+                                        Cancelado
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <button
+                                class="boton-secundario"
+                                id="limpiarFiltrosPostulaciones"
+                                type="button"
+                            >
+                                Limpiar
+                            </button>
+
+                        </section>
+
+                        <!-- TABLA POSTULACIONES -->
+
+                        <section class="panel">
+
+                            <div class="panel-cabecera">
+
+                                <h3>
+                                    Mis postulaciones
+                                </h3>
+
+                                <span
+                                    id="contadorPostulaciones"
+                                    class="contador-resultados"
+                                >
+                                    0 postulaciones
+                                </span>
+
+                            </div>
+
+                            <div class="tabla-contenedor">
+
+                                <table>
+
+                                    <thead>
+
+                                        <tr>
+                                            <th>Proyecto</th>
+                                            <th>Rol</th>
+                                            <th>Compatibilidad</th>
+                                            <th>Fecha</th>
+                                            <th>Estado</th>
+                                            <th>Acción</th>
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody id="tablaPostulaciones">
+
+                                        <tr>
+
+                                            <td
+                                                colspan="6"
+                                                class="tabla-vacia"
+                                            >
+                                                Todavía no has enviado postulaciones.
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        </section>
+
+                    </section>
+
+                </div>
+
+            </main>
+
+        </section>
+
+    </div>
+
+    <!-- ======================================
+         PANEL LATERAL DE OPORTUNIDAD
+    ======================================= -->
+
+    <div
+        id="modalOportunidad"
+        class="panel-lateral"
+        aria-hidden="true"
+    >
+
+        <div class="panel-lateral-contenido">
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Oportunidad de proyecto
+                    </span>
+
+                    <h2 id="detalleTituloOportunidad">
+                        Proyecto
+                    </h2>
+
+                </div>
+
+                <button
+                    class="boton-cerrar-modal"
+                    id="cerrarModalOportunidad"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div class="detalle-oportunidad-superior">
+
+                <div class="compatibilidad-grande">
+
+                    <span id="detalleCompatibilidad">
+                        0%
+                    </span>
+
+                    <small>
+                        Compatibilidad
+                    </small>
+
+                </div>
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Rol recomendado
+                    </span>
+
+                    <div
+                        id="detalleRolRecomendado"
+                        class="rol-recomendado-grande"
+                    >
+                        Contributor
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Estado del equipo
+                    </span>
+
+                    <div
+                        id="detalleEstadoEquipo"
+                        class="estado-equipo-modal"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-grid">
+
+                <div class="detalle-ticket">
+
+                    <span>Área</span>
+
+                    <strong id="detalleAreaOportunidad">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>Duración</span>
+
+                    <strong id="detalleDuracionOportunidad">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>
+                        Disponibilidad requerida
+                    </span>
+
+                    <strong id="detalleDisponibilidadOportunidad">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>Dificultad</span>
+
+                    <strong id="detalleDificultadOportunidad">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>Descripción</span>
+
+                    <p id="detalleDescripcionOportunidad">
+                        —
+                    </p>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>Herramientas</span>
+
+                    <div
+                        id="detalleHerramientasOportunidad"
+                        class="etiquetas-herramientas"
+                    ></div>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>
+                        ¿Por qué es compatible contigo?
+                    </span>
+
+                    <ul
+                        id="detalleRazonesOportunidad"
+                        class="lista-razones"
+                    ></ul>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>
+                        Responsabilidades del rol
+                    </span>
+
+                    <p id="detalleResponsabilidadesOportunidad">
+                        —
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="modal-acciones">
+
+                <button
+                    class="boton-secundario"
+                    id="cancelarModalOportunidad"
+                    type="button"
+                >
+                    Cerrar
+                </button>
+
+                <button
+                    class="boton-principal"
+                    id="botonPostularse"
+                    type="button"
+                >
+                    Postularme
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ======================================
+         PANEL LATERAL DE POSTULACIÓN
+    ======================================= -->
+
+    <div
+        id="panelDetallePostulacion"
+        class="panel-lateral"
+        aria-hidden="true"
+    >
+
+        <div class="panel-lateral-contenido">
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="modal-etiqueta">
+                        Detalle de postulación
+                    </span>
+
+                    <h2 id="detalleProyectoPostulacion">
+                        Proyecto
+                    </h2>
+
+                </div>
+
+                <button
+                    class="boton-cerrar-modal"
+                    id="cerrarDetallePostulacion"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div class="modal-grid">
+
+                <div class="detalle-ticket">
+
+                    <span>Rol solicitado</span>
+
+                    <strong id="detalleRolPostulacion">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>Compatibilidad</span>
+
+                    <strong id="detalleCompatibilidadPostulacion">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>Fecha</span>
+
+                    <strong id="detalleFechaPostulacion">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket">
+
+                    <span>Estado</span>
+
+                    <strong id="detalleEstadoPostulacion">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>
+                        Comentarios del gerente
+                    </span>
+
+                    <p id="detalleComentarioPostulacion">
+                        Todavía no hay comentarios.
+                    </p>
+
+                </div>
+
+                <div class="detalle-ticket campo-completo">
+
+                    <span>
+                        Próximo paso
+                    </span>
+
+                    <p id="detalleProximoPasoPostulacion">
+                        La postulación está pendiente de revisión.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="modal-acciones">
+
+                <button
+                    class="boton-secundario"
+                    id="cancelarPostulacion"
+                    type="button"
+                >
+                    Cancelar postulación
+                </button>
+
+                <button
+                    class="boton-principal"
+                    id="cerrarDetallePostulacionInferior"
+                    type="button"
+                >
+                    Cerrar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        id="notificacion"
+        class="notificacion"
+    ></div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/oportunidades.js"></script>
+
+</body>
+
+</html>
