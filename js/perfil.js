@@ -26,36 +26,111 @@ function iniciarPerfil() {
 
 /*
 ==================================================
+DATOS DE SESIÓN
+==================================================
+*/
+
+function obtenerCorreoPerfil() {
+
+    return (
+        sessionStorage.getItem(
+            "octoflowCorreo"
+        ) ||
+        localStorage.getItem(
+            "octoflowCorreo"
+        ) ||
+        ""
+    );
+}
+
+
+function obtenerNombrePerfil() {
+
+    return (
+        sessionStorage.getItem(
+            "octoflowNombre"
+        ) ||
+        localStorage.getItem(
+            "octoflowNombre"
+        ) ||
+        ""
+    );
+}
+
+
+function obtenerApellidoSesionPerfil() {
+
+    return (
+        sessionStorage.getItem(
+            "octoflowApellido"
+        ) ||
+        localStorage.getItem(
+            "octoflowApellido"
+        ) ||
+        ""
+    );
+}
+
+
+function obtenerNombreCompletoPerfil() {
+
+    return (
+        sessionStorage.getItem(
+            "octoflowNombreCompleto"
+        ) ||
+        localStorage.getItem(
+            "octoflowNombreCompleto"
+        ) ||
+        ""
+    );
+}
+
+
+function obtenerRolPerfil() {
+
+    return (
+        sessionStorage.getItem(
+            "octoflowRol"
+        ) ||
+        localStorage.getItem(
+            "octoflowRol"
+        ) ||
+        "colaborador"
+    );
+}
+
+
+/*
+==================================================
 INFORMACIÓN PERSONAL
 ==================================================
 */
 
 function cargarInformacionPersonal() {
 
+    const correo =
+        obtenerCorreoPerfil();
+
     const nombre =
-        localStorage.getItem(
-            "octoflowNombre"
-        ) || "";
+        obtenerNombrePerfil();
 
     const apellido =
-        localStorage.getItem(
-            "octoflowApellido"
-        ) || "";
-
-    const correo =
-        localStorage.getItem(
-            "octoflowCorreo"
-        ) || "";
+        obtenerApellidoSesionPerfil();
 
     const rol =
-        localStorage.getItem(
-            "octoflowRol"
-        ) || "colaborador";
+        obtenerRolPerfil();
 
     const nombreCompletoGuardado =
-        localStorage.getItem(
-            "octoflowNombreCompleto"
-        ) || "";
+        obtenerNombreCompletoPerfil();
+
+    /*
+    Construimos el nombre completo usando,
+    en este orden:
+
+    1. Nombre completo guardado en sesión.
+    2. Nombre + apellido.
+    3. Nombre generado desde el correo.
+    */
 
     const nombreCompleto =
         nombreCompletoGuardado.trim() ||
@@ -67,12 +142,23 @@ function cargarInformacionPersonal() {
             correo
         );
 
+    /*
+    Si no existe nombre individual,
+    tomamos el primer nombre del nombre completo.
+    */
+
     const nombreVisible =
         nombre.trim() ||
         nombreCompleto
             .split(" ")
             .filter(Boolean)[0] ||
         "";
+
+    /*
+    Si no existe apellido guardado,
+    obtenemos todo lo que viene después
+    del primer nombre.
+    */
 
     const apellidoVisible =
         apellido.trim() ||
@@ -81,7 +167,9 @@ function cargarInformacionPersonal() {
         );
 
     const rolVisible =
-        rol === "gerente"
+        normalizarPerfil(
+            rol
+        ) === "gerente"
             ? "Gerente"
             : "Colaborador";
 
@@ -90,8 +178,11 @@ function cargarInformacionPersonal() {
             nombreCompleto
         );
 
+
     /*
-    Campos personales.
+    ==============================================
+    CAMPOS PERSONALES
+    ==============================================
     */
 
     asignarValorPerfil(
@@ -114,8 +205,11 @@ function cargarInformacionPersonal() {
         rolVisible
     );
 
+
     /*
-    Elementos visibles del perfil.
+    ==============================================
+    NOMBRE VISIBLE
+    ==============================================
     */
 
     document
@@ -131,6 +225,13 @@ function cargarInformacionPersonal() {
             }
         );
 
+
+    /*
+    ==============================================
+    CORREO VISIBLE
+    ==============================================
+    */
+
     document
         .querySelectorAll(
             "[data-correo-usuario]"
@@ -139,9 +240,17 @@ function cargarInformacionPersonal() {
             function (elemento) {
 
                 elemento.textContent =
-                    correo;
+                    correo ||
+                    "Sin correo";
             }
         );
+
+
+    /*
+    ==============================================
+    ROL VISIBLE
+    ==============================================
+    */
 
     document
         .querySelectorAll(
@@ -154,6 +263,13 @@ function cargarInformacionPersonal() {
                     rolVisible;
             }
         );
+
+
+    /*
+    ==============================================
+    AVATAR
+    ==============================================
+    */
 
     document
         .querySelectorAll(
@@ -179,23 +295,65 @@ function cargarResumenHabilidades() {
 
     const correo =
         normalizarPerfil(
-            localStorage.getItem(
-                "octoflowCorreo"
-            )
+            obtenerCorreoPerfil()
+        );
+
+    if (!correo) {
+
+        asignarTextoPerfil(
+            "perfilTotalHabilidades",
+            0
+        );
+
+        asignarTextoPerfil(
+            "perfilHabilidadesAvanzadas",
+            0
+        );
+
+        asignarTextoPerfil(
+            "perfilInteresesAprendizaje",
+            0
+        );
+
+        asignarTextoPerfil(
+            "perfilDisponibilidad",
+            "No definida"
+        );
+
+        return;
+    }
+
+
+    /*
+    ==============================================
+    HABILIDADES DEL USUARIO ACTUAL
+    ==============================================
+    */
+
+    const todasLasHabilidades =
+        leerColeccionPerfil(
+            "octoflowHabilidades"
         );
 
     const habilidades =
-        leerColeccionPerfil(
-            "octoflowHabilidades"
-        )
+        todasLasHabilidades
             .filter(
                 function (habilidad) {
 
-                    return normalizarPerfil(
-                        habilidad.correo
-                    ) === correo;
+                    return (
+                        normalizarPerfil(
+                            habilidad.correo
+                        ) === correo
+                    );
                 }
             );
+
+
+    /*
+    ==============================================
+    AVANZADO / EXPERTO
+    ==============================================
+    */
 
     const avanzadas =
         habilidades.filter(
@@ -212,6 +370,13 @@ function cargarResumenHabilidades() {
                 );
             }
         ).length;
+
+
+    /*
+    ==============================================
+    INTERESES DE APRENDIZAJE
+    ==============================================
+    */
 
     const interesesAprendizaje =
         habilidades.filter(
@@ -233,24 +398,50 @@ function cargarResumenHabilidades() {
             }
         ).length;
 
-    const perfilHabilidades =
+
+    /*
+    ==============================================
+    PERFIL DE HABILIDADES
+    ==============================================
+    */
+
+    const perfiles =
         leerColeccionPerfil(
             "octoflowPerfilesHabilidades"
-        )
-            .find(
-                function (perfil) {
+        );
 
-                    return normalizarPerfil(
+    const perfilHabilidades =
+        perfiles.find(
+            function (perfil) {
+
+                return (
+                    normalizarPerfil(
                         perfil.correo
-                    ) === correo;
-                }
-            );
+                    ) === correo
+                );
+            }
+        ) || null;
+
+
+    /*
+    ==============================================
+    DISPONIBILIDAD
+    ==============================================
+    */
 
     const disponibilidad =
         Number(
             perfilHabilidades?.disponibilidad ||
+            perfilHabilidades?.disponibilidadSemanal ||
             0
         );
+
+
+    /*
+    ==============================================
+    MOSTRAR RESULTADOS
+    ==============================================
+    */
 
     asignarTextoPerfil(
         "perfilTotalHabilidades",
@@ -270,7 +461,8 @@ function cargarResumenHabilidades() {
     asignarTextoPerfil(
         "perfilDisponibilidad",
         disponibilidad > 0
-            ? disponibilidad + " h/sem."
+            ? disponibilidad +
+              " h/sem."
             : "No definida"
     );
 }
@@ -278,11 +470,13 @@ function cargarResumenHabilidades() {
 
 /*
 ==================================================
-UTILIDADES
+LEER COLECCIONES
 ==================================================
 */
 
-function leerColeccionPerfil(clave) {
+function leerColeccionPerfil(
+    clave
+) {
 
     const datos =
         localStorage.getItem(
@@ -297,16 +491,21 @@ function leerColeccionPerfil(clave) {
     try {
 
         const coleccion =
-            JSON.parse(datos);
+            JSON.parse(
+                datos
+            );
 
-        return Array.isArray(coleccion)
+        return Array.isArray(
+            coleccion
+        )
             ? coleccion
             : [];
 
     } catch (error) {
 
         console.error(
-            "No fue posible leer " + clave,
+            "No fue posible leer " +
+            clave,
             error
         );
 
@@ -315,13 +514,21 @@ function leerColeccionPerfil(clave) {
 }
 
 
+/*
+==================================================
+ASIGNAR VALOR
+==================================================
+*/
+
 function asignarValorPerfil(
     id,
     valor
 ) {
 
     const elemento =
-        document.getElementById(id);
+        document.getElementById(
+            id
+        );
 
     if (elemento) {
 
@@ -331,13 +538,21 @@ function asignarValorPerfil(
 }
 
 
+/*
+==================================================
+ASIGNAR TEXTO
+==================================================
+*/
+
 function asignarTextoPerfil(
     id,
     texto
 ) {
 
     const elemento =
-        document.getElementById(id);
+        document.getElementById(
+            id
+        );
 
     if (elemento) {
 
@@ -347,21 +562,45 @@ function asignarTextoPerfil(
 }
 
 
+/*
+==================================================
+OBTENER NOMBRE DESDE CORREO
+==================================================
+*/
+
 function obtenerNombreDesdeCorreoPerfil(
     correo
 ) {
 
-    return String(correo || "Usuario")
-        .split("@")[0]
-        .replace(/[._-]+/g, " ")
+    const usuario =
+        String(
+            correo || ""
+        )
+            .split("@")[0];
+
+    if (!usuario) {
+
+        return "Usuario";
+    }
+
+    return usuario
+        .replace(
+            /[._-]+/g,
+            " "
+        )
         .split(" ")
         .filter(Boolean)
         .map(
             function (palabra) {
 
                 return (
-                    palabra.charAt(0).toUpperCase() +
-                    palabra.slice(1).toLowerCase()
+                    palabra
+                        .charAt(0)
+                        .toUpperCase()
+                    +
+                    palabra
+                        .slice(1)
+                        .toLowerCase()
                 );
             }
         )
@@ -369,29 +608,53 @@ function obtenerNombreDesdeCorreoPerfil(
 }
 
 
+/*
+==================================================
+OBTENER APELLIDO
+==================================================
+*/
+
 function obtenerApellidoPerfil(
     nombreCompleto
 ) {
 
     const partes =
-        String(nombreCompleto || "")
+        String(
+            nombreCompleto || ""
+        )
             .split(" ")
             .filter(Boolean);
 
     return partes.length > 1
-        ? partes.slice(1).join(" ")
+        ? partes
+            .slice(1)
+            .join(" ")
         : "";
 }
 
+
+/*
+==================================================
+INICIALES
+==================================================
+*/
 
 function obtenerInicialesPerfil(
     nombreCompleto
 ) {
 
     const partes =
-        String(nombreCompleto || "Usuario")
+        String(
+            nombreCompleto ||
+            "Usuario"
+        )
             .split(" ")
             .filter(Boolean);
+
+    if (partes.length === 0) {
+
+        return "U";
+    }
 
     if (partes.length === 1) {
 
@@ -401,18 +664,35 @@ function obtenerInicialesPerfil(
     }
 
     return (
-        partes[0].charAt(0) +
-        partes[partes.length - 1].charAt(0)
+        partes[0]
+            .charAt(0)
+        +
+        partes[
+            partes.length - 1
+        ]
+            .charAt(0)
     ).toUpperCase();
 }
 
 
-function normalizarPerfil(texto) {
+/*
+==================================================
+NORMALIZAR
+==================================================
+*/
 
-    return String(texto || "")
+function normalizarPerfil(
+    texto
+) {
+
+    return String(
+        texto || ""
+    )
         .trim()
         .toLowerCase()
-        .normalize("NFD")
+        .normalize(
+            "NFD"
+        )
         .replace(
             /[\u0300-\u036f]/g,
             ""
